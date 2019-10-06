@@ -5,12 +5,22 @@ export interface HelloProps {
   framework: string;
 }
 
-export const Hello = (props: HelloProps) => {
+const Hello = (props: HelloProps) => {
   const { compiler, framework } = props;
 
   return (
     <h1>
-      Hello from {compiler} and {framework}!
+      Hello from
+      {' '}
+      {' '}
+      {compiler}
+      {' '}
+and
+      {' '}
+      {framework}
+!
     </h1>
   );
 };
+
+export default Hello;
