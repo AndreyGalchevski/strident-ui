@@ -6,8 +6,6 @@ import { useAuthContext } from '../context/authContext';
 function PrivateRoute(props: RouteProps): React.ReactElement {
   const [authState] = useAuthContext();
 
-  console.log(authState.isAuthenticated);
-
   let shouldRedirect = false;
   if (!authState.isAuthenticated) {
     shouldRedirect = true;

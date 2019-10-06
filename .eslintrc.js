@@ -18,6 +18,8 @@ module.exports = {
         'extensions': ['.tsx']
       }
     ],
+    'no-underscore-dangle': 'off',
+    'import/prefer-default-export': 'off'
   },
   settings: {
     'import/extensions': ['.js','.jsx','.ts','.tsx'],

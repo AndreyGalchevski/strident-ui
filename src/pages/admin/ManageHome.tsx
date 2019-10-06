@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 function ManageHome(): React.ReactElement {
   return <h1>ManageHome</h1>;

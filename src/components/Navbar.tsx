@@ -36,7 +36,12 @@ function Navbar(): ReactElement {
         </li>
         <li>
           <NavLink exact to="/gigs">
-            Home
+            Gigs
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to="/lyrics">
+            Lyrics
           </NavLink>
         </li>
       </ul>
