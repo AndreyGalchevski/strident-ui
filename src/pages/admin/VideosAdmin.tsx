@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
 import { fetchResources } from '../../api/utils';
 import { Video } from '../../api/types';
 
@@ -28,7 +29,7 @@ function VideosAdmin(): React.ReactElement {
       <div>
         {videos.map(video => (
           <div key={video._id}>
-            <p>{video._id}</p>
+            <Link to={`videos/${video._id}`}>{video._id}</Link>
             <p>{video.name}</p>
             <p>{video.url}</p>
             <p>{video.date}</p>

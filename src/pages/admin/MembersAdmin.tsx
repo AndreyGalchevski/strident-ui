@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
 import { Member } from '../../api/types';
 import { fetchResources } from '../../api/utils';
 
@@ -28,7 +29,7 @@ function MembersAdmin(): React.ReactElement {
       <div>
         {members.map(member => (
           <div key={member._id}>
-            <p>{member._id}</p>
+            <Link to={`members/${member._id}`}>{member._id}</Link>
             <p>{member.name}</p>
             <p>{member.instrument}</p>
             <p>{member.info}</p>

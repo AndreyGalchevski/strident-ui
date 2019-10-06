@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
 import { Gig } from '../../api/types';
 import { fetchResources } from '../../api/utils';
 
@@ -28,7 +29,7 @@ function Gigs(): React.ReactElement {
       <div>
         {gigs.map(gig => (
           <div key={gig._id}>
-            <p>{gig._id}</p>
+            <Link to={`gigs/${gig._id}`}>{gig._id}</Link>
             <p>{gig.venue}</p>
             <p>{gig.address}</p>
             <p>{gig.date}</p>

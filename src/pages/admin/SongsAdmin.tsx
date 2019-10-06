@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
 import { Song } from '../../api/types';
 import { fetchResources } from '../../api/utils';
 
@@ -28,7 +29,7 @@ function SongsAdmin(): React.ReactElement {
       <div>
         {songs.map(song => (
           <div key={song._id}>
-            <p>{song._id}</p>
+            <Link to={`songs/${song._id}`}>{song._id}</Link>
             <p>{song.name}</p>
             <p>{song.url}</p>
           </div>
