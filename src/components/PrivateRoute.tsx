@@ -1,15 +1,15 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
-export interface PrivateRouteProps extends RouteProps {
-  isAuthenticated: boolean;
-}
+import { useAuthContext } from '../context/authContext';
 
-function PrivateRoute(props: PrivateRouteProps): React.ReactElement {
-  const { isAuthenticated } = props;
+function PrivateRoute(props: RouteProps): React.ReactElement {
+  const [authState] = useAuthContext();
+
+  console.log(authState.isAuthenticated);
 
   let shouldRedirect = false;
-  if (!isAuthenticated) {
+  if (!authState.isAuthenticated) {
     shouldRedirect = true;
   }
 
