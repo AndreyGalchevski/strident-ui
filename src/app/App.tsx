@@ -1,9 +1,10 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
+import { AuthProvider } from '../context/authContext';
+
 import Loader from '../components/Loader';
 import PrivateRoute from '../components/PrivateRoute';
-import { AuthProvider } from '../context/authContext';
 import Navbar from '../components/Navbar';
 
 const Home = withRouter(lazy(() => import('../pages/Home')));
@@ -13,12 +14,12 @@ const Videos = withRouter(lazy(() => import('../pages/Videos')));
 const Gigs = withRouter(lazy(() => import('../pages/Gigs')));
 const Lyrics = withRouter(lazy(() => import('../pages/Lyrics')));
 const Login = withRouter(lazy(() => import('../pages/Login')));
-const ManageHome = withRouter(lazy(() => import('../pages/admin/ManageHome')));
-const ManageMembers = withRouter(lazy(() => import('../pages/admin/ManageMembers')));
-const ManageSongs = withRouter(lazy(() => import('../pages/admin/ManageSongs')));
-const ManageVideos = withRouter(lazy(() => import('../pages/admin/ManageVideos')));
-const ManageGigs = withRouter(lazy(() => import('../pages/admin/ManageGigs')));
-const ManageLyrics = withRouter(lazy(() => import('../pages/admin/ManageLyrics')));
+const HomeAdmin = withRouter(lazy(() => import('../pages/admin/HomeAdmin')));
+const MembersAdmin = withRouter(lazy(() => import('../pages/admin/MembersAdmin')));
+const SongsAdmin = withRouter(lazy(() => import('../pages/admin/SongsAdmin')));
+const VideosAdmin = withRouter(lazy(() => import('../pages/admin/VideosAdmin')));
+const GigsAdmin = withRouter(lazy(() => import('../pages/admin/GigsAdmin')));
+const LyricsAdmin = withRouter(lazy(() => import('../pages/admin/LyricsAdmin')));
 
 function App(): React.ReactElement {
   return (
@@ -33,12 +34,12 @@ function App(): React.ReactElement {
           <Route exact path="/gigs" component={Gigs} />
           <Route exact path="/lyrics" component={Lyrics} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/admin/home" component={ManageHome} />
-          <PrivateRoute exact path="/admin/members" component={ManageMembers} />
-          <PrivateRoute exact path="/admin/songs" component={ManageSongs} />
-          <PrivateRoute exact path="/admin/videos" component={ManageVideos} />
-          <PrivateRoute exact path="/admin/gigs" component={ManageGigs} />
-          <PrivateRoute exact path="/admin/lyrics" component={ManageLyrics} />
+          <PrivateRoute exact path="/admin/home" component={HomeAdmin} />
+          <PrivateRoute exact path="/admin/members" component={MembersAdmin} />
+          <PrivateRoute exact path="/admin/songs" component={SongsAdmin} />
+          <PrivateRoute exact path="/admin/videos" component={VideosAdmin} />
+          <PrivateRoute exact path="/admin/gigs" component={GigsAdmin} />
+          <PrivateRoute exact path="/admin/lyrics" component={LyricsAdmin} />
         </Suspense>
       </AuthProvider>
     </main>
