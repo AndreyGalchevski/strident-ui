@@ -1,3 +1,13 @@
+export interface Credentials {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  err: string;
+}
+
 export interface Member {
   _id: string;
   name: string;
