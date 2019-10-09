@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Lyric } from '../../api/types';
-import { fetchResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource } from '../../api/utils';
 
 function ManageLyric(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -17,8 +17,27 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
       setLoading(false);
     }
 
-    fetchLyric();
+    if (match.params.id) {
+      fetchLyric();
+    }
   }, []);
+
+  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
+    setLyric({ ...lyric, [e.target.name]: e.target.value });
+  }
+
+  async function handleSaveClick(): Promise<void> {
+    let res = '';
+    setLoading(true);
+    if (match.params.id) {
+      res = await updateResource<Lyric>('lyrics', match.params.id, lyric);
+    } else {
+      res = await createResource<Lyric>('lyrics', lyric);
+      setLyric({} as Lyric);
+    }
+    setLoading(false);
+    window.alert(res);
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -26,11 +45,29 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h1>Manage Lyric</h1>
+      {match.params.id ? <h1>Update Lyric</h1> : <h1>Create Lyric</h1>}
       <div>
-        <p>{lyric._id}</p>
-        <p>{lyric.name}</p>
-        <p>{lyric.text}</p>
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            onChange={handleFormChange}
+            value={lyric.name}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="text"
+            placeholder="Text"
+            onChange={handleFormChange}
+            value={lyric.text}
+          />
+        </div>
+        <button type="button" onClick={handleSaveClick}>
+          Save
+        </button>
       </div>
     </section>
   );
