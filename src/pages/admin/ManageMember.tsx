@@ -33,8 +33,8 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
       res = await updateResource<Member>('members', match.params.id, member);
     } else {
       res = await createResource<Member>('members', member);
+      setMember({} as Member);
     }
-    setMember({} as Member);
     setLoading(false);
     window.alert(res);
   }

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Song } from '../../api/types';
-import { fetchResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource } from '../../api/utils';
 
 function ManageSong(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -17,8 +17,27 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
       setLoading(false);
     }
 
-    fetchSong();
+    if (match.params.id) {
+      fetchSong();
+    }
   }, []);
+
+  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
+    setSong({ ...song, [e.target.name]: e.target.value });
+  }
+
+  async function handleSaveClick(): Promise<void> {
+    let res = '';
+    setLoading(true);
+    if (match.params.id) {
+      res = await updateResource<Song>('songs', match.params.id, song);
+    } else {
+      res = await createResource<Song>('songs', song);
+      setSong({} as Song);
+    }
+    setLoading(false);
+    window.alert(res);
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -26,11 +45,29 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h1>Manage Song</h1>
+      {match.params.id ? <h1>Update Song</h1> : <h1>Create Song</h1>}
       <div>
-        <p>{song._id}</p>
-        <p>{song.name}</p>
-        <p>{song.url}</p>
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            onChange={handleFormChange}
+            value={song.name}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="url"
+            placeholder="URL"
+            onChange={handleFormChange}
+            value={song.url}
+          />
+        </div>
+        <button type="button" onClick={handleSaveClick}>
+          Save
+        </button>
       </div>
     </section>
   );
