@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Gig } from '../../api/types';
-import { fetchResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource } from '../../api/utils';
 
 function ManageGig(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -17,8 +17,27 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
       setLoading(false);
     }
 
-    fetchVideo();
+    if (match.params.id) {
+      fetchVideo();
+    }
   }, []);
+
+  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
+    setGig({ ...gig, [e.target.name]: e.target.value });
+  }
+
+  async function handleSaveClick(): Promise<void> {
+    let res = '';
+    setLoading(true);
+    if (match.params.id) {
+      res = await updateResource<Gig>('gigs', match.params.id, gig);
+    } else {
+      res = await createResource<Gig>('gigs', gig);
+      setGig({} as Gig);
+    }
+    setLoading(false);
+    window.alert(res);
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -26,15 +45,65 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h1>Manage Gig</h1>
+      {match.params.id ? <h1>Update Gig</h1> : <h1>Create Gig</h1>}
       <div>
-        <p>{gig._id}</p>
-        <p>{gig.venue}</p>
-        <p>{gig.address}</p>
-        <p>{gig.date}</p>
-        <p>{gig.hour}</p>
-        <p>{gig.fbEvent}</p>
-        <p>{gig.image}</p>
+        <div>
+          <input
+            type="text"
+            name="venue"
+            placeholder="Venue"
+            onChange={handleFormChange}
+            value={gig.venue}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="address"
+            placeholder="Address"
+            onChange={handleFormChange}
+            value={gig.address}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="date"
+            placeholder="Date"
+            onChange={handleFormChange}
+            value={gig.date}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="hour"
+            placeholder="Hour"
+            onChange={handleFormChange}
+            value={gig.hour}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="fbEvent"
+            placeholder="Facebook Event URL"
+            onChange={handleFormChange}
+            value={gig.fbEvent}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="image"
+            placeholder="Image"
+            onChange={handleFormChange}
+            value={gig.image}
+          />
+        </div>
+        <button type="button" onClick={handleSaveClick}>
+          Save
+        </button>
       </div>
     </section>
   );
