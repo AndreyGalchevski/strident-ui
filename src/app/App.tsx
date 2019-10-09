@@ -65,7 +65,13 @@ function App(): React.ReactElement {
           <PrivateRoute exact key="new-song" path="/admin/songs/new" component={ManageSong} />
           <PrivateRoute exact key="edit-song" path="/admin/songs/edit/:id" component={ManageSong} />
           <PrivateRoute exact path="/admin/videos" component={VideosAdmin} />
-          <PrivateRoute exact path="/admin/videos/:id" component={ManageVideo} />
+          <PrivateRoute exact key="new-video" path="/admin/videos/new" component={ManageVideo} />
+          <PrivateRoute
+            exact
+            key="edit-video"
+            path="/admin/videos/edit/:id"
+            component={ManageVideo}
+          />
           <PrivateRoute exact path="/admin/gigs" component={GigsAdmin} />
           <PrivateRoute exact path="/admin/gigs/:id" component={ManageGig} />
           <PrivateRoute exact path="/admin/lyrics" component={LyricsAdmin} />
