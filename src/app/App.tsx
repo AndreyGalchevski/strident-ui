@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
 import { AuthProvider } from '../context/authContext';
@@ -6,6 +6,7 @@ import { AuthProvider } from '../context/authContext';
 import Loader from '../components/Loader';
 import PrivateRoute from '../components/PrivateRoute';
 import Navbar from '../components/Navbar';
+import decodeJWT from '../utils/jwt';
 
 const Home = withRouter(lazy(() => import('../pages/Home')));
 const Members = withRouter(lazy(() => import('../pages/Members')));
@@ -27,6 +28,18 @@ const LyricsAdmin = withRouter(lazy(() => import('../pages/admin/LyricsAdmin')))
 const ManageLyric = withRouter(lazy(() => import('../pages/admin/ManageLyric')));
 
 function App(): React.ReactElement {
+  useEffect(() => {
+    const token = localStorage.getItem('stridentToken');
+    if (token) {
+      const decodedData = decodeJWT(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedData.exp < currentTime) {
+        localStorage.removeItem('stridentToken');
+        window.location.href = '/login';
+      }
+    }
+  }, []);
+
   return (
     <main>
       <AuthProvider>
@@ -41,7 +54,13 @@ function App(): React.ReactElement {
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/admin/home" component={HomeAdmin} />
           <PrivateRoute exact path="/admin/members" component={MembersAdmin} />
-          <PrivateRoute exact path="/admin/members/:id" component={ManageMember} />
+          <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
+          <PrivateRoute
+            exact
+            key="edit-member"
+            path="/admin/members/edit/:id"
+            component={ManageMember}
+          />
           <PrivateRoute exact path="/admin/songs" component={SongsAdmin} />
           <PrivateRoute exact path="/admin/songs/:id" component={ManageSong} />
           <PrivateRoute exact path="/admin/videos" component={VideosAdmin} />

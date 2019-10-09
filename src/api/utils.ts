@@ -1,6 +1,7 @@
 import { Credentials, LoginResponse } from './types';
 
-let baseURL = 'http://localhost:8080/api';
+let baseURL = 'https://strident-api.herokuapp.com/api';
+// let baseURL = 'http://localhost:8080/api';
 
 if (process.env.NODE_ENV === 'production') {
   baseURL = 'https://strident-api.herokuapp.com/api';
@@ -48,7 +49,7 @@ export async function fetchResource<T>(resourceName: string, resourceId: string)
   return resources;
 }
 
-export async function createResource<T>(resourceName: string, data: T): Promise<void> {
+export async function createResource<T>(resourceName: string, data: T): Promise<string> {
   const response = await fetch(`${baseURL}/${resourceName}`, {
     ...options,
     method: 'POST',
@@ -57,15 +58,26 @@ export async function createResource<T>(resourceName: string, data: T): Promise<
     },
     body: JSON.stringify(data),
   });
-  const resources = await response.json();
-  return resources;
+
+  switch (response.status) {
+    case 200:
+      return 'Created Successfully';
+    case 401:
+      return 'Not Authorized';
+    case 422:
+      return 'Fill Out All The fields';
+    case 500:
+      return 'Something Went Wrong';
+    default:
+      return '';
+  }
 }
 
 export async function updateResource<T>(
   resourceName: string,
   resourceId: string,
   data: T,
-): Promise<void> {
+): Promise<string> {
   const response = await fetch(`${baseURL}/${resourceName}/${resourceId}`, {
     ...options,
     method: 'PUT',
@@ -74,11 +86,22 @@ export async function updateResource<T>(
     },
     body: JSON.stringify(data),
   });
-  const resources = await response.json();
-  return resources;
+
+  switch (response.status) {
+    case 200:
+      return 'Updated Successfully';
+    case 401:
+      return 'Not Authorized';
+    case 422:
+      return 'Fill Out All The Fields';
+    case 500:
+      return 'Something Went Wrong';
+    default:
+      return '';
+  }
 }
 
-export async function deleteResources(resourceName: string, resourceId: string): Promise<void> {
+export async function deleteResource(resourceName: string, resourceId: string): Promise<string> {
   const response = await fetch(`${baseURL}/${resourceName}/${resourceId}`, {
     ...options,
     method: 'DELETE',
@@ -86,6 +109,17 @@ export async function deleteResources(resourceName: string, resourceId: string):
       Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
     },
   });
-  const resources = await response.json();
-  return resources;
+
+  switch (response.status) {
+    case 200:
+      return 'Deleted Successfully';
+    case 401:
+      return 'Not Authorized';
+    case 422:
+      return 'Fill Out All The Fields';
+    case 500:
+      return 'Something Went Wrong';
+    default:
+      return '';
+  }
 }

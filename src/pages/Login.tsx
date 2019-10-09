@@ -25,7 +25,7 @@ function Login(): React.ReactElement {
     const { token, err } = await login({ username, password });
     setLoading(false);
     if (err) {
-      alert(err);
+      window.alert(err);
       return;
     }
     dispatch({ type: LOGIN_SUCCESS, payload: token });
@@ -39,7 +39,7 @@ function Login(): React.ReactElement {
     <section>
       <h1>Login</h1>
       <input type="text" placeholder="Username" onChange={handleUsernameChange} />
-      <input type="text" placeholder="Password" onChange={handlePasswordChange} />
+      <input type="password" placeholder="Password" onChange={handlePasswordChange} />
       <button type="button" onClick={handleLogin}>
         Login
       </button>

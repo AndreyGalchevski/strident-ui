@@ -8,6 +8,11 @@ export interface LoginResponse {
   err: string;
 }
 
+export interface TokenClaims {
+  username: string;
+  exp: number;
+}
+
 export interface Member {
   _id: string;
   name: string;

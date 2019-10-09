@@ -33,6 +33,7 @@ module.exports = {
       }
   },
   globals: {
+    atob: true,
     window: true,
     document: true,
     localStorage: true,

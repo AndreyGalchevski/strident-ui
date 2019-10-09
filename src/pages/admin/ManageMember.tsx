@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Member } from '../../api/types';
-import { fetchResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource } from '../../api/utils';
 
 function ManageMember(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -17,8 +17,27 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
       setLoading(false);
     }
 
-    fetchMember();
+    if (match.params.id) {
+      fetchMember();
+    }
   }, []);
+
+  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
+    setMember({ ...member, [e.target.name]: e.target.value });
+  }
+
+  async function handleSaveClick(): Promise<void> {
+    let res = '';
+    setLoading(true);
+    if (match.params.id) {
+      res = await updateResource<Member>('members', match.params.id, member);
+    } else {
+      res = await createResource<Member>('members', member);
+    }
+    setMember({} as Member);
+    setLoading(false);
+    window.alert(res);
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -26,13 +45,47 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h1>Manage Member</h1>
+      {match.params.id ? <h1>Update Member</h1> : <h1>Create Member</h1>}
       <div>
-        <p>{member._id}</p>
-        <p>{member.name}</p>
-        <p>{member.instrument}</p>
-        <p>{member.info}</p>
-        <p>{member.image}</p>
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            onChange={handleFormChange}
+            value={member.name}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="instrument"
+            placeholder="Instrument"
+            onChange={handleFormChange}
+            value={member.instrument}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="info"
+            placeholder="Info"
+            onChange={handleFormChange}
+            value={member.info}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            name="image"
+            placeholder="Image"
+            onChange={handleFormChange}
+            value={member.image}
+          />
+        </div>
+        <button type="button" onClick={handleSaveClick}>
+          Save
+        </button>
       </div>
     </section>
   );
