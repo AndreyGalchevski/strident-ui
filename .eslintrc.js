@@ -40,6 +40,7 @@ module.exports = {
     FormData: true,
     FileReader: true,
     navigator: true,
-    fetch: true
+    fetch: true,
+    M: true,
   }
 }

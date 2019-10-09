@@ -5,7 +5,7 @@ import { AuthProvider } from '../context/authContext';
 
 import Loader from '../components/Loader';
 import PrivateRoute from '../components/PrivateRoute';
-import Navbar from '../components/Navbar';
+import Navbar from '../layout/Navbar';
 import decodeJWT from '../utils/jwt';
 
 const Home = withRouter(lazy(() => import('../pages/Home')));
@@ -27,6 +27,11 @@ const ManageGig = withRouter(lazy(() => import('../pages/admin/ManageGig')));
 const LyricsAdmin = withRouter(lazy(() => import('../pages/admin/LyricsAdmin')));
 const ManageLyric = withRouter(lazy(() => import('../pages/admin/ManageLyric')));
 
+const styles = {
+  fontFamily: '"Special Elite", cursive',
+  textAlign: 'center',
+};
+
 function App(): React.ReactElement {
   useEffect(() => {
     const token = localStorage.getItem('stridentToken');
@@ -41,7 +46,7 @@ function App(): React.ReactElement {
   }, []);
 
   return (
-    <main>
+    <main style={styles}>
       <AuthProvider>
         <Navbar />
         <Suspense fallback={<Loader />}>
