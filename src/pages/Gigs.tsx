@@ -24,7 +24,7 @@ function Gigs(): React.ReactElement {
 
   return (
     <section>
-      <h1>Gigs</h1>
+      <h3>Gigs</h3>
       <div>
         {gigs.map(gig => (
           <div key={gig._id}>

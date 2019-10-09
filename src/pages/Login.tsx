@@ -37,7 +37,7 @@ function Login(): React.ReactElement {
 
   return (
     <section>
-      <h1>Login</h1>
+      <h3>Login</h3>
       <input type="text" placeholder="Username" onChange={handleUsernameChange} />
       <input type="password" placeholder="Password" onChange={handlePasswordChange} />
       <button type="button" onClick={handleLogin}>

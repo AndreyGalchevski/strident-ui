@@ -33,7 +33,7 @@ function VideosAdmin(): React.ReactElement {
 
   return (
     <section>
-      <h1>Videos Admin</h1>
+      <h3>Videos Admin</h3>
       <div>
         <Link to="/admin/videos/new">New</Link>
         {videos.map(video => (

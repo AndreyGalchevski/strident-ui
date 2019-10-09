@@ -24,7 +24,7 @@ function Videos(): React.ReactElement {
 
   return (
     <section>
-      <h1>Videos</h1>
+      <h3>Videos</h3>
       <div>
         {videos.map(video => (
           <div key={video._id}>

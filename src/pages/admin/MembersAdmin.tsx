@@ -33,7 +33,7 @@ function MembersAdmin(): React.ReactElement {
 
   return (
     <section>
-      <h1>Members Admin</h1>
+      <h3>Members Admin</h3>
       <div>
         <Link to="/admin/members/new">New</Link>
         {members.map(member => (

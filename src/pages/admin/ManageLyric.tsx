@@ -45,7 +45,7 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      {match.params.id ? <h1>Update Lyric</h1> : <h1>Create Lyric</h1>}
+      {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
       <div>
         <div>
           <input

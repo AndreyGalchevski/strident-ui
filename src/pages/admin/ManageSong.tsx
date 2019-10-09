@@ -45,7 +45,7 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      {match.params.id ? <h1>Update Song</h1> : <h1>Create Song</h1>}
+      {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
       <div>
         <div>
           <input

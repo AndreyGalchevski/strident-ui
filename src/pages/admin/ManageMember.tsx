@@ -45,7 +45,7 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      {match.params.id ? <h1>Update Member</h1> : <h1>Create Member</h1>}
+      {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
       <div>
         <div>
           <input

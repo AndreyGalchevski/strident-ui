@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ManageHome(): React.ReactElement {
-  return <h1>Home Admin</h1>;
+  return <h3>Home Admin</h3>;
 }
 
 export default ManageHome;

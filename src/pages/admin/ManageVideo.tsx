@@ -45,7 +45,7 @@ function ManageVideo(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      {match.params.id ? <h1>Update Video</h1> : <h1>Create Video</h1>}
+      {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
       <div>
         <div>
           <input

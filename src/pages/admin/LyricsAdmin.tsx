@@ -33,7 +33,7 @@ function LyricsAdmin(): React.ReactElement {
 
   return (
     <section>
-      <h1>Lyrics Admin</h1>
+      <h3>Lyrics Admin</h3>
       <div>
         <Link to="/admin/lyrics/new">New</Link>
         {lyrics.map(lyric => (

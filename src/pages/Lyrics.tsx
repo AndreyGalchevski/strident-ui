@@ -24,7 +24,7 @@ function Lyrics(): React.ReactElement {
 
   return (
     <section>
-      <h1>Lyrics</h1>
+      <h3>Lyrics</h3>
       <div>
         {lyrics.map(lyric => (
           <div key={lyric._id}>

@@ -33,7 +33,7 @@ function Gigs(): React.ReactElement {
 
   return (
     <section>
-      <h1>Gigs Admin</h1>
+      <h3>Gigs Admin</h3>
       <div>
         <Link to="/admin/gigs/new">New</Link>
         {gigs.map(gig => (

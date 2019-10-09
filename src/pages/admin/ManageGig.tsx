@@ -45,7 +45,7 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      {match.params.id ? <h1>Update Gig</h1> : <h1>Create Gig</h1>}
+      {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
       <div>
         <div>
           <input

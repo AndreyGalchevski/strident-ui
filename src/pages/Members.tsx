@@ -24,7 +24,7 @@ function Members(): React.ReactElement {
 
   return (
     <section>
-      <h1>Members</h1>
+      <h3>Members</h3>
       <div>
         {members.map(member => (
           <div key={member._id}>

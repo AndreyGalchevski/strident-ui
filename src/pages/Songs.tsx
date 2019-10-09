@@ -24,7 +24,7 @@ function Songs(): React.ReactElement {
 
   return (
     <section>
-      <h1>Songs</h1>
+      <h3>Songs</h3>
       <div>
         {songs.map(song => (
           <div key={song._id}>
