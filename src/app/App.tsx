@@ -28,11 +28,6 @@ const ManageGig = withRouter(lazy(() => import('../pages/admin/ManageGig')));
 const LyricsAdmin = withRouter(lazy(() => import('../pages/admin/LyricsAdmin')));
 const ManageLyric = withRouter(lazy(() => import('../pages/admin/ManageLyric')));
 
-const styles = {
-  fontFamily: '"Special Elite", cursive',
-  textAlign: 'center',
-};
-
 function App(): React.ReactElement {
   useEffect(() => {
     const token = localStorage.getItem('stridentToken');
@@ -47,7 +42,7 @@ function App(): React.ReactElement {
   }, []);
 
   return (
-    <main style={styles}>
+    <main>
       <AuthProvider>
         <Navbar />
         <Suspense fallback={<Loader />}>
