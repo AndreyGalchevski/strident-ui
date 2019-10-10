@@ -1,8 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 
-import { AuthProvider } from '../context/authContext';
-
 import Loader from '../components/Loader';
 import PrivateRoute from '../components/PrivateRoute';
 import Navbar from '../layout/Navbar';
@@ -28,6 +26,11 @@ const ManageGig = withRouter(lazy(() => import('../pages/admin/ManageGig')));
 const LyricsAdmin = withRouter(lazy(() => import('../pages/admin/LyricsAdmin')));
 const ManageLyric = withRouter(lazy(() => import('../pages/admin/ManageLyric')));
 
+const styles = {
+  overflowY: 'scroll',
+  height: '100%',
+};
+
 function App(): React.ReactElement {
   useEffect(() => {
     const token = localStorage.getItem('stridentToken');
@@ -42,51 +45,48 @@ function App(): React.ReactElement {
   }, []);
 
   return (
-    <main>
-      <AuthProvider>
-        <Navbar />
-        <Suspense fallback={<Loader />}>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/members" component={Members} />
-          <Route exact path="/songs" component={Songs} />
-          <Route exact path="/videos" component={Videos} />
-          <Route exact path="/gigs" component={Gigs} />
-          <Route exact path="/lyrics" component={Lyrics} />
-          <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/admin" component={Admin} />
-          <PrivateRoute exact path="/admin/home" component={HomeAdmin} />
-          <PrivateRoute exact path="/admin/members" component={MembersAdmin} />
-          <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
-          <PrivateRoute
-            exact
-            key="edit-member"
-            path="/admin/members/edit/:id"
-            component={ManageMember}
-          />
-          <PrivateRoute exact path="/admin/songs" component={SongsAdmin} />
-          <PrivateRoute exact key="new-song" path="/admin/songs/new" component={ManageSong} />
-          <PrivateRoute exact key="edit-song" path="/admin/songs/edit/:id" component={ManageSong} />
-          <PrivateRoute exact path="/admin/videos" component={VideosAdmin} />
-          <PrivateRoute exact key="new-video" path="/admin/videos/new" component={ManageVideo} />
-          <PrivateRoute
-            exact
-            key="edit-video"
-            path="/admin/videos/edit/:id"
-            component={ManageVideo}
-          />
-          <PrivateRoute exact path="/admin/gigs" component={GigsAdmin} />
-          <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
-          <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />
-          <PrivateRoute exact path="/admin/lyrics" component={LyricsAdmin} />
-          <PrivateRoute exact key="new-lyric" path="/admin/lyrics/new" component={ManageLyric} />
-          <PrivateRoute
-            exact
-            key="edit-lyric"
-            path="/admin/lyrics/edit/:id"
-            component={ManageLyric}
-          />
-        </Suspense>
-      </AuthProvider>
+    <main style={styles}>
+      <Suspense fallback={<Loader />}>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/members" component={Members} />
+        <Route exact path="/songs" component={Songs} />
+        <Route exact path="/videos" component={Videos} />
+        <Route exact path="/gigs" component={Gigs} />
+        <Route exact path="/lyrics" component={Lyrics} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/admin" component={Admin} />
+        <PrivateRoute exact path="/admin/home" component={HomeAdmin} />
+        <PrivateRoute exact path="/admin/members" component={MembersAdmin} />
+        <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
+        <PrivateRoute
+          exact
+          key="edit-member"
+          path="/admin/members/edit/:id"
+          component={ManageMember}
+        />
+        <PrivateRoute exact path="/admin/songs" component={SongsAdmin} />
+        <PrivateRoute exact key="new-song" path="/admin/songs/new" component={ManageSong} />
+        <PrivateRoute exact key="edit-song" path="/admin/songs/edit/:id" component={ManageSong} />
+        <PrivateRoute exact path="/admin/videos" component={VideosAdmin} />
+        <PrivateRoute exact key="new-video" path="/admin/videos/new" component={ManageVideo} />
+        <PrivateRoute
+          exact
+          key="edit-video"
+          path="/admin/videos/edit/:id"
+          component={ManageVideo}
+        />
+        <PrivateRoute exact path="/admin/gigs" component={GigsAdmin} />
+        <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
+        <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />
+        <PrivateRoute exact path="/admin/lyrics" component={LyricsAdmin} />
+        <PrivateRoute exact key="new-lyric" path="/admin/lyrics/new" component={ManageLyric} />
+        <PrivateRoute
+          exact
+          key="edit-lyric"
+          path="/admin/lyrics/edit/:id"
+          component={ManageLyric}
+        />
+      </Suspense>
     </main>
   );
 }
