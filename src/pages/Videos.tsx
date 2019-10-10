@@ -40,6 +40,7 @@ function Videos(): React.ReactElement {
               src={video.url}
               allow="autoplay; encrypted-media"
               allowFullScreen
+              frameBorder="0"
               width="360"
               height="380"
             />
