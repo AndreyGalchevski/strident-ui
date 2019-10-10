@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
@@ -8,6 +8,7 @@ function ManageVideo(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
   const [video, setVideo] = useState<Video>({} as Video);
   const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
     async function fetchVideo(): Promise<void> {
@@ -36,6 +37,7 @@ function ManageVideo(props: RouteComponentProps): React.ReactElement {
       setVideo({} as Video);
     }
     setLoading(false);
+    setShouldRedirect(true);
     window.alert(res);
   }
 
@@ -44,41 +46,44 @@ function ManageVideo(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
-      {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
-      <div>
+    <>
+      {shouldRedirect && <Redirect to="admin/videos" />}
+      <section>
+        {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
         <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            onChange={handleFormChange}
-            value={video.name}
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              onChange={handleFormChange}
+              value={video.name}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="url"
+              placeholder="URL"
+              onChange={handleFormChange}
+              value={video.url}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="date"
+              placeholder="Date"
+              onChange={handleFormChange}
+              value={video.date}
+            />
+          </div>
+          <button type="button" onClick={handleSaveClick}>
+            Save
+          </button>
         </div>
-        <div>
-          <input
-            type="text"
-            name="url"
-            placeholder="URL"
-            onChange={handleFormChange}
-            value={video.url}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="date"
-            placeholder="Date"
-            onChange={handleFormChange}
-            value={video.date}
-          />
-        </div>
-        <button type="button" onClick={handleSaveClick}>
-          Save
-        </button>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
@@ -8,6 +8,7 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
   const [gig, setGig] = useState<Gig>({} as Gig);
   const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
     async function fetchVideo(): Promise<void> {
@@ -36,6 +37,7 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
       setGig({} as Gig);
     }
     setLoading(false);
+    setShouldRedirect(true);
     window.alert(res);
   }
 
@@ -44,68 +46,71 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
-      {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
-      <div>
+    <>
+      {shouldRedirect && <Redirect to="/admin/gigs" />}
+      <section>
+        {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
         <div>
-          <input
-            type="text"
-            name="venue"
-            placeholder="Venue"
-            onChange={handleFormChange}
-            value={gig.venue}
-          />
+          <div>
+            <input
+              type="text"
+              name="venue"
+              placeholder="Venue"
+              onChange={handleFormChange}
+              value={gig.venue}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="address"
+              placeholder="Address"
+              onChange={handleFormChange}
+              value={gig.address}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="date"
+              placeholder="Date"
+              onChange={handleFormChange}
+              value={gig.date}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="hour"
+              placeholder="Hour"
+              onChange={handleFormChange}
+              value={gig.hour}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="fbEvent"
+              placeholder="Facebook Event URL"
+              onChange={handleFormChange}
+              value={gig.fbEvent}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="image"
+              placeholder="Image"
+              onChange={handleFormChange}
+              value={gig.image}
+            />
+          </div>
+          <button type="button" onClick={handleSaveClick}>
+            Save
+          </button>
         </div>
-        <div>
-          <input
-            type="text"
-            name="address"
-            placeholder="Address"
-            onChange={handleFormChange}
-            value={gig.address}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="date"
-            placeholder="Date"
-            onChange={handleFormChange}
-            value={gig.date}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="hour"
-            placeholder="Hour"
-            onChange={handleFormChange}
-            value={gig.hour}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="fbEvent"
-            placeholder="Facebook Event URL"
-            onChange={handleFormChange}
-            value={gig.fbEvent}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            name="image"
-            placeholder="Image"
-            onChange={handleFormChange}
-            value={gig.image}
-          />
-        </div>
-        <button type="button" onClick={handleSaveClick}>
-          Save
-        </button>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

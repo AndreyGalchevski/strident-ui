@@ -25,13 +25,18 @@ function Videos(): React.ReactElement {
   return (
     <section>
       <h3>Videos</h3>
-      <div>
+      <div className="row">
         {videos.map(video => (
-          <div key={video._id}>
-            <p>{video._id}</p>
-            <p>{video.name}</p>
-            <p>{video.url}</p>
-            <p>{video.date}</p>
+          <div key={video._id} className="col s12 m6">
+            <iframe
+              className="embed"
+              title={video.name}
+              src={video.url}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              // width="300"
+              // height="380"
+            />
           </div>
         ))}
       </div>

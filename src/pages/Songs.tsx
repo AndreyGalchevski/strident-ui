@@ -25,12 +25,18 @@ function Songs(): React.ReactElement {
   return (
     <section>
       <h3>Songs</h3>
-      <div>
+      <div className="row">
         {songs.map(song => (
-          <div key={song._id}>
-            <p>{song._id}</p>
-            <p>{song.name}</p>
-            <p>{song.url}</p>
+          <div key={song._id} className="col s12 m4">
+            <iframe
+              title={song.name}
+              src={song.url}
+              frameBorder="0"
+              allowTransparency
+              allow="encrypted-media"
+              // width="300"
+              // height="380"
+            />
           </div>
         ))}
       </div>

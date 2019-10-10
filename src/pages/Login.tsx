@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 
+import { Redirect } from 'react-router';
 import { useAuthContext } from '../context/authContext';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
@@ -9,6 +10,7 @@ function Login(): React.ReactElement {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const [, dispatch] = useAuthContext();
 
@@ -29,6 +31,7 @@ function Login(): React.ReactElement {
       return;
     }
     dispatch({ type: LOGIN_SUCCESS, payload: token });
+    setShouldRedirect(true);
   }
 
   if (isLoading) {
@@ -36,14 +39,17 @@ function Login(): React.ReactElement {
   }
 
   return (
-    <section>
-      <h3>Login</h3>
-      <input type="text" placeholder="Username" onChange={handleUsernameChange} />
-      <input type="password" placeholder="Password" onChange={handlePasswordChange} />
-      <button type="button" onClick={handleLogin}>
-        Login
-      </button>
-    </section>
+    <>
+      {shouldRedirect && <Redirect to="/admin" />}
+      <section>
+        <h3>Login</h3>
+        <input type="text" placeholder="Username" onChange={handleUsernameChange} />
+        <input type="password" placeholder="Password" onChange={handlePasswordChange} />
+        <button type="button" onClick={handleLogin}>
+          Login
+        </button>
+      </section>
+    </>
   );
 }
 

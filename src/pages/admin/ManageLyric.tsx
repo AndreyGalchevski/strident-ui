@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Lyric } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
@@ -8,6 +8,7 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
   const [lyric, setLyric] = useState<Lyric>({} as Lyric);
   const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
     async function fetchLyric(): Promise<void> {
@@ -36,6 +37,7 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
       setLyric({} as Lyric);
     }
     setLoading(false);
+    setShouldRedirect(true);
     window.alert(res);
   }
 
@@ -44,32 +46,35 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
-      {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
-      <div>
+    <>
+      {shouldRedirect && <Redirect to="/admin/lyrics" />}
+      <section>
+        {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
         <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            onChange={handleFormChange}
-            value={lyric.name}
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              onChange={handleFormChange}
+              value={lyric.name}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="text"
+              placeholder="Text"
+              onChange={handleFormChange}
+              value={lyric.text}
+            />
+          </div>
+          <button type="button" onClick={handleSaveClick}>
+            Save
+          </button>
         </div>
-        <div>
-          <input
-            type="text"
-            name="text"
-            placeholder="Text"
-            onChange={handleFormChange}
-            value={lyric.text}
-          />
-        </div>
-        <button type="button" onClick={handleSaveClick}>
-          Save
-        </button>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

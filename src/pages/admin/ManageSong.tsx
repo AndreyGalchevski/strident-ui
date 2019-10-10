@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
@@ -8,6 +8,7 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
   const [song, setSong] = useState<Song>({} as Song);
   const [isLoading, setLoading] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   useEffect(() => {
     async function fetchSong(): Promise<void> {
@@ -35,6 +36,7 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
       res = await createResource<Song>('songs', song);
       setSong({} as Song);
     }
+    setShouldRedirect(true);
     setLoading(false);
     window.alert(res);
   }
@@ -44,32 +46,35 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
-      {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
-      <div>
+    <>
+      {shouldRedirect && <Redirect to="/admin/songs" />}
+      <section>
+        {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
         <div>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            onChange={handleFormChange}
-            value={song.name}
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              onChange={handleFormChange}
+              value={song.name}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              name="url"
+              placeholder="URL"
+              onChange={handleFormChange}
+              value={song.url}
+            />
+          </div>
+          <button type="button" onClick={handleSaveClick}>
+            Save
+          </button>
         </div>
-        <div>
-          <input
-            type="text"
-            name="url"
-            placeholder="URL"
-            onChange={handleFormChange}
-            value={song.url}
-          />
-        </div>
-        <button type="button" onClick={handleSaveClick}>
-          Save
-        </button>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
