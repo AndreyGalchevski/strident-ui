@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { fetchResources } from '../api/utils';
 import { Video } from '../api/types';
 
+const styles = {
+  video: {
+    marginBottom: '2em',
+  },
+};
+
 function Videos(): React.ReactElement {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -27,15 +33,15 @@ function Videos(): React.ReactElement {
       <h3>Videos</h3>
       <div className="row">
         {videos.map(video => (
-          <div key={video._id} className="col s12 m6">
+          <div key={video._id} className="col s12 m6" style={styles.video}>
             <iframe
               className="embed"
               title={video.name}
               src={video.url}
               allow="autoplay; encrypted-media"
               allowFullScreen
-              // width="300"
-              // height="380"
+              width="360"
+              height="380"
             />
           </div>
         ))}

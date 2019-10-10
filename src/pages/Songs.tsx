@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { fetchResources } from '../api/utils';
 import { Song } from '../api/types';
 
+const styles = {
+  song: {
+    marginBottom: '2em',
+  },
+};
+
 function Songs(): React.ReactElement {
   const [songs, setSongs] = useState<Song[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -27,15 +33,14 @@ function Songs(): React.ReactElement {
       <h3>Songs</h3>
       <div className="row">
         {songs.map(song => (
-          <div key={song._id} className="col s12 m4">
+          <div key={song._id} className="col s12 m4" style={styles.song}>
             <iframe
               title={song.name}
               src={song.url}
               frameBorder="0"
-              allowTransparency
               allow="encrypted-media"
-              // width="300"
-              // height="380"
+              width="300"
+              height="380"
             />
           </div>
         ))}
