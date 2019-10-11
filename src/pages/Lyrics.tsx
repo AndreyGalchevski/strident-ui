@@ -12,6 +12,13 @@ const styles = {
   card: {
     boxShadow: `0 4px 8px 0 ${LIGHT_COLOR}, 0 6px 20px 0 ${LIGHT_COLOR}`,
   },
+  cardContent: {
+    padding: '0',
+  },
+  text: {
+    fontFamily: '"Special Elite", cursive',
+    fontSize: '13px',
+  },
 };
 
 function Lyrics(props: RouteComponentProps): React.ReactElement {
@@ -65,8 +72,8 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
           <div key={lyric._id} className="col s12 m6">
             <div className="card" style={styles.card}>
               <span className="card-title">{lyric.name}</span>
-              <div className="card-content">
-                <p>{lyric.text}</p>
+              <div className="card-content" style={styles.cardContent}>
+                <pre style={styles.text}>{lyric.text}</pre>
               </div>
               {authState.isAuthenticated && (
                 <div className="card-action">
