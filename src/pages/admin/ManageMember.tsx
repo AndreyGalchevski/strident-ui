@@ -3,6 +3,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Member } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
+import Button from '../../components/Button';
 
 function ManageMember(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -50,46 +51,52 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
       {shouldRedirect && <Redirect to="/members" />}
       <section>
         {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
-        <div>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              onChange={handleFormChange}
-              value={member.name}
-            />
+        <div className="row">
+          <div className="col 12 m4 offset-m4">
+            <div className="card">
+              <div className="card-content">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    onChange={handleFormChange}
+                    value={member.name}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="instrument"
+                    placeholder="Instrument"
+                    onChange={handleFormChange}
+                    value={member.instrument}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="info"
+                    placeholder="Info"
+                    onChange={handleFormChange}
+                    value={member.info}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="image"
+                    placeholder="Image"
+                    onChange={handleFormChange}
+                    value={member.image}
+                  />
+                </div>
+              </div>
+              <div className="card-action">
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </div>
+            </div>
           </div>
-          <div>
-            <input
-              type="text"
-              name="instrument"
-              placeholder="Instrument"
-              onChange={handleFormChange}
-              value={member.instrument}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="info"
-              placeholder="Info"
-              onChange={handleFormChange}
-              value={member.info}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              name="image"
-              placeholder="Image"
-              onChange={handleFormChange}
-              value={member.image}
-            />
-          </div>
-          <button type="button" onClick={handleSaveClick}>
-            Save
-          </button>
         </div>
       </section>
     </>

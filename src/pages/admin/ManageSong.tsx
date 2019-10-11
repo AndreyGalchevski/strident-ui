@@ -3,6 +3,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
+import Button from '../../components/Button';
 
 function ManageSong(props: RouteComponentProps): React.ReactElement {
   const { match } = props;
@@ -50,28 +51,34 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
       {shouldRedirect && <Redirect to="/songs" />}
       <section>
         {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
-        <div>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              onChange={handleFormChange}
-              value={song.name}
-            />
+        <div className="row">
+          <div className="col s12 m4 offset-m4">
+            <div className="card">
+              <div className="card-content">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    onChange={handleFormChange}
+                    value={song.name}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="url"
+                    placeholder="URL"
+                    onChange={handleFormChange}
+                    value={song.url}
+                  />
+                </div>
+              </div>
+              <div className="card-action">
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </div>
+            </div>
           </div>
-          <div>
-            <input
-              type="text"
-              name="url"
-              placeholder="URL"
-              onChange={handleFormChange}
-              value={song.url}
-            />
-          </div>
-          <button type="button" onClick={handleSaveClick}>
-            Save
-          </button>
         </div>
       </section>
     </>
