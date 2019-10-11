@@ -1,10 +1,11 @@
 import React, { useState, ChangeEvent } from 'react';
-
 import { Redirect } from 'react-router-dom';
+
 import { useAuthContext } from '../context/authContext';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
 import Loader from '../components/Loader';
+import Button from '../components/Button';
 
 function Login(): React.ReactElement {
   const [username, setUsername] = useState('');
@@ -43,11 +44,19 @@ function Login(): React.ReactElement {
       {shouldRedirect && <Redirect to="/" />}
       <section>
         <h3>Login</h3>
-        <input type="text" placeholder="Username" onChange={handleUsernameChange} />
-        <input type="password" placeholder="Password" onChange={handlePasswordChange} />
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
+        <div className="row">
+          <div className="col s12 m4 offset-m4">
+            <div className="card">
+              <div className="card-content">
+                <input type="text" placeholder="Username" onChange={handleUsernameChange} />
+                <input type="password" placeholder="Password" onChange={handlePasswordChange} />
+              </div>
+              <div className="card-action">
+                <Button handleClick={handleLogin}>Login</Button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );
