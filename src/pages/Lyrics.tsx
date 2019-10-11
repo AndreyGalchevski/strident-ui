@@ -3,8 +3,10 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
-import { LIGHT_COLOR, ACCENT_COLOR } from '../utils/constants';
+import { LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
+import PlusIcon from '../components/PlusIcon';
+import Button from '../components/Button';
 
 const styles = {
   card: {
@@ -54,9 +56,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
         Lyrics
         {authState.isAuthenticated && (
           <Link to="/admin/lyrics/new">
-            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
-              add
-            </i>
+            <PlusIcon />
           </Link>
         )}
       </h3>
@@ -70,22 +70,12 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
               </div>
               {authState.isAuthenticated && (
                 <div className="card-action">
-                  <button
-                    type="button"
-                    className="waves-effect waves-light btn grey"
-                    onClick={handleUpdateClick(lyric._id)}
-                    style={{ marginRight: '1em', marginLeft: '1em' }}
-                  >
+                  <Button handleClick={handleUpdateClick(lyric._id)}>
                     <i className="material-icons">edit</i>
-                  </button>
-                  <button
-                    type="button"
-                    className="waves-effect waves-light btn red darken-4"
-                    onClick={handleDeleteClick(lyric._id)}
-                    style={{ marginRight: '1em', marginLeft: '1em' }}
-                  >
+                  </Button>
+                  <Button isPrimary handleClick={handleDeleteClick(lyric._id)}>
                     <i className="material-icons">delete</i>
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

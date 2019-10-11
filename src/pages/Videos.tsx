@@ -1,33 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, MouseEventHandler } from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
 
-import { fetchResources } from '../api/utils';
+import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import { ACCENT_COLOR } from '../utils/constants';
+import PlusIcon from '../components/PlusIcon';
+import Button from '../components/Button';
 
 const styles = {
   video: {
     marginBottom: '2em',
   },
+  cardContent: {
+    padding: 0,
+  },
 };
 
-function Videos(): React.ReactElement {
+function Videos(props: RouteComponentProps): React.ReactElement {
+  const { history } = props;
+
   const [authState] = useAuthContext();
 
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchVideos(): Promise<void> {
-      setLoading(true);
-      const resources = await fetchResources<Video>('videos');
-      setVideos(resources);
-      setLoading(false);
-    }
+  async function fetchVideos(): Promise<void> {
+    setLoading(true);
+    const resources = await fetchResources<Video>('videos');
+    setVideos(resources);
+    setLoading(false);
+  }
 
+  useEffect(() => {
     fetchVideos();
   }, []);
+
+  function handleUpdateClick(videoId: string): MouseEventHandler {
+    return (): void => {
+      history.push(`/admin/videos/edit/${videoId}`);
+    };
+  }
+
+  function handleDeleteClick(videoId: string): MouseEventHandler {
+    return async (): Promise<void> => {
+      const res = await deleteResource('videos', videoId);
+      fetchVideos();
+      window.alert(res);
+    };
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -39,41 +59,36 @@ function Videos(): React.ReactElement {
         Videos
         {authState.isAuthenticated && (
           <Link to="/admin/videos/new">
-            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
-              add
-            </i>
+            <PlusIcon />
           </Link>
         )}
       </h3>
       <div className="row">
         {videos.map(video => (
           <div key={video._id} className="col s12 m4" style={styles.video}>
-            {authState.isAuthenticated && (
-              <div style={{ position: 'relative', float: 'right', right: '50px', top: '330px' }}>
-                <Link
-                  to={`/admin/videos/edit/${video._id}`}
-                  style={{
-                    display: 'block',
-                    color: 'white',
-                    backgroundColor: 'red',
-                    width: '30px',
-                    height: '30px',
-                    borderRadius: '50%',
-                  }}
-                >
-                  <i className="material-icons">edit</i>
-                </Link>
+            <div className="card">
+              <div className="card-content" style={styles.cardContent}>
+                <iframe
+                  title={video.name}
+                  src={video.url}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  frameBorder="0"
+                  width="100%"
+                  height="60%"
+                />
               </div>
-            )}
-            <iframe
-              title={video.name}
-              src={video.url}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              frameBorder="0"
-              width="360"
-              height="380"
-            />
+              {authState.isAuthenticated && (
+                <div className="card-action">
+                  <Button handleClick={handleUpdateClick(video._id)}>
+                    <i className="material-icons">edit</i>
+                  </Button>
+                  <Button isPrimary handleClick={handleDeleteClick(video._id)}>
+                    <i className="material-icons">delete</i>
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

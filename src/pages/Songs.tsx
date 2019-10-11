@@ -1,33 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, MouseEventHandler } from 'react';
+import { Link, RouteComponentProps } from 'react-router-dom';
 
-import { fetchResources } from '../api/utils';
+import { fetchResources, deleteResource } from '../api/utils';
 import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import { ACCENT_COLOR } from '../utils/constants';
+import PlusIcon from '../components/PlusIcon';
+import Button from '../components/Button';
 
 const styles = {
   song: {
     marginBottom: '2em',
   },
+  cardContent: {
+    padding: 0,
+  },
 };
 
-function Songs(): React.ReactElement {
+function Songs(props: RouteComponentProps): React.ReactElement {
+  const { history } = props;
+
   const [authState] = useAuthContext();
 
   const [songs, setSongs] = useState<Song[]>([]);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchSongs(): Promise<void> {
-      setLoading(true);
-      const resources = await fetchResources<Song>('songs');
-      setSongs(resources);
-      setLoading(false);
-    }
+  async function fetchSongs(): Promise<void> {
+    setLoading(true);
+    const resources = await fetchResources<Song>('songs');
+    setSongs(resources);
+    setLoading(false);
+  }
 
+  useEffect(() => {
     fetchSongs();
   }, []);
+
+  function handleUpdateClick(songId: string): MouseEventHandler {
+    return (): void => {
+      history.push(`/admin/songs/edit/${songId}`);
+    };
+  }
+
+  function handleDeleteClick(songId: string): MouseEventHandler {
+    return async (): Promise<void> => {
+      const res = await deleteResource('songs', songId);
+      fetchSongs();
+      window.alert(res);
+    };
+  }
 
   if (isLoading) {
     return <h3>Loading...</h3>;
@@ -39,30 +59,35 @@ function Songs(): React.ReactElement {
         Songs
         {authState.isAuthenticated && (
           <Link to="/admin/songs/new">
-            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
-              add
-            </i>
+            <PlusIcon />
           </Link>
         )}
       </h3>
       <div className="row">
         {songs.map(song => (
           <div key={song._id} className="col s12 m4" style={styles.song}>
-            {authState.isAuthenticated && (
-              <div style={{ position: 'relative', float: 'right', right: '100px', top: '6px' }}>
-                <Link to={`/admin/songs/edit/${song._id}`} style={{ color: 'white' }}>
-                  <i className="material-icons">edit</i>
-                </Link>
+            <div className="card">
+              <div className="card-content" style={styles.cardContent}>
+                <iframe
+                  title={song.name}
+                  src={song.url}
+                  frameBorder="0"
+                  allow="encrypted-media"
+                  width="100%"
+                  height="60%"
+                />
               </div>
-            )}
-            <iframe
-              title={song.name}
-              src={song.url}
-              frameBorder="0"
-              allow="encrypted-media"
-              width="300"
-              height="380"
-            />
+              {authState.isAuthenticated && (
+                <div className="card-action">
+                  <Button handleClick={handleUpdateClick(song._id)}>
+                    <i className="material-icons">edit</i>
+                  </Button>
+                  <Button isPrimary handleClick={handleDeleteClick(song._id)}>
+                    <i className="material-icons">delete</i>
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

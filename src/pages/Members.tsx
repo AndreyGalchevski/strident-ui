@@ -3,8 +3,10 @@ import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { LIGHT_COLOR, ACCENT_COLOR } from '../utils/constants';
+import { LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
+import PlusIcon from '../components/PlusIcon';
+import Button from '../components/Button';
 
 const styles = {
   card: {
@@ -55,9 +57,7 @@ function Members(props: RouteComponentProps): React.ReactElement {
         Members
         {authState.isAuthenticated && (
           <Link to="/admin/members/new">
-            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
-              add
-            </i>
+            <PlusIcon />
           </Link>
         )}
       </h3>
@@ -74,22 +74,12 @@ function Members(props: RouteComponentProps): React.ReactElement {
               </div>
               {authState.isAuthenticated && (
                 <div className="card-action">
-                  <button
-                    type="button"
-                    className="waves-effect waves-light btn grey"
-                    onClick={handleUpdateClick(member._id)}
-                    style={{ marginRight: '1em', marginLeft: '1em' }}
-                  >
+                  <Button handleClick={handleUpdateClick(member._id)}>
                     <i className="material-icons">edit</i>
-                  </button>
-                  <button
-                    type="button"
-                    className="waves-effect waves-light btn red darken-4"
-                    onClick={handleDeleteClick(member._id)}
-                    style={{ marginRight: '1em', marginLeft: '1em' }}
-                  >
+                  </Button>
+                  <Button isPrimary handleClick={handleDeleteClick(member._id)}>
                     <i className="material-icons">delete</i>
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>
