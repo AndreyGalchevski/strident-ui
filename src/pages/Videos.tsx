@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { fetchResources } from '../api/utils';
 import { Video } from '../api/types';
+import { useAuthContext } from '../context/authContext';
+import { ACCENT_COLOR } from '../utils/constants';
 
 const styles = {
   video: {
@@ -10,6 +13,8 @@ const styles = {
 };
 
 function Videos(): React.ReactElement {
+  const [authState] = useAuthContext();
+
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -30,12 +35,37 @@ function Videos(): React.ReactElement {
 
   return (
     <section>
-      <h3>Videos</h3>
+      <h3>
+        Videos
+        {authState.isAuthenticated && (
+          <Link to="/admin/videos/new">
+            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
+              add
+            </i>
+          </Link>
+        )}
+      </h3>
       <div className="row">
         {videos.map(video => (
-          <div key={video._id} className="col s12 m6" style={styles.video}>
+          <div key={video._id} className="col s12 m4" style={styles.video}>
+            {authState.isAuthenticated && (
+              <div style={{ position: 'relative', float: 'right', right: '50px', top: '330px' }}>
+                <Link
+                  to={`/admin/videos/edit/${video._id}`}
+                  style={{
+                    display: 'block',
+                    color: 'white',
+                    backgroundColor: 'red',
+                    width: '30px',
+                    height: '30px',
+                    borderRadius: '50%',
+                  }}
+                >
+                  <i className="material-icons">edit</i>
+                </Link>
+              </div>
+            )}
             <iframe
-              className="embed"
               title={video.name}
               src={video.url}
               allow="autoplay; encrypted-media"

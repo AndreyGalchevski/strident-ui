@@ -23,8 +23,12 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
     }
   }, []);
 
-  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
-    setLyric({ ...lyric, [e.target.name]: e.target.value });
+  function handleNameChange(e: ChangeEvent<HTMLInputElement>): void {
+    setLyric({ ...lyric, name: e.target.value });
+  }
+
+  function handleTextChange(e: ChangeEvent<HTMLTextAreaElement>): void {
+    setLyric({ ...lyric, text: e.target.value });
   }
 
   async function handleSaveClick(): Promise<void> {
@@ -47,27 +51,15 @@ function ManageLyric(props: RouteComponentProps): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/admin/lyrics" />}
+      {shouldRedirect && <Redirect to="/lyrics" />}
       <section>
         {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
         <div>
           <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              onChange={handleFormChange}
-              value={lyric.name}
-            />
+            <input type="text" placeholder="Name" onChange={handleNameChange} value={lyric.name} />
           </div>
           <div>
-            <input
-              type="text"
-              name="text"
-              placeholder="Text"
-              onChange={handleFormChange}
-              value={lyric.text}
-            />
+            <textarea placeholder="Text" onChange={handleTextChange} value={lyric.text} />
           </div>
           <button type="button" onClick={handleSaveClick}>
             Save

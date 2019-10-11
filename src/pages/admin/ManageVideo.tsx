@@ -47,7 +47,7 @@ function ManageVideo(props: RouteComponentProps): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="admin/videos" />}
+      {shouldRedirect && <Redirect to="/videos" />}
       <section>
         {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
         <div>

@@ -47,7 +47,7 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="admin/members" />}
+      {shouldRedirect && <Redirect to="/members" />}
       <section>
         {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
         <div>

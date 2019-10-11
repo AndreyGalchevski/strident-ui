@@ -47,7 +47,7 @@ function ManageSong(props: RouteComponentProps): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/admin/songs" />}
+      {shouldRedirect && <Redirect to="/songs" />}
       <section>
         {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
         <div>

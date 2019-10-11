@@ -47,7 +47,7 @@ function ManageGig(props: RouteComponentProps): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/admin/gigs" />}
+      {shouldRedirect && <Redirect to="/gigs" />}
       <section>
         {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
         <div>

@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from 'react';
 
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { useAuthContext } from '../context/authContext';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
@@ -40,7 +40,7 @@ function Login(): React.ReactElement {
 
   return (
     <>
-      {shouldRedirect && <Redirect to="/admin" />}
+      {shouldRedirect && <Redirect to="/" />}
       <section>
         <h3>Login</h3>
         <input type="text" placeholder="Username" onChange={handleUsernameChange} />

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { fetchResources } from '../api/utils';
 import { Song } from '../api/types';
+import { useAuthContext } from '../context/authContext';
+import { ACCENT_COLOR } from '../utils/constants';
 
 const styles = {
   song: {
@@ -10,6 +13,8 @@ const styles = {
 };
 
 function Songs(): React.ReactElement {
+  const [authState] = useAuthContext();
+
   const [songs, setSongs] = useState<Song[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -30,10 +35,26 @@ function Songs(): React.ReactElement {
 
   return (
     <section>
-      <h3>Songs</h3>
+      <h3>
+        Songs
+        {authState.isAuthenticated && (
+          <Link to="/admin/songs/new">
+            <i className="material-icons" style={{ color: ACCENT_COLOR }}>
+              add
+            </i>
+          </Link>
+        )}
+      </h3>
       <div className="row">
         {songs.map(song => (
           <div key={song._id} className="col s12 m4" style={styles.song}>
+            {authState.isAuthenticated && (
+              <div style={{ position: 'relative', float: 'right', right: '100px', top: '6px' }}>
+                <Link to={`/admin/songs/edit/${song._id}`} style={{ color: 'white' }}>
+                  <i className="material-icons">edit</i>
+                </Link>
+              </div>
+            )}
             <iframe
               title={song.name}
               src={song.url}
