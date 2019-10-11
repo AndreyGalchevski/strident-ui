@@ -37,7 +37,7 @@ function Navbar(): ReactElement {
           <div className="nav-wrapper">
             <img
               className="brand-logo center"
-              src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570630024/strident/logo.png"
+              src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570799435/strident/20191011_160907.png"
               alt=""
               style={styles.brandLogo}
             />
