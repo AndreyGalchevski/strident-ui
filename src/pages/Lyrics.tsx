@@ -3,14 +3,26 @@ import { Link, RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
-import { LIGHT_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 
 const styles = {
+  lyricsContainer: (isWideScreen: boolean): any => ({
+    margin: 'auto',
+    maxWidth: '1080px',
+    columnCount: isWideScreen ? '2' : '1',
+  }),
+  lyric: {
+    display: 'inline-block',
+    width: '100%',
+    padding: '2vh',
+  },
   card: {
-    boxShadow: `0 4px 8px 0 ${LIGHT_COLOR}, 0 6px 20px 0 ${LIGHT_COLOR}`,
+    paddingTop: '2em',
+    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
   },
   cardContent: {
     padding: '0',
@@ -24,6 +36,7 @@ const styles = {
 function Lyrics(props: RouteComponentProps): React.ReactElement {
   const { history } = props;
   const [authState] = useAuthContext();
+  const isWideScreen = useMediaQuery('(min-width: 1024px)');
 
   const [lyrics, setLyrics] = useState<Lyric[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -67,9 +80,9 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
           </Link>
         )}
       </h3>
-      <div className="row">
+      <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
         {lyrics.map(lyric => (
-          <div key={lyric._id} className="col s12 m6">
+          <div key={lyric._id} style={styles.lyric}>
             <div className="card" style={styles.card}>
               <span className="card-title">{lyric.name}</span>
               <div className="card-content" style={styles.cardContent}>

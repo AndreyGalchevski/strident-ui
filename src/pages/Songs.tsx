@@ -6,10 +6,14 @@ import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
 import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
+import { PRIMARY_COLOR } from '../utils/constants';
 
 const styles = {
   song: {
     marginBottom: '2em',
+  },
+  card: {
+    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
   },
   cardContent: {
     padding: 0,
@@ -66,7 +70,7 @@ function Songs(props: RouteComponentProps): React.ReactElement {
       <div className="row">
         {songs.map(song => (
           <div key={song._id} className="col s12 m4" style={styles.song}>
-            <div className="card">
+            <div className="card" style={styles.cardContent}>
               <div className="card-content" style={styles.cardContent}>
                 <iframe
                   title={song.name}

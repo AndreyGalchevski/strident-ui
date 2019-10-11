@@ -3,14 +3,14 @@ import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { LIGHT_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
 
 const styles = {
   card: {
-    boxShadow: `0 4px 8px 0 ${LIGHT_COLOR}, 0 6px 20px 0 ${LIGHT_COLOR}`,
+    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
   },
 };
 
