@@ -17,6 +17,19 @@ const styles = {
   rightLinks: {
     paddingRight: '22em',
   },
+  sideNav: {
+    backgroundColor: PRIMARY_COLOR,
+    // backgroundImage:
+    // 'url("https://res.cloudinary.com/dqvimfd8b/image/upload/v1570892825/strident/metal-texture-4331005_960_720__01__01.jpg")',
+  },
+  link: {
+    color: '#fff',
+  },
+  sideNavImage: {
+    marginTop: '8vh',
+    width: '65vw',
+    height: '40vh',
+  },
 };
 
 function Navbar(): ReactElement {
@@ -82,37 +95,78 @@ function Navbar(): ReactElement {
           </div>
         </nav>
       </div>
-      <ul id="slide-out" className="sidenav">
+      <ul id="slide-out" className="sidenav" style={styles.sideNav}>
         <li>
-          <NavLink exact to="/" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/members" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/members"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Members
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/songs" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/songs"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Songs
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/videos" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/videos"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Videos
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/gigs" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/gigs"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Gigs
           </NavLink>
         </li>
         <li>
-          <NavLink exact to="/lyrics" className="sidenav-close" activeStyle={activeLinkStyle}>
+          <NavLink
+            exact
+            to="/lyrics"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
             Lyrics
           </NavLink>
         </li>
+        <img
+          style={styles.sideNavImage}
+          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570902242/strident/48361695_1034454676764330_2735285098239754240_n.png"
+          alt=""
+        />
       </ul>
     </div>
   );
