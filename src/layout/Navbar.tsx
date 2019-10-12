@@ -19,8 +19,6 @@ const styles = {
   },
   sideNav: {
     backgroundColor: PRIMARY_COLOR,
-    // backgroundImage:
-    // 'url("https://res.cloudinary.com/dqvimfd8b/image/upload/v1570892825/strident/metal-texture-4331005_960_720__01__01.jpg")',
   },
   link: {
     color: '#fff',
@@ -51,7 +49,7 @@ function Navbar(): ReactElement {
           <div className="nav-wrapper">
             <img
               className="brand-logo center"
-              src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570799435/strident/20191011_160907.png"
+              src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570799435/strident/app/20191011_160907.png"
               alt=""
               style={styles.brandLogo}
             />
@@ -164,7 +162,7 @@ function Navbar(): ReactElement {
         </li>
         <img
           style={styles.sideNavImage}
-          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570907313/strident/1570907271835.png"
+          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570907313/strident/app/1570907271835.png"
           alt=""
         />
       </ul>

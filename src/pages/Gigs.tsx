@@ -70,7 +70,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                     className="btn-floating halfway-fab waves-effect waves-light white"
                   >
                     <img
-                      src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/facebook.png"
+                      src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/icons/facebook.png"
                       alt=""
                     />
                   </a>
