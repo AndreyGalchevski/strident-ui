@@ -68,9 +68,12 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                   href={gig.fbEvent}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-floating halfway-fab waves-effect waves-light red"
+                  className="btn-floating halfway-fab waves-effect waves-light white"
                 >
-                  <i className="material-icons">share</i>
+                  <img
+                    src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/facebook.png"
+                    alt=""
+                  />
                 </a>
               </div>
               <div className="card-content">
