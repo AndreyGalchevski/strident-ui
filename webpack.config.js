@@ -2,50 +2,54 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-  entry: './src/index.tsx',
+const isProduction =
+  typeof process.env.NODE_ENV !== 'undefined' && process.env.NODE_ENV === 'production';
+const mode = isProduction ? 'production' : 'development';
+const devtool = isProduction ? false : 'inline-source-map';
 
-  output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
-  },
-
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
-  },
-
-  devServer: {
-    contentBase: path.join(__dirname, '/dist'),
-    compress: true,
-    port: 4000,
-    historyApiFallback: true,
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
+module.exports = [
+  {
+    entry: './src/index.tsx',
+    target: 'web',
+    mode,
+    devtool,
+    devServer: {
+      contentBase: path.resolve(__dirname, '/dist'),
+      port: 4000,
+      historyApiFallback: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.(ts|js)x?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
         },
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
+        },
+      ],
+    },
+    resolve: {
+      extensions: ['.tsx', '.ts', '.js'],
+    },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].bundle.js',
+      publicPath: '/',
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+      }),
+      new CopyWebpackPlugin([
+        {
+          from: path.resolve(__dirname, './_redirects'),
+          to: path.resolve(__dirname, './dist'),
+          ignore: ['.*'],
+        },
+      ]),
     ],
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, './_redirects'),
-        to: path.resolve(__dirname, './dist'),
-        ignore: ['.*'],
-      },
-    ]),
-  ],
-};
+];
