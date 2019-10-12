@@ -1,13 +1,13 @@
 import React, { useEffect, useState, MouseEventHandler } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
 import { PRIMARY_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
-import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
+import Header from '../components/Header';
 
 const styles = {
   lyricsContainer: (isWideScreen: boolean): any => ({
@@ -72,14 +72,11 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h3>
-        Lyrics
-        {authState.isAuthenticated && (
-          <Link to="/admin/lyrics/new">
-            <PlusIcon />
-          </Link>
-        )}
-      </h3>
+      <Header
+        title="Lyrics"
+        isAuthenticated={authState.isAuthenticated}
+        adminPath="/admin/lyrics/new"
+      />
       <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
         {lyrics.map(lyric => (
           <div key={lyric._id} style={styles.lyric}>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
 
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
 import { PRIMARY_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
-import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
+import Header from '../components/Header';
 
 const styles = {
   card: {
@@ -53,14 +53,11 @@ function Members(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h3>
-        Members
-        {authState.isAuthenticated && (
-          <Link to="/admin/members/new">
-            <PlusIcon />
-          </Link>
-        )}
-      </h3>
+      <Header
+        title="Members"
+        isAuthenticated={authState.isAuthenticated}
+        adminPath="/admin/members/new"
+      />
       <div className="row">
         {members.map(member => (
           <div key={member._id} className="col s12 m3">

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, MouseEventHandler } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
 import { PRIMARY_COLOR } from '../utils/constants';
+import Header from '../components/Header';
 
 const styles = {
   song: {
@@ -59,14 +59,11 @@ function Songs(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h3>
-        Songs
-        {authState.isAuthenticated && (
-          <Link to="/admin/songs/new">
-            <PlusIcon />
-          </Link>
-        )}
-      </h3>
+      <Header
+        title="Songs"
+        isAuthenticated={authState.isAuthenticated}
+        adminPath="/admin/songs/new"
+      />
       <div className="row">
         {songs.map(song => (
           <div key={song._id} className="col s12 m4" style={styles.song}>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import PlusIcon from '../components/PlusIcon';
 import Button from '../components/Button';
 import { PRIMARY_COLOR } from '../utils/constants';
+import Header from '../components/Header';
 
 const styles = {
   video: {
@@ -59,14 +59,11 @@ function Videos(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <h3>
-        Videos
-        {authState.isAuthenticated && (
-          <Link to="/admin/videos/new">
-            <PlusIcon />
-          </Link>
-        )}
-      </h3>
+      <Header
+        title="Videos"
+        isAuthenticated={authState.isAuthenticated}
+        adminPath="/admin/videos/new"
+      />
       <div className="row">
         {videos.map(video => (
           <div key={video._id} className="col s12 m4" style={styles.video}>

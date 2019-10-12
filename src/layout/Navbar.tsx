@@ -164,7 +164,7 @@ function Navbar(): ReactElement {
         </li>
         <img
           style={styles.sideNavImage}
-          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570902242/strident/48361695_1034454676764330_2735285098239754240_n.png"
+          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570907313/strident/1570907271835.png"
           alt=""
         />
       </ul>

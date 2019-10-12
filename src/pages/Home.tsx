@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
-function Home(): React.ReactElement {
-  return <h3>Home</h3>;
+import Header from '../components/Header';
+
+function Home(): ReactElement {
+  return (
+    <section>
+      <Header title="Home" isAuthenticated={false} adminPath="/admin/home/new" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1>Under Construction</h1>
+    </section>
+  );
 }
 
 export default Home;
