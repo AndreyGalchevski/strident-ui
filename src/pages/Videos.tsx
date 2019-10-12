@@ -53,10 +53,6 @@ function Videos(props: RouteComponentProps): React.ReactElement {
     };
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <section>
       <Header
@@ -64,35 +60,39 @@ function Videos(props: RouteComponentProps): React.ReactElement {
         isAuthenticated={authState.isAuthenticated}
         adminPath="/admin/videos/new"
       />
-      <div className="row">
-        {videos.map(video => (
-          <div key={video._id} className="col s12 m4" style={styles.video}>
-            <div className="card" style={styles.card}>
-              <div className="card-content" style={styles.cardContent}>
-                <iframe
-                  title={video.name}
-                  src={video.url}
-                  allow="autoplay; encrypted-media"
-                  allowFullScreen
-                  frameBorder="0"
-                  width="100%"
-                  height="60%"
-                />
-              </div>
-              {authState.isAuthenticated && (
-                <div className="card-action">
-                  <Button handleClick={handleUpdateClick(video._id)}>
-                    <i className="material-icons">edit</i>
-                  </Button>
-                  <Button isPrimary handleClick={handleDeleteClick(video._id)}>
-                    <i className="material-icons">delete</i>
-                  </Button>
+      {isLoading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div className="row">
+          {videos.map(video => (
+            <div key={video._id} className="col s12 m4" style={styles.video}>
+              <div className="card" style={styles.card}>
+                <div className="card-content" style={styles.cardContent}>
+                  <iframe
+                    title={video.name}
+                    src={video.url}
+                    allow="autoplay; encrypted-media"
+                    allowFullScreen
+                    frameBorder="0"
+                    width="100%"
+                    height="60%"
+                  />
                 </div>
-              )}
+                {authState.isAuthenticated && (
+                  <div className="card-action">
+                    <Button handleClick={handleUpdateClick(video._id)}>
+                      <i className="material-icons">edit</i>
+                    </Button>
+                    <Button isPrimary handleClick={handleDeleteClick(video._id)}>
+                      <i className="material-icons">delete</i>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

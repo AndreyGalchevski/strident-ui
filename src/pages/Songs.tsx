@@ -53,10 +53,6 @@ function Songs(props: RouteComponentProps): React.ReactElement {
     };
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <section>
       <Header
@@ -64,34 +60,38 @@ function Songs(props: RouteComponentProps): React.ReactElement {
         isAuthenticated={authState.isAuthenticated}
         adminPath="/admin/songs/new"
       />
-      <div className="row">
-        {songs.map(song => (
-          <div key={song._id} className="col s12 m4" style={styles.song}>
-            <div className="card" style={styles.cardContent}>
-              <div className="card-content" style={styles.cardContent}>
-                <iframe
-                  title={song.name}
-                  src={song.url}
-                  frameBorder="0"
-                  allow="encrypted-media"
-                  width="100%"
-                  height="60%"
-                />
-              </div>
-              {authState.isAuthenticated && (
-                <div className="card-action">
-                  <Button handleClick={handleUpdateClick(song._id)}>
-                    <i className="material-icons">edit</i>
-                  </Button>
-                  <Button isPrimary handleClick={handleDeleteClick(song._id)}>
-                    <i className="material-icons">delete</i>
-                  </Button>
+      {isLoading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div className="row">
+          {songs.map(song => (
+            <div key={song._id} className="col s12 m4" style={styles.song}>
+              <div className="card" style={styles.cardContent}>
+                <div className="card-content" style={styles.cardContent}>
+                  <iframe
+                    title={song.name}
+                    src={song.url}
+                    frameBorder="0"
+                    allow="encrypted-media"
+                    width="100%"
+                    height="60%"
+                  />
                 </div>
-              )}
+                {authState.isAuthenticated && (
+                  <div className="card-action">
+                    <Button handleClick={handleUpdateClick(song._id)}>
+                      <i className="material-icons">edit</i>
+                    </Button>
+                    <Button isPrimary handleClick={handleDeleteClick(song._id)}>
+                      <i className="material-icons">delete</i>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

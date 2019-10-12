@@ -47,10 +47,6 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
     };
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <section>
       <Header
@@ -58,44 +54,48 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
         isAuthenticated={authState.isAuthenticated}
         adminPath="/admin/gigs/new"
       />
-      <div className="row">
-        {gigs.map(gig => (
-          <div key={gig._id} className="col s12 m4">
-            <div className="card" style={styles.card}>
-              <div className="card-image">
-                <img src={gig.image} alt="" />
-                <a
-                  href={gig.fbEvent}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-floating halfway-fab waves-effect waves-light white"
-                >
-                  <img
-                    src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/facebook.png"
-                    alt=""
-                  />
-                </a>
-              </div>
-              <div className="card-content">
-                <p>{gig.venue}</p>
-                <p>{gig.address}</p>
-                <p>{gig.date}</p>
-                <p>{gig.hour}</p>
-              </div>
-              {authState.isAuthenticated && (
-                <div className="card-action">
-                  <Button handleClick={handleUpdateClick(gig._id)}>
-                    <i className="material-icons">edit</i>
-                  </Button>
-                  <Button isPrimary handleClick={handleDeleteClick(gig._id)}>
-                    <i className="material-icons">delete</i>
-                  </Button>
+      {isLoading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div className="row">
+          {gigs.map(gig => (
+            <div key={gig._id} className="col s12 m4">
+              <div className="card" style={styles.card}>
+                <div className="card-image">
+                  <img src={gig.image} alt="" />
+                  <a
+                    href={gig.fbEvent}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-floating halfway-fab waves-effect waves-light white"
+                  >
+                    <img
+                      src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/facebook.png"
+                      alt=""
+                    />
+                  </a>
                 </div>
-              )}
+                <div className="card-content">
+                  <p>{gig.venue}</p>
+                  <p>{gig.address}</p>
+                  <p>{gig.date}</p>
+                  <p>{gig.hour}</p>
+                </div>
+                {authState.isAuthenticated && (
+                  <div className="card-action">
+                    <Button handleClick={handleUpdateClick(gig._id)}>
+                      <i className="material-icons">edit</i>
+                    </Button>
+                    <Button isPrimary handleClick={handleDeleteClick(gig._id)}>
+                      <i className="material-icons">delete</i>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

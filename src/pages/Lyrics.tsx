@@ -66,10 +66,6 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
     };
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <section>
       <Header
@@ -77,28 +73,32 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
         isAuthenticated={authState.isAuthenticated}
         adminPath="/admin/lyrics/new"
       />
-      <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
-        {lyrics.map(lyric => (
-          <div key={lyric._id} style={styles.lyric}>
-            <div className="card" style={styles.card}>
-              <span className="card-title">{lyric.name}</span>
-              <div className="card-content" style={styles.cardContent}>
-                <pre style={styles.text}>{lyric.text}</pre>
-              </div>
-              {authState.isAuthenticated && (
-                <div className="card-action">
-                  <Button handleClick={handleUpdateClick(lyric._id)}>
-                    <i className="material-icons">edit</i>
-                  </Button>
-                  <Button isPrimary handleClick={handleDeleteClick(lyric._id)}>
-                    <i className="material-icons">delete</i>
-                  </Button>
+      {isLoading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
+          {lyrics.map(lyric => (
+            <div key={lyric._id} style={styles.lyric}>
+              <div className="card" style={styles.card}>
+                <span className="card-title">{lyric.name}</span>
+                <div className="card-content" style={styles.cardContent}>
+                  <pre style={styles.text}>{lyric.text}</pre>
                 </div>
-              )}
+                {authState.isAuthenticated && (
+                  <div className="card-action">
+                    <Button handleClick={handleUpdateClick(lyric._id)}>
+                      <i className="material-icons">edit</i>
+                    </Button>
+                    <Button isPrimary handleClick={handleDeleteClick(lyric._id)}>
+                      <i className="material-icons">delete</i>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

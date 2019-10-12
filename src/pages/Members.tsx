@@ -47,10 +47,6 @@ function Members(props: RouteComponentProps): React.ReactElement {
     };
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <section>
       <Header
@@ -58,31 +54,35 @@ function Members(props: RouteComponentProps): React.ReactElement {
         isAuthenticated={authState.isAuthenticated}
         adminPath="/admin/members/new"
       />
-      <div className="row">
-        {members.map(member => (
-          <div key={member._id} className="col s12 m3">
-            <div className="card" style={styles.card}>
-              <div className="card-image">
-                <img src={member.image} alt="" />
-                <span className="card-title">{member.name}</span>
-              </div>
-              <div className="card-content">
-                <p>{member.instrument}</p>
-              </div>
-              {authState.isAuthenticated && (
-                <div className="card-action">
-                  <Button handleClick={handleUpdateClick(member._id)}>
-                    <i className="material-icons">edit</i>
-                  </Button>
-                  <Button isPrimary handleClick={handleDeleteClick(member._id)}>
-                    <i className="material-icons">delete</i>
-                  </Button>
+      {isLoading ? (
+        <h3>Loading...</h3>
+      ) : (
+        <div className="row">
+          {members.map(member => (
+            <div key={member._id} className="col s12 m3">
+              <div className="card" style={styles.card}>
+                <div className="card-image">
+                  <img src={member.image} alt="" />
+                  <span className="card-title">{member.name}</span>
                 </div>
-              )}
+                <div className="card-content">
+                  <p>{member.instrument}</p>
+                </div>
+                {authState.isAuthenticated && (
+                  <div className="card-action">
+                    <Button handleClick={handleUpdateClick(member._id)}>
+                      <i className="material-icons">edit</i>
+                    </Button>
+                    <Button isPrimary handleClick={handleDeleteClick(member._id)}>
+                      <i className="material-icons">delete</i>
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
