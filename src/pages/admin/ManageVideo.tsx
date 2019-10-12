@@ -5,7 +5,11 @@ import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 
-function ManageVideo(props: RouteComponentProps): React.ReactElement {
+type MatchParams = {
+  id: string;
+};
+
+function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [video, setVideo] = useState<Video>({} as Video);
   const [isLoading, setLoading] = useState(false);

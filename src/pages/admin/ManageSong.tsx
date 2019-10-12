@@ -5,7 +5,11 @@ import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 
-function ManageSong(props: RouteComponentProps): React.ReactElement {
+type MatchParams = {
+  id: string;
+};
+
+function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [song, setSong] = useState<Song>({} as Song);
   const [isLoading, setLoading] = useState(false);

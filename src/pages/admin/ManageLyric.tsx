@@ -5,7 +5,11 @@ import { Lyric } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 
-function ManageLyric(props: RouteComponentProps): React.ReactElement {
+type MatchParams = {
+  id: string;
+};
+
+function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [lyric, setLyric] = useState<Lyric>({} as Lyric);
   const [isLoading, setLoading] = useState(false);

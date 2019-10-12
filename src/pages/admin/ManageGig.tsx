@@ -5,7 +5,11 @@ import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 
-function ManageGig(props: RouteComponentProps): React.ReactElement {
+type MatchParams = {
+  id: string;
+};
+
+function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [gig, setGig] = useState<Gig>({} as Gig);
   const [isLoading, setLoading] = useState(false);

@@ -27,6 +27,7 @@ function Navbar(): ReactElement {
 
   useEffect(() => {
     const elems = document.querySelectorAll('.sidenav');
+    // @ts-ignore
     M.Sidenav.init(elems, {});
   }, []);
 

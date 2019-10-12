@@ -5,7 +5,11 @@ import { Member } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 
-function ManageMember(props: RouteComponentProps): React.ReactElement {
+type MatchParams = {
+  id: string;
+};
+
+function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [member, setMember] = useState<Member>({} as Member);
   const [isLoading, setLoading] = useState(false);
