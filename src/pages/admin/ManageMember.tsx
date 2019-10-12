@@ -52,7 +52,7 @@ function ManageMember(props: RouteComponentProps): React.ReactElement {
       <section>
         {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
         <div className="row">
-          <div className="col 12 m4 offset-m4">
+          <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
                 <div>
