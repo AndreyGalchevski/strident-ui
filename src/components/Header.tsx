@@ -1,11 +1,7 @@
 import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import PlusIcon from './PlusIcon';
 
 export interface HeaderProps {
   title: string;
-  isAuthenticated: boolean;
-  adminPath: string;
 }
 
 const styles = {
@@ -18,7 +14,7 @@ const styles = {
 };
 
 function Header(props: HeaderProps): ReactElement {
-  const { title, isAuthenticated, adminPath } = props;
+  const { title } = props;
 
   return (
     <div>
@@ -34,11 +30,6 @@ function Header(props: HeaderProps): ReactElement {
           alt=""
           style={styles.rightImage}
         />
-        {isAuthenticated && (
-          <Link to={adminPath}>
-            <PlusIcon />
-          </Link>
-        )}
       </h3>
       <h3 className="hide-on-med-and-down"> </h3>
     </div>

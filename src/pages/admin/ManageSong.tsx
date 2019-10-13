@@ -77,6 +77,15 @@ function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement
                     value={song.url}
                   />
                 </div>
+                <div>
+                  <input
+                    type="text"
+                    name="album"
+                    placeholder="Album"
+                    onChange={handleFormChange}
+                    value={song.album}
+                  />
+                </div>
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>

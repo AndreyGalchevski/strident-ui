@@ -24,6 +24,7 @@ export interface Member {
 export interface Song {
   _id: string;
   name: string;
+  album: string;
   url: string;
 }
 

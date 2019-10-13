@@ -1,5 +1,5 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
@@ -7,6 +7,7 @@ import { PRIMARY_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import Header from '../components/Header';
+import PlusIcon from '../components/PlusIcon';
 
 const styles = {
   card: {
@@ -49,11 +50,12 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <Header
-        title="Gigs"
-        isAuthenticated={authState.isAuthenticated}
-        adminPath="/admin/gigs/new"
-      />
+      <Header title="Gigs" />
+      {authState.isAuthenticated && (
+        <Link to="/admin/gigs/new">
+          <PlusIcon />
+        </Link>
+      )}
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (

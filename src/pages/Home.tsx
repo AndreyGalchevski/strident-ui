@@ -2,8 +2,10 @@ import React, { ReactElement } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { PRIMARY_COLOR } from '../utils/constants';
+import PlusIcon from '../components/PlusIcon';
 
 const styles = {
   socialMediaLinksContainer: {
@@ -79,7 +81,7 @@ function Home(): ReactElement {
 
   return (
     <section>
-      <Header title="Home" isAuthenticated={false} adminPath="/admin/home/new" />
+      <Header title="Home" />
       <ImageGallery items={images} />
       <div>
         <h3>Follow Us On Social Media</h3>

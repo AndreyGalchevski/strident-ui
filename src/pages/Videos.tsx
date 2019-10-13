@@ -1,5 +1,5 @@
 import React, { useState, useEffect, MouseEventHandler } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
@@ -7,6 +7,7 @@ import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import { PRIMARY_COLOR } from '../utils/constants';
 import Header from '../components/Header';
+import PlusIcon from '../components/PlusIcon';
 
 const styles = {
   video: {
@@ -55,11 +56,12 @@ function Videos(props: RouteComponentProps): React.ReactElement {
 
   return (
     <section>
-      <Header
-        title="Videos"
-        isAuthenticated={authState.isAuthenticated}
-        adminPath="/admin/videos/new"
-      />
+      <Header title="Videos" />
+      {authState.isAuthenticated && (
+        <Link to="/admin/videos/new">
+          <PlusIcon />
+        </Link>
+      )}
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (
