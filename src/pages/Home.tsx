@@ -2,10 +2,8 @@ import React, { ReactElement } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { PRIMARY_COLOR } from '../utils/constants';
-import PlusIcon from '../components/PlusIcon';
 
 const styles = {
   socialMediaLinksContainer: {

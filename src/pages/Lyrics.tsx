@@ -1,5 +1,5 @@
 import React, { useEffect, useState, MouseEventHandler } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
@@ -8,7 +8,7 @@ import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Header from '../components/Header';
-import PlusIcon from '../components/PlusIcon';
+import Fab from '../components/Fab';
 
 const styles = {
   lyricsContainer: (isWideScreen: boolean): any => ({
@@ -70,11 +70,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
   return (
     <section>
       <Header title="Lyrics" />
-      {authState.isAuthenticated && (
-        <Link to="/admin/lyrics/new">
-          <PlusIcon />
-        </Link>
-      )}
+      {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
       {isLoading ? (
         <h3>Loading...</h3>
       ) : (
