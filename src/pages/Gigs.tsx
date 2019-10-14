@@ -8,6 +8,7 @@ import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
+import { formatDate } from '../utils/general';
 
 const styles = {
   card: {
@@ -76,8 +77,8 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                 <div className="card-content">
                   <p>{gig.venue}</p>
                   <p>{gig.address}</p>
-                  <p>{gig.date}</p>
-                  <p>{gig.hour}</p>
+                  <p>{formatDate(new Date(gig.date))}</p>
+                  <p>20:00</p>
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">

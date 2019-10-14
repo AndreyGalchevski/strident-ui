@@ -43,7 +43,6 @@ function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElemen
       res = await updateResource<Lyric>('lyrics', match.params.id, lyric);
     } else {
       res = await createResource<Lyric>('lyrics', lyric);
-      setLyric({} as Lyric);
     }
     setLoading(false);
     setShouldRedirect(true);

@@ -39,7 +39,6 @@ function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement
       res = await updateResource<Song>('songs', match.params.id, song);
     } else {
       res = await createResource<Song>('songs', song);
-      setSong({} as Song);
     }
     setShouldRedirect(true);
     setLoading(false);

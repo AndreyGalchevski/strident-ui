@@ -49,7 +49,6 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
       res = await updateResource<Video>('videos', match.params.id, video);
     } else {
       res = await createResource<Video>('videos', video);
-      setVideo({} as Video);
     }
     setLoading(false);
     setShouldRedirect(true);

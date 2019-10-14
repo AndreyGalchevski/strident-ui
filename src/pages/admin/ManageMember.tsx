@@ -39,7 +39,6 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
       res = await updateResource<Member>('members', match.params.id, member);
     } else {
       res = await createResource<Member>('members', member);
-      setMember({} as Member);
     }
     setLoading(false);
     setShouldRedirect(true);

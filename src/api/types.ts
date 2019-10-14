@@ -39,8 +39,7 @@ export interface Gig {
   id: string;
   venue: string;
   address: string;
-  date: string;
-  hour: string;
+  date: Date;
   fbEvent: string;
   image: string;
 }

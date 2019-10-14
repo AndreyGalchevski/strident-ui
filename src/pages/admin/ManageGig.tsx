@@ -4,6 +4,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
+import { formatDate } from '../../utils/general';
 
 type MatchParams = {
   id: string;
@@ -11,7 +12,14 @@ type MatchParams = {
 
 function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
-  const [gig, setGig] = useState<Gig>({} as Gig);
+  const [gig, setGig] = useState<Gig>({
+    id: '',
+    venue: '',
+    address: '',
+    date: new Date(),
+    fbEvent: '',
+    image: '',
+  });
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -19,7 +27,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     async function fetchVideo(): Promise<void> {
       setLoading(true);
       const resource = await fetchResource<Gig>('gigs', match.params.id);
-      setGig(resource);
+      setGig({ ...resource, date: new Date(resource.date) });
       setLoading(false);
     }
 
@@ -29,7 +37,12 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
   }, []);
 
   function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
-    setGig({ ...gig, [e.target.name]: e.target.value });
+    const { type, name, value } = e.target;
+    if (type === 'date') {
+      setGig({ ...gig, [name]: new Date(value) });
+    } else {
+      setGig({ ...gig, [name]: value });
+    }
   }
 
   async function handleSaveClick(): Promise<void> {
@@ -39,7 +52,6 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
       res = await updateResource<Gig>('gigs', match.params.id, gig);
     } else {
       res = await createResource<Gig>('gigs', gig);
-      setGig({} as Gig);
     }
     setLoading(false);
     setShouldRedirect(true);
@@ -79,20 +91,11 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                 </div>
                 <div>
                   <input
-                    type="text"
+                    type="date"
                     name="date"
                     placeholder="Date"
                     onChange={handleFormChange}
-                    value={gig.date}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="hour"
-                    placeholder="Hour"
-                    onChange={handleFormChange}
-                    value={gig.hour}
+                    value={formatDate(gig.date)}
                   />
                 </div>
                 <div>
