@@ -80,7 +80,7 @@ function Home(): ReactElement {
   return (
     <section>
       <Header title="Home" />
-      <ImageGallery items={images} />
+      <ImageGallery items={images} lazyLoad />
       <div>
         <h3>Follow Us On Social Media</h3>
         <div style={styles.socialMediaLinksContainer}>
