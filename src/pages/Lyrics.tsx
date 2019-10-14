@@ -80,7 +80,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
       ) : (
         <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
           {lyrics.map(lyric => (
-            <div key={lyric._id} style={styles.lyric}>
+            <div key={lyric.id} style={styles.lyric}>
               <div className="card" style={styles.card}>
                 <span className="card-title">{lyric.name}</span>
                 <div className="card-content" style={styles.cardContent}>
@@ -88,10 +88,10 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">
-                    <Button handleClick={handleUpdateClick(lyric._id)}>
+                    <Button handleClick={handleUpdateClick(lyric.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
-                    <Button isPrimary handleClick={handleDeleteClick(lyric._id)}>
+                    <Button isPrimary handleClick={handleDeleteClick(lyric.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
                   </div>

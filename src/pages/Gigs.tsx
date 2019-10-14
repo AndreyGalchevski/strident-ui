@@ -61,7 +61,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
       ) : (
         <div className="row">
           {gigs.map(gig => (
-            <div key={gig._id} className="col s12 m4">
+            <div key={gig.id} className="col s12 m4">
               <div className="card" style={styles.card}>
                 <div className="card-image">
                   <img src={gig.image} alt="" />
@@ -85,10 +85,10 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">
-                    <Button handleClick={handleUpdateClick(gig._id)}>
+                    <Button handleClick={handleUpdateClick(gig.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
-                    <Button isPrimary handleClick={handleDeleteClick(gig._id)}>
+                    <Button isPrimary handleClick={handleDeleteClick(gig.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
                   </div>

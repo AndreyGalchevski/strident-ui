@@ -25,14 +25,14 @@ function Login(): React.ReactElement {
 
   async function handleLogin(): Promise<void> {
     setLoading(true);
-    const { token, err } = await login({ username, password });
-    setLoading(false);
-    if (err) {
-      window.alert(err);
-      return;
+    try {
+      const token = await login({ username, password });
+      dispatch({ type: LOGIN_SUCCESS, payload: token });
+      setShouldRedirect(true);
+    } catch (error) {
+      window.alert(error.message);
     }
-    dispatch({ type: LOGIN_SUCCESS, payload: token });
-    setShouldRedirect(true);
+    setLoading(false);
   }
 
   if (isLoading) {

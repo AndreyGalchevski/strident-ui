@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import Calendar from 'react-calendar';
 
 import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
@@ -11,7 +12,12 @@ type MatchParams = {
 
 function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
-  const [video, setVideo] = useState<Video>({} as Video);
+  const [video, setVideo] = useState<Video>({
+    id: '',
+    name: '',
+    url: '',
+    date: new Date(),
+  });
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -19,7 +25,7 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
     async function fetchVideo(): Promise<void> {
       setLoading(true);
       const resource = await fetchResource<Video>('videos', match.params.id);
-      setVideo(resource);
+      setVideo({ ...resource, date: new Date(resource.date) });
       setLoading(false);
     }
 
@@ -30,6 +36,10 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
 
   function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
     setVideo({ ...video, [e.target.name]: e.target.value });
+  }
+
+  function handleDateChange(date: Date): void {
+    setVideo({ ...video, date });
   }
 
   async function handleSaveClick(): Promise<void> {
@@ -77,15 +87,7 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
                     value={video.url}
                   />
                 </div>
-                <div>
-                  <input
-                    type="text"
-                    name="date"
-                    placeholder="Date"
-                    onChange={handleFormChange}
-                    value={video.date}
-                  />
-                </div>
+                <Calendar value={video.date} onChange={handleDateChange} />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>

@@ -14,7 +14,7 @@ export interface TokenClaims {
 }
 
 export interface Member {
-  _id: string;
+  id: string;
   name: string;
   instrument: string;
   info: string;
@@ -22,21 +22,21 @@ export interface Member {
 }
 
 export interface Song {
-  _id: string;
+  id: string;
   name: string;
   album: string;
   url: string;
 }
 
 export interface Video {
-  _id: string;
+  id: string;
   name: string;
   url: string;
-  date: string;
+  date: Date;
 }
 
 export interface Gig {
-  _id: string;
+  id: string;
   venue: string;
   address: string;
   date: string;
@@ -46,7 +46,7 @@ export interface Gig {
 }
 
 export interface Lyric {
-  _id: string;
+  id: string;
   name: string;
   text: string;
 }

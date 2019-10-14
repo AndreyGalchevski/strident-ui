@@ -67,7 +67,7 @@ function Songs(props: RouteComponentProps): React.ReactElement {
       ) : (
         <div className="row">
           {songs.map(song => (
-            <div key={song._id} className="col s12 m4" style={styles.song}>
+            <div key={song.id} className="col s12 m4" style={styles.song}>
               <div className="card" style={styles.cardContent}>
                 <div className="card-content" style={styles.cardContent}>
                   <iframe
@@ -81,10 +81,10 @@ function Songs(props: RouteComponentProps): React.ReactElement {
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">
-                    <Button handleClick={handleUpdateClick(song._id)}>
+                    <Button handleClick={handleUpdateClick(song.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
-                    <Button isPrimary handleClick={handleDeleteClick(song._id)}>
+                    <Button isPrimary handleClick={handleDeleteClick(song.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
                   </div>

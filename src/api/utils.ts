@@ -3,7 +3,7 @@ import { Credentials, LoginResponse } from './types';
 let baseURL = 'http://localhost:8080/api';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://strident-api.herokuapp.com/api';
+  baseURL = 'https://strident.herokuapp.com/api';
 }
 
 const options = {
@@ -22,18 +22,15 @@ export async function login(creds: Credentials): Promise<LoginResponse> {
   if (response.status >= 400) {
     switch (response.status) {
       case 404:
-        return { token: '', err: 'User not found' };
-      case 401:
-        return { token: '', err: 'Wrong credentials' };
-      case 500:
-        return { token: '', err: 'Something went wrong' };
+        throw new Error('User not found');
+      case 400:
+        throw new Error('Wrong credentials');
       default:
-        return { token: '', err: 'Something went wrong' };
+        throw new Error('Something went wrong');
     }
   }
-
-  const token = await response.json();
-  return { token, err: '' };
+  const { token } = await response.json();
+  return token;
 }
 
 export async function fetchResources<T>(resourceName: string): Promise<T[]> {
@@ -53,6 +50,7 @@ export async function createResource<T>(resourceName: string, data: T): Promise<
     ...options,
     method: 'POST',
     headers: {
+      ...options.headers,
       Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
     },
     body: JSON.stringify(data),
@@ -81,6 +79,7 @@ export async function updateResource<T>(
     ...options,
     method: 'PUT',
     headers: {
+      ...options.headers,
       Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
     },
     body: JSON.stringify(data),

@@ -67,7 +67,7 @@ function Videos(props: RouteComponentProps): React.ReactElement {
       ) : (
         <div className="row">
           {videos.map(video => (
-            <div key={video._id} className="col s12 m4" style={styles.video}>
+            <div key={video.id} className="col s12 m4" style={styles.video}>
               <div className="card" style={styles.card}>
                 <div className="card-content" style={styles.cardContent}>
                   <iframe
@@ -82,10 +82,10 @@ function Videos(props: RouteComponentProps): React.ReactElement {
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">
-                    <Button handleClick={handleUpdateClick(video._id)}>
+                    <Button handleClick={handleUpdateClick(video.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
-                    <Button isPrimary handleClick={handleDeleteClick(video._id)}>
+                    <Button isPrimary handleClick={handleDeleteClick(video.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
                   </div>
