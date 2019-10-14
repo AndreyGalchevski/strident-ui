@@ -1,10 +1,10 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
-import Calendar from 'react-calendar';
 
 import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
+import { formatDate } from '../../utils/general';
 
 type MatchParams = {
   id: string;
@@ -38,8 +38,8 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
     setVideo({ ...video, [e.target.name]: e.target.value });
   }
 
-  function handleDateChange(date: Date): void {
-    setVideo({ ...video, date });
+  function handleDateChange(e: ChangeEvent<HTMLInputElement>): void {
+    setVideo({ ...video, date: new Date(e.target.value) });
   }
 
   async function handleSaveClick(): Promise<void> {
@@ -87,7 +87,15 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
                     value={video.url}
                   />
                 </div>
-                <Calendar value={video.date} onChange={handleDateChange} />
+                <div>
+                  <input
+                    type="date"
+                    name="date"
+                    placeholder="Date"
+                    onChange={handleDateChange}
+                    value={formatDate(video.date)}
+                  />
+                </div>
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>
