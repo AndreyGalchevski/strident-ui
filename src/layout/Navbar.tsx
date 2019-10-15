@@ -160,11 +160,23 @@ function Navbar(): ReactElement {
             Lyrics
           </NavLink>
         </li>
-        <img
-          style={styles.sideNavImage}
-          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570907313/strident/app/1570907271835.png"
-          alt=""
-        />
+        <picture>
+          <source
+            style={styles.sideNavImage}
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164676/strident/app/sidenav_ng.webp"
+            type="image/webp"
+          />
+          <source
+            style={styles.sideNavImage}
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164625/strident/app/sidenav.png"
+            type="image/jpeg"
+          />
+          <img
+            style={styles.sideNavImage}
+            src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164625/strident/app/sidenav.png"
+            alt=""
+          />
+        </picture>
       </ul>
     </div>
   );
