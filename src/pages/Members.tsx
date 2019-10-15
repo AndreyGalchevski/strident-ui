@@ -60,7 +60,11 @@ function Members(props: RouteComponentProps): React.ReactElement {
             <div key={member.id} className="col s12 m3">
               <div className="card" style={styles.card}>
                 <div className="card-image">
-                  <img src={member.image} alt="" />
+                  <picture>
+                    <source srcSet={member.imageNG} type="image/webp" />
+                    <source srcSet={member.image} type="image/jpeg" />
+                    <img src={member.image} alt="" />
+                  </picture>
                   <span className="card-title">{member.name}</span>
                 </div>
                 <div className="card-content">

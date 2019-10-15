@@ -11,7 +11,14 @@ type MatchParams = {
 
 function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
-  const [member, setMember] = useState<Member>({} as Member);
+  const [member, setMember] = useState<Member>({
+    id: '',
+    name: '',
+    instrument: '',
+    info: '',
+    image: '',
+    imageNG: '',
+  });
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -92,6 +99,15 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
                     placeholder="Image"
                     onChange={handleFormChange}
                     value={member.image}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="imageNG"
+                    placeholder="Image Nex-Gen"
+                    onChange={handleFormChange}
+                    value={member.imageNG}
                   />
                 </div>
               </div>

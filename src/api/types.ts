@@ -19,6 +19,7 @@ export interface Member {
   instrument: string;
   info: string;
   image: string;
+  imageNG: string;
 }
 
 export interface Song {
