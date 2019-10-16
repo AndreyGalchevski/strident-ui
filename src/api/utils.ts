@@ -1,9 +1,9 @@
 import { Credentials, LoginResponse } from './types';
 
-let baseURL = 'http://localhost:8080/api';
+let baseURL = 'http://localhost:8080';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://strident.herokuapp.com/api';
+  baseURL = 'https://api.strident.band';
 }
 
 const options = {
