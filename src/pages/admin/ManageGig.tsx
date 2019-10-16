@@ -16,6 +16,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     id: '',
     venue: '',
     address: '',
+    city: '',
     date: new Date(),
     fbEvent: '',
     image: '',
@@ -93,6 +94,15 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     placeholder="Address"
                     onChange={handleTextInputChange}
                     value={gig.address}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="city"
+                    placeholder="City"
+                    onChange={handleTextInputChange}
+                    value={gig.city}
                   />
                 </div>
                 <div>

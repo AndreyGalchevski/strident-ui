@@ -40,6 +40,7 @@ export interface Gig {
   id: string;
   venue: string;
   address: string;
+  city: string;
   date: Date;
   fbEvent: string;
   image: string;

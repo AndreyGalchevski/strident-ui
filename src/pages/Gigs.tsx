@@ -14,6 +14,13 @@ const styles = {
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
   },
+  facebookIcon: {
+    color: '#3b5998',
+  },
+  directionsIcon: {
+    color: '#4A89F3',
+    marginTop: '-0.4em',
+  },
 };
 
 function Gigs(props: RouteComponentProps): React.ReactElement {
@@ -68,15 +75,23 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                     rel="noopener noreferrer"
                     className="btn-floating halfway-fab waves-effect waves-light white"
                   >
-                    <img
-                      src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570909046/strident/icons/facebook.png"
-                      alt=""
-                    />
+                    <i className="fab fa-facebook-f" style={styles.facebookIcon} />
+                  </a>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${gig.venue} ${gig.city}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ paddingTop: '10px' }}
+                    className="btn-floating halfway-fab waves-effect waves-light white left"
+                  >
+                    <i className="fas fa-directions" style={styles.directionsIcon} />
                   </a>
                 </div>
                 <div className="card-content">
                   <p>{gig.venue}</p>
-                  <p>{gig.address}</p>
+                  <p>
+                    {gig.address}, {gig.city}
+                  </p>
                   <p>{formatDate(new Date(gig.date))}</p>
                   <p>{formatTime(new Date(gig.date))}</p>
                 </div>
