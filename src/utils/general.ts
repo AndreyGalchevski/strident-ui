@@ -13,3 +13,18 @@ export function formatDate(date: Date): string {
   const formattedDate = `${yyyy}-${mm}-${dd}`;
   return formattedDate;
 }
+
+export function formatTime(date: Date): string {
+  let hh = String(date.getHours());
+  let mm = String(date.getMinutes());
+
+  if (Number(hh) < 10) {
+    hh = `0${hh}`;
+  }
+  if (Number(mm) < 10) {
+    mm = `0${mm}`;
+  }
+
+  const formattedDate = `${hh}:${mm}`;
+  return formattedDate;
+}

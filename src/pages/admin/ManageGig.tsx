@@ -4,7 +4,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
-import { formatDate } from '../../utils/general';
+import { formatDate, formatTime } from '../../utils/general';
 
 type MatchParams = {
   id: string;
@@ -36,13 +36,19 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     }
   }, []);
 
-  function handleFormChange(e: ChangeEvent<HTMLInputElement>): void {
-    const { type, name, value } = e.target;
-    if (type === 'date') {
-      setGig({ ...gig, [name]: new Date(value) });
-    } else {
-      setGig({ ...gig, [name]: value });
-    }
+  function handleTextInputChange(e: ChangeEvent<HTMLInputElement>): void {
+    const { name, value } = e.target;
+    setGig({ ...gig, [name]: value });
+  }
+
+  function handleDateInputChange(e: ChangeEvent<HTMLInputElement>): void {
+    const { value } = e.target;
+    setGig({ ...gig, date: new Date(value) });
+  }
+
+  function handleTimeInputChange(e: ChangeEvent<HTMLInputElement>): void {
+    const { value } = e.target;
+    setGig({ ...gig, date: new Date(`${formatDate(gig.date)} ${value}`) });
   }
 
   async function handleSaveClick(): Promise<void> {
@@ -76,7 +82,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     type="text"
                     name="venue"
                     placeholder="Venue"
-                    onChange={handleFormChange}
+                    onChange={handleTextInputChange}
                     value={gig.venue}
                   />
                 </div>
@@ -85,7 +91,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     type="text"
                     name="address"
                     placeholder="Address"
-                    onChange={handleFormChange}
+                    onChange={handleTextInputChange}
                     value={gig.address}
                   />
                 </div>
@@ -94,8 +100,17 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     type="date"
                     name="date"
                     placeholder="Date"
-                    onChange={handleFormChange}
+                    onChange={handleDateInputChange}
                     value={formatDate(gig.date)}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="time"
+                    name="date"
+                    placeholder="Time"
+                    onChange={handleTimeInputChange}
+                    value={formatTime(gig.date)}
                   />
                 </div>
                 <div>
@@ -103,7 +118,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     type="text"
                     name="fbEvent"
                     placeholder="Facebook Event URL"
-                    onChange={handleFormChange}
+                    onChange={handleTextInputChange}
                     value={gig.fbEvent}
                   />
                 </div>
@@ -112,7 +127,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                     type="text"
                     name="image"
                     placeholder="Image"
-                    onChange={handleFormChange}
+                    onChange={handleTextInputChange}
                     value={gig.image}
                   />
                 </div>
