@@ -3,7 +3,7 @@ import { Credentials, LoginResponse } from './types';
 let baseURL = 'http://localhost:8080';
 
 if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://www.api.strident.band';
+  baseURL = 'https://api.strident.band';
 }
 
 const options = {
