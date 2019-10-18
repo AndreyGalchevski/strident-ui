@@ -68,7 +68,11 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
             <div key={gig.id} className="col s12 m4">
               <div className="card" style={styles.card}>
                 <div className="card-image">
-                  <img src={gig.image} alt="" />
+                  <picture>
+                    <source srcSet={gig.imageNG} type="image/webp" />
+                    <source srcSet={gig.image} type="image/jpeg" />
+                    <img src={gig.image} alt="" />
+                  </picture>
                   <a
                     href={gig.fbEvent}
                     target="_blank"

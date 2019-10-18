@@ -44,6 +44,7 @@ export interface Gig {
   date: Date;
   fbEvent: string;
   image: string;
+  imageNG: string;
 }
 
 export interface Lyric {

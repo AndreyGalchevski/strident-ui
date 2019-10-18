@@ -2,10 +2,11 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Gig } from '../../api/types';
-import { fetchResource, updateResource, createResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
 import Button from '../../components/Button';
 import { formatDate, formatTime } from '../../utils/general';
 import Input from '../../components/Input';
+import FileInput from '../../components/FileInput';
 
 type MatchParams = {
   id: string;
@@ -13,6 +14,7 @@ type MatchParams = {
 
 function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
+
   const [gig, setGig] = useState<Gig>({
     id: '',
     venue: '',
@@ -21,7 +23,9 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     date: new Date(),
     fbEvent: '',
     image: '',
+    imageNG: '',
   });
+  const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -53,14 +57,42 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     setGig({ ...gig, date: new Date(`${formatDate(gig.date)} ${value}`) });
   }
 
+  function handleImageChange(e: ChangeEvent<HTMLInputElement>): void {
+    setSelectedFile(e.target.files[0]);
+  }
+
   async function handleSaveClick(): Promise<void> {
-    let res = '';
     setLoading(true);
+
+    let res = '';
+    let imageURL = '';
+    let ngImageURL = '';
+
+    if (selectedFile) {
+      const image = new FormData();
+      image.append('gigImage', selectedFile);
+      try {
+        const fileName = `${gig.venue.replace(/ /g, '')}-${formatDate(gig.date)}`;
+        const result = await uploadImage('gigs', fileName, image);
+        imageURL = result.imageURL;
+        ngImageURL = result.ngImageURL;
+      } catch (error) {
+        window.alert(error);
+        return;
+      }
+    }
+
+    if (imageURL && ngImageURL) {
+      gig.image = imageURL;
+      gig.imageNG = ngImageURL;
+    }
+
     if (match.params.id) {
       res = await updateResource<Gig>('gigs', match.params.id, gig);
     } else {
       res = await createResource<Gig>('gigs', gig);
     }
+
     setLoading(false);
     setShouldRedirect(true);
     window.alert(res);
@@ -121,15 +153,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
                   onChange={handleTextInputChange}
                   value={gig.fbEvent}
                 />
-                <div>
-                  <input
-                    type="text"
-                    name="image"
-                    placeholder="Image"
-                    onChange={handleTextInputChange}
-                    value={gig.image}
-                  />
-                </div>
+                <FileInput onChange={handleImageChange} />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>
