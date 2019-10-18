@@ -6,6 +6,7 @@ import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
+import Input from '../components/Input';
 
 function Login(): React.ReactElement {
   const [username, setUsername] = useState('');
@@ -48,8 +49,20 @@ function Login(): React.ReactElement {
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <input type="text" placeholder="Username" onChange={handleUsernameChange} />
-                <input type="password" placeholder="Password" onChange={handlePasswordChange} />
+                <Input
+                  name="username"
+                  type="text"
+                  label="Username"
+                  onChange={handleUsernameChange}
+                  value={username}
+                />
+                <Input
+                  name="password"
+                  type="password"
+                  label="Password"
+                  onChange={handlePasswordChange}
+                  value={password}
+                />
               </div>
               <div className="card-action">
                 <Button handleClick={handleLogin}>Login</Button>

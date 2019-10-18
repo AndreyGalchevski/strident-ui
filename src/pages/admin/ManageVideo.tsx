@@ -3,8 +3,9 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
-import Button from '../../components/Button';
 import { formatDate } from '../../utils/general';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 type MatchParams = {
   id: string;
@@ -68,33 +69,27 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    onChange={handleFormChange}
-                    value={video.name}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="url"
-                    placeholder="URL"
-                    onChange={handleFormChange}
-                    value={video.url}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    name="date"
-                    placeholder="Date"
-                    onChange={handleDateChange}
-                    value={formatDate(video.date)}
-                  />
-                </div>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleFormChange}
+                  value={video.name}
+                />
+                <Input
+                  name="url"
+                  type="text"
+                  label="URL"
+                  onChange={handleFormChange}
+                  value={video.url}
+                />
+                <Input
+                  name="date"
+                  type="date"
+                  label="Date"
+                  onChange={handleDateChange}
+                  value={formatDate(video.date)}
+                />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>

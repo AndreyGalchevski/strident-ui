@@ -4,6 +4,7 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 type MatchParams = {
   id: string;
@@ -58,33 +59,27 @@ function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    onChange={handleFormChange}
-                    value={song.name}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="url"
-                    placeholder="URL"
-                    onChange={handleFormChange}
-                    value={song.url}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="album"
-                    placeholder="Album"
-                    onChange={handleFormChange}
-                    value={song.album}
-                  />
-                </div>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleFormChange}
+                  value={song.name}
+                />
+                <Input
+                  name="url"
+                  type="text"
+                  label="URL"
+                  onChange={handleFormChange}
+                  value={song.url}
+                />
+                <Input
+                  name="album"
+                  type="text"
+                  label="Album"
+                  onChange={handleFormChange}
+                  value={song.album}
+                />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>

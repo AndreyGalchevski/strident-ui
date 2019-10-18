@@ -5,6 +5,7 @@ import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
 import { formatDate, formatTime } from '../../utils/general';
+import Input from '../../components/Input';
 
 type MatchParams = {
   id: string;
@@ -78,60 +79,48 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <div>
-                  <input
-                    type="text"
-                    name="venue"
-                    placeholder="Venue"
-                    onChange={handleTextInputChange}
-                    value={gig.venue}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="address"
-                    placeholder="Address"
-                    onChange={handleTextInputChange}
-                    value={gig.address}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                    onChange={handleTextInputChange}
-                    value={gig.city}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="date"
-                    name="date"
-                    placeholder="Date"
-                    onChange={handleDateInputChange}
-                    value={formatDate(gig.date)}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="time"
-                    name="date"
-                    placeholder="Time"
-                    onChange={handleTimeInputChange}
-                    value={formatTime(gig.date)}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="fbEvent"
-                    placeholder="Facebook Event URL"
-                    onChange={handleTextInputChange}
-                    value={gig.fbEvent}
-                  />
-                </div>
+                <Input
+                  name="venue"
+                  type="text"
+                  label="Venue"
+                  onChange={handleTextInputChange}
+                  value={gig.venue}
+                />
+                <Input
+                  name="address"
+                  type="text"
+                  label="Address"
+                  onChange={handleTextInputChange}
+                  value={gig.address}
+                />
+                <Input
+                  name="city"
+                  type="text"
+                  label="City"
+                  onChange={handleTextInputChange}
+                  value={gig.city}
+                />
+                <Input
+                  name="date"
+                  type="date"
+                  label="Date"
+                  onChange={handleDateInputChange}
+                  value={formatDate(gig.date)}
+                />
+                <Input
+                  name="date"
+                  type="time"
+                  label="Time"
+                  onChange={handleTimeInputChange}
+                  value={formatTime(gig.date)}
+                />
+                <Input
+                  name="fbEvent"
+                  type="text"
+                  label="Facebook Event"
+                  onChange={handleTextInputChange}
+                  value={gig.fbEvent}
+                />
                 <div>
                   <input
                     type="text"

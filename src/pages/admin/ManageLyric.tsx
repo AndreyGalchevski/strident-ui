@@ -4,6 +4,8 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Lyric } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
+import TextArea from '../../components/TextArea';
 
 type MatchParams = {
   id: string;
@@ -62,22 +64,14 @@ function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElemen
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    onChange={handleNameChange}
-                    value={lyric.name}
-                  />
-                </div>
-                <div>
-                  <textarea
-                    placeholder="Text"
-                    className="materialize-textarea"
-                    onChange={handleTextChange}
-                    value={lyric.text}
-                  />
-                </div>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleNameChange}
+                  value={lyric.name}
+                />
+                <TextArea name="text" label="Text" onChange={handleTextChange} value={lyric.text} />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>

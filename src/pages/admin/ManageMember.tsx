@@ -4,6 +4,8 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Member } from '../../api/types';
 import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
+import FileInput from '../../components/FileInput';
 
 type MatchParams = {
   id: string;
@@ -23,14 +25,14 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
-  useEffect(() => {
-    async function fetchMember(): Promise<void> {
-      setLoading(true);
-      const resource = await fetchResource<Member>('members', match.params.id);
-      setMember(resource);
-      setLoading(false);
-    }
+  async function fetchMember(): Promise<void> {
+    setLoading(true);
+    const resource = await fetchResource<Member>('members', match.params.id);
+    setMember(resource);
+    setLoading(false);
+  }
 
+  useEffect(() => {
     if (match.params.id) {
       fetchMember();
     }
@@ -94,41 +96,28 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
           <div className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-content">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    onChange={handleFormChange}
-                    value={member.name}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="instrument"
-                    placeholder="Instrument"
-                    onChange={handleFormChange}
-                    value={member.instrument}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="info"
-                    placeholder="Info"
-                    onChange={handleFormChange}
-                    value={member.info}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="file"
-                    name="image"
-                    placeholder="Select Image"
-                    onChange={handleImageChange}
-                  />
-                </div>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleFormChange}
+                  value={member.name}
+                />
+                <Input
+                  name="instrument"
+                  type="text"
+                  label="Instrument"
+                  onChange={handleFormChange}
+                  value={member.instrument}
+                />
+                <Input
+                  name="info"
+                  type="text"
+                  label="Info"
+                  onChange={handleFormChange}
+                  value={member.info}
+                />
+                <FileInput onChange={handleImageChange} />
               </div>
               <div className="card-action">
                 <Button handleClick={handleSaveClick}>Save</Button>
