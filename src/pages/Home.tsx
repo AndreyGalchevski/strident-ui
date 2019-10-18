@@ -19,61 +19,149 @@ const styles = {
   },
 };
 
+const baseURL = 'https://res.cloudinary.com/dqvimfd8b/image/upload';
+
 function Home(): ReactElement {
   const images = [
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914457/strident/home/14560001_305560699829313_190576764753653116_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914457/strident/home/14560001_305560699829313_190576764753653116_o.jpg',
+      original: `${baseURL}/v1570914457/strident/home/1.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914457/strident/home/1.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571406645/strident/home/1_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914457/strident/home/1.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914452/strident/home/14707023_306805919706290_6733490491524521498_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914452/strident/home/14707023_306805919706290_6733490491524521498_o.jpg',
+      original: `${baseURL}/v1570914452/strident/home/2.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914452/strident/home/2.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410056/strident/home/2_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914452/strident/home/2.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914449/strident/home/69207337_501988200599418_1324525320895725568_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914449/strident/home/69207337_501988200599418_1324525320895725568_o.jpg',
+      original: `${baseURL}/v1570914449/strident/home/3.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914449/strident/home/3.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410056/strident/home/3_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914449/strident/home/3.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914452/strident/home/14633299_306806073039608_1412137420161929612_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914452/strident/home/14633299_306806073039608_1412137420161929612_o.jpg',
+      original: `${baseURL}/v1570914452/strident/home/4.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914452/strident/home/4.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410058/strident/home/4_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914452/strident/home/4.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914455/strident/home/14853019_305560963162620_4415895129920502907_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914455/strident/home/14853019_305560963162620_4415895129920502907_o.jpg',
+      original: `${baseURL}/v1570914455/strident/home/5.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914455/strident/home/5.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410055/strident/home/5_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914455/strident/home/5.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914457/strident/home/68511355_184485419239032_1400362765327007744_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914457/strident/home/68511355_184485419239032_1400362765327007744_o.jpg',
+      original: `${baseURL}/v1570914457/strident/home/6.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914457/strident/home/6.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410058/strident/home/6_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914457/strident/home/6.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914457/strident/home/14753198_305561073162609_8668462644089060614_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914457/strident/home/14753198_305561073162609_8668462644089060614_o.jpg',
+      original: `${baseURL}/v1570914457/strident/home/7.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914457/strident/home/7.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410057/strident/home/7_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914457/strident/home/7.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914451/strident/home/14615874_306806359706246_3238184304545373077_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914451/strident/home/14615874_306806359706246_3238184304545373077_o.jpg',
+      original: `${baseURL}/v1570914451/strident/home/8.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914451/strident/home/8.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410056/strident/home/8_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914451/strident/home/8.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
     {
-      original:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/v1570914456/strident/home/14853237_306807193039496_7866568446602456550_o.jpg',
-      thumbnail:
-        'https://res.cloudinary.com/dqvimfd8b/image/upload/c_thumb,w_200,g_face/v1570914456/strident/home/14853237_306807193039496_7866568446602456550_o.jpg',
+      original: `${baseURL}/v1570914456/strident/home/9.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914456/strident/home/9.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410058/strident/home/9_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914456/strident/home/9.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
+    },
+    {
+      original: `${baseURL}/v1570914452/strident/home/10.jpg`,
+      thumbnail: `${baseURL}/c_thumb,w_200,g_face/v1570914452/strident/home/10.jpg`,
+      imageSet: [
+        {
+          srcSet: `${baseURL}/v1571410057/strident/home/10_ng.webp`,
+          type: 'image/webp',
+        },
+        {
+          srcSet: `${baseURL}/v1570914452/strident/home/10.jpg`,
+          media: 'image/jpeg',
+        },
+      ],
     },
   ];
 
