@@ -24,6 +24,7 @@ const styles = {
   card: {
     paddingTop: '2em',
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    paddingBottom: '1em',
   },
   cardContent: {
     padding: '0',
