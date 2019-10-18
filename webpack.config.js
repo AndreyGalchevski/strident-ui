@@ -5,14 +5,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const isProduction =
   typeof process.env.NODE_ENV !== 'undefined' && process.env.NODE_ENV === 'production';
 const mode = isProduction ? 'production' : 'development';
-const devtool = isProduction ? false : 'inline-source-map';
 
 module.exports = [
   {
     entry: './src/index.tsx',
     target: 'web',
     mode,
-    devtool,
     devServer: {
       contentBase: path.resolve(__dirname, '/dist'),
       port: 4000,
