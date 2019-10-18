@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Member } from '../../api/types';
-import { fetchResource, updateResource, createResource } from '../../api/utils';
+import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
 import Button from '../../components/Button';
 
 type MatchParams = {
@@ -19,6 +19,7 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
     image: '',
     imageNG: '',
   });
+  const [selectedFile, setSelectedFile] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -39,14 +40,42 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
     setMember({ ...member, [e.target.name]: e.target.value });
   }
 
+  function handleImageChange(e: ChangeEvent<HTMLInputElement>): void {
+    setSelectedFile(e.target.files[0]);
+  }
+
   async function handleSaveClick(): Promise<void> {
-    let res = '';
+    // TODO: validate
     setLoading(true);
+
+    let res = '';
+    let imageURL = '';
+    let ngImageURL = '';
+
+    if (selectedFile) {
+      const image = new FormData();
+      image.append('memberImage', selectedFile);
+      try {
+        const result = await uploadImage('members', member.name, image);
+        imageURL = result.imageURL;
+        ngImageURL = result.ngImageURL;
+      } catch (error) {
+        window.alert(error);
+        return;
+      }
+    }
+
+    if (imageURL && ngImageURL) {
+      member.image = imageURL;
+      member.imageNG = ngImageURL;
+    }
+
     if (match.params.id) {
       res = await updateResource<Member>('members', match.params.id, member);
     } else {
       res = await createResource<Member>('members', member);
     }
+
     setLoading(false);
     setShouldRedirect(true);
     window.alert(res);
@@ -94,20 +123,10 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
                 </div>
                 <div>
                   <input
-                    type="text"
+                    type="file"
                     name="image"
-                    placeholder="Image"
-                    onChange={handleFormChange}
-                    value={member.image}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="imageNG"
-                    placeholder="Image Nex-Gen"
-                    onChange={handleFormChange}
-                    value={member.imageNG}
+                    placeholder="Select Image"
+                    onChange={handleImageChange}
                   />
                 </div>
               </div>

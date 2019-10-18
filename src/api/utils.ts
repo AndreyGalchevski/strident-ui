@@ -121,3 +121,36 @@ export async function deleteResource(resourceName: string, resourceId: string): 
       return '';
   }
 }
+
+interface ImageUploadResponse {
+  imageURL: string;
+  ngImageURL: string;
+}
+
+export async function uploadImage(
+  folderName: string,
+  fileName: string,
+  image: FormData,
+): Promise<ImageUploadResponse> {
+  const response = await fetch(`${baseURL}/images?folderName=${folderName}&fileName=${fileName}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('stridentToken')}`,
+    },
+    body: image,
+  });
+
+  if (response.status >= 400) {
+    switch (response.status) {
+      case 400:
+        throw new Error('Choose exactly one image');
+      case 401:
+        throw new Error('Not Authorized');
+      default:
+        throw new Error('Something Went Wrong');
+    }
+  }
+
+  const result: ImageUploadResponse = await response.json();
+  return result;
+}
