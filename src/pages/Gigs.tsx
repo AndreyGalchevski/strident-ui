@@ -16,9 +16,12 @@ const styles = {
   },
   facebookIcon: {
     color: '#3b5998',
+    fontSize: '20px',
+    marginTop: '0.5em',
   },
   directionsIcon: {
     color: '#4A89F3',
+    fontSize: '25px',
     marginTop: '-0.4em',
   },
 };
@@ -90,7 +93,9 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
                     style={{ paddingTop: '10px' }}
                     className="btn-floating halfway-fab waves-effect waves-light white left"
                   >
-                    <i className="fas fa-directions" style={styles.directionsIcon} />
+                    <i className="material-icons" style={styles.directionsIcon}>
+                      directions
+                    </i>
                   </a>
                 </div>
                 <div className="card-content">
