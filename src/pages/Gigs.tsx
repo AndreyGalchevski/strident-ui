@@ -50,9 +50,11 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
 
   function handleDeleteClick(gigId: string): MouseEventHandler {
     return async (): Promise<void> => {
-      const res = await deleteResource('gigs', gigId);
-      fetchGigs();
-      window.alert(res);
+      if (window.confirm('Are you sure you want to delete the gig?')) {
+        const res = await deleteResource('gigs', gigId);
+        fetchGigs();
+        window.alert(res);
+      }
     };
   }
 

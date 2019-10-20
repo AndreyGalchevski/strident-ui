@@ -48,9 +48,11 @@ function Songs(props: RouteComponentProps): React.ReactElement {
 
   function handleDeleteClick(songId: string): MouseEventHandler {
     return async (): Promise<void> => {
-      const res = await deleteResource('songs', songId);
-      fetchSongs();
-      window.alert(res);
+      if (window.confirm('Are you sure you want to delete the song?')) {
+        const res = await deleteResource('songs', songId);
+        fetchSongs();
+        window.alert(res);
+      }
     };
   }
 

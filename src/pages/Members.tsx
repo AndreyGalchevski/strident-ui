@@ -42,9 +42,11 @@ function Members(props: RouteComponentProps): React.ReactElement {
 
   function handleDeleteClick(memberId: string): MouseEventHandler {
     return async (): Promise<void> => {
-      const res = await deleteResource('members', memberId);
-      fetchMembers();
-      window.alert(res);
+      if (window.confirm('Are you sure you want to delete the member?')) {
+        const res = await deleteResource('members', memberId);
+        fetchMembers();
+        window.alert(res);
+      }
     };
   }
 

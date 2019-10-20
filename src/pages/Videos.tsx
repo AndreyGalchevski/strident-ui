@@ -48,9 +48,11 @@ function Videos(props: RouteComponentProps): React.ReactElement {
 
   function handleDeleteClick(videoId: string): MouseEventHandler {
     return async (): Promise<void> => {
-      const res = await deleteResource('videos', videoId);
-      fetchVideos();
-      window.alert(res);
+      if (window.confirm('Are you sure you want to delete the video?')) {
+        const res = await deleteResource('videos', videoId);
+        fetchVideos();
+        window.alert(res);
+      }
     };
   }
 
