@@ -197,6 +197,7 @@ function Home(): ReactElement {
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialMediaLink}
+            aria-label="Follow Strident on Facebook"
           >
             <i className="fab fa-facebook-square" style={styles.socialMediaIcon} />
           </a>
@@ -205,6 +206,7 @@ function Home(): ReactElement {
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialMediaLink}
+            aria-label="Follow Strident on Instagram"
           >
             <i className="fab fa-instagram" style={styles.socialMediaIcon} />
           </a>
@@ -213,6 +215,7 @@ function Home(): ReactElement {
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialMediaLink}
+            aria-label="Foolow Strident on Bandcamp"
           >
             <i className="fab fa-bandcamp" style={styles.socialMediaIcon} />
           </a>
