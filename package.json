@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/materialize-css": "^1.0.6",
     "@types/node": "^12.11.1",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
@@ -37,11 +36,11 @@
     "tslib": "^1.10.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
+    "webpack-async-chunk-names-plugin": "^0.1.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "materialize-css": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-image-gallery": "^0.9.1",

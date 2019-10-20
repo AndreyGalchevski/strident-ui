@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FloatingActionButton } from 'materialize-css';
 
 export interface FabProps {
   url: string;
@@ -11,7 +10,8 @@ function Fab(props: FabProps): React.ReactElement {
 
   useEffect(() => {
     const elems = document.querySelectorAll('.fixed-action-btn');
-    FloatingActionButton.init(elems, {});
+    // @ts-ignore
+    M.FloatingActionButton.init(elems, {});
   }, []);
 
   return (

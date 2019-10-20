@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 
 const isProduction =
   typeof process.env.NODE_ENV !== 'undefined' && process.env.NODE_ENV === 'production';
@@ -48,6 +49,7 @@ module.exports = [
           ignore: ['.*'],
         },
       ]),
+      new AsyncChunkNames(),
     ],
     optimization: {
       splitChunks: {

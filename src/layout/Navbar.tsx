@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Sidenav } from 'materialize-css';
 
 import { PRIMARY_COLOR, ACCENT_COLOR } from '../utils/constants';
 
@@ -39,7 +38,8 @@ function Navbar(): ReactElement {
 
   useEffect(() => {
     const elems = document.querySelectorAll('.sidenav');
-    Sidenav.init(elems, {});
+    // @ts-ignore
+    M.Sidenav.init(elems, {});
   }, []);
 
   return (
