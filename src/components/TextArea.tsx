@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect } from 'react';
+import { textareaAutoResize } from 'materialize-css';
 
 export interface TextAreaProps {
   name: string;
@@ -12,8 +13,7 @@ function TextArea(props: TextAreaProps): React.ReactElement {
 
   useEffect(() => {
     const el = document.querySelector(`#${name}`);
-    // @ts-ignore
-    M.textareaAutoResize(el);
+    textareaAutoResize(el);
   });
 
   return (

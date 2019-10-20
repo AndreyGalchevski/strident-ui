@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect } from 'react';
+import { updateTextFields } from 'materialize-css';
 
 export interface TextInputProps {
   name: string;
@@ -12,8 +13,7 @@ function TextInput(props: TextInputProps): React.ReactElement {
   const { name, type, label, onChange, value } = props;
 
   useEffect(() => {
-    // @ts-ignore
-    M.updateTextFields();
+    updateTextFields();
   });
 
   return (

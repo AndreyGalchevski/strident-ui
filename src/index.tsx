@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import 'materialize-css/dist/css/materialize.min.css';
 
 import './index.css';
 import App from './app/App';
