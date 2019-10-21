@@ -11,6 +11,10 @@ const styles = {
   rightImage: {
     marginLeft: '10px',
   },
+  divider: {
+    paddingTop: '1.5vh',
+    paddingBottom: '1.5vh',
+  },
 };
 
 function Header(props: HeaderProps): ReactElement {
@@ -31,7 +35,9 @@ function Header(props: HeaderProps): ReactElement {
           style={styles.rightImage}
         />
       </h3>
-      <h3 className="hide-on-med-and-down"> </h3>
+      <div className="hide-on-med-and-down" style={styles.divider}>
+        {' '}
+      </div>
     </div>
   );
 }

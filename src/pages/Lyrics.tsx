@@ -19,7 +19,8 @@ const styles = {
   lyric: {
     display: 'inline-block',
     width: '100%',
-    padding: '2vh',
+    paddingRight: '2vh',
+    paddingLeft: '2vh',
   },
   card: {
     paddingTop: '2em',
