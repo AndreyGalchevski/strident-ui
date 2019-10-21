@@ -11,6 +11,7 @@ const Songs = withRouter(lazy(() => import('../pages/Songs')));
 const Videos = withRouter(lazy(() => import('../pages/Videos')));
 const Gigs = withRouter(lazy(() => import('../pages/Gigs')));
 const Lyrics = withRouter(lazy(() => import('../pages/Lyrics')));
+const About = withRouter(lazy(() => import('../pages/About')));
 const Login = withRouter(lazy(() => import('../pages/Login')));
 const ManageMember = withRouter(lazy(() => import('../pages/admin/ManageMember')));
 const ManageSong = withRouter(lazy(() => import('../pages/admin/ManageSong')));
@@ -45,6 +46,7 @@ function App(): React.ReactElement {
         <Route exact path="/videos" component={Videos} />
         <Route exact path="/gigs" component={Gigs} />
         <Route exact path="/lyrics" component={Lyrics} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
         <PrivateRoute
