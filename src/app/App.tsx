@@ -4,11 +4,13 @@ import { Route, withRouter } from 'react-router-dom';
 import decodeJWT from '../utils/jwt';
 import PrivateRoute from '../components/PrivateRoute';
 import Loader from '../components/Loader';
+import ManageMerchandise from '../pages/admin/ManageMerchandise';
 
 const Home = withRouter(lazy(() => import('../pages/Home')));
 const Members = withRouter(lazy(() => import('../pages/Members')));
 const Songs = withRouter(lazy(() => import('../pages/Songs')));
 const Videos = withRouter(lazy(() => import('../pages/Videos')));
+const Merchandises = withRouter(lazy(() => import('../pages/Merchandises')));
 const Gigs = withRouter(lazy(() => import('../pages/Gigs')));
 const Lyrics = withRouter(lazy(() => import('../pages/Lyrics')));
 const About = withRouter(lazy(() => import('../pages/About')));
@@ -44,6 +46,7 @@ function App(): React.ReactElement {
         <Route exact path="/members" component={Members} />
         <Route exact path="/songs" component={Songs} />
         <Route exact path="/videos" component={Videos} />
+        <Route exact path="/merch" component={Merchandises} />
         <Route exact path="/gigs" component={Gigs} />
         <Route exact path="/lyrics" component={Lyrics} />
         <Route exact path="/about" component={About} />
@@ -63,6 +66,13 @@ function App(): React.ReactElement {
           key="edit-video"
           path="/admin/videos/edit/:id"
           component={ManageVideo}
+        />
+        <PrivateRoute exact key="new-merch" path="/admin/merch/new" component={ManageMerchandise} />
+        <PrivateRoute
+          exact
+          key="edit-merch"
+          path="/admin/merch/edit/:id"
+          component={ManageMerchandise}
         />
         <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
         <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />

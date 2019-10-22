@@ -36,6 +36,16 @@ export interface Video {
   date: Date;
 }
 
+export interface Merchandise {
+  id: string;
+  name: string;
+  type: string;
+  price: number;
+  url: string;
+  image: string;
+  imageNG: string;
+}
+
 export interface Gig {
   id: string;
   venue: string;

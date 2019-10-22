@@ -12,10 +12,10 @@ const styles = {
     height: '1.9em',
   },
   leftLinks: {
-    paddingLeft: '20em',
+    paddingLeft: '15em',
   },
   rightLinks: {
-    paddingRight: '22em',
+    paddingRight: '17em',
   },
   sideNav: {
     backgroundColor: PRIMARY_COLOR,
@@ -24,7 +24,7 @@ const styles = {
     color: '#fff',
   },
   sideNavImage: {
-    marginTop: '8vh',
+    marginTop: '5vh',
     width: '65vw',
     height: '40vh',
   },
@@ -68,6 +68,11 @@ function Navbar(): ReactElement {
                 </NavLink>
               </li>
               <li>
+                <NavLink exact to="/videos" activeStyle={activeLinkStyle}>
+                  Videos
+                </NavLink>
+              </li>
+              <li>
                 <NavLink exact to="/songs" activeStyle={activeLinkStyle}>
                   Songs
                 </NavLink>
@@ -75,8 +80,8 @@ function Navbar(): ReactElement {
             </ul>
             <ul className="right hide-on-med-and-down" style={styles.rightLinks}>
               <li>
-                <NavLink exact to="/videos" activeStyle={activeLinkStyle}>
-                  Videos
+                <NavLink exact to="/merch" activeStyle={activeLinkStyle}>
+                  Merch
                 </NavLink>
               </li>
               <li>
@@ -87,6 +92,11 @@ function Navbar(): ReactElement {
               <li>
                 <NavLink exact to="/lyrics" activeStyle={activeLinkStyle}>
                   Lyrics
+                </NavLink>
+              </li>
+              <li>
+                <NavLink exact to="/about" activeStyle={activeLinkStyle}>
+                  About
                 </NavLink>
               </li>
             </ul>
@@ -119,6 +129,17 @@ function Navbar(): ReactElement {
         <li>
           <NavLink
             exact
+            to="/videos"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
+            Videos
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            exact
             to="/songs"
             className="sidenav-close"
             style={styles.link}
@@ -130,12 +151,12 @@ function Navbar(): ReactElement {
         <li>
           <NavLink
             exact
-            to="/videos"
+            to="/merch"
             className="sidenav-close"
             style={styles.link}
             activeStyle={activeLinkStyle}
           >
-            Videos
+            Merch
           </NavLink>
         </li>
         <li>
@@ -158,6 +179,17 @@ function Navbar(): ReactElement {
             activeStyle={activeLinkStyle}
           >
             Lyrics
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            exact
+            to="/about"
+            className="sidenav-close"
+            style={styles.link}
+            activeStyle={activeLinkStyle}
+          >
+            About
           </NavLink>
         </li>
         <li>
