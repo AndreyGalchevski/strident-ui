@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import { formatDate, formatTime } from '../utils/general';
+import Loader from '../components/Loader';
 
 const styles = {
   card: {
@@ -65,9 +66,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
     <section>
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
-      {isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
+      <Loader isLoading={isLoading}>
         <div className="row">
           {gigs.map(gig => (
             <div key={gig.id} className="col s12 m4">
@@ -120,7 +119,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

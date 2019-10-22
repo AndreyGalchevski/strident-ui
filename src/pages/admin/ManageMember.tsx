@@ -6,6 +6,7 @@ import { fetchResource, updateResource, createResource, uploadImage } from '../.
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
+import Loader from '../../components/Loader';
 
 type MatchParams = {
   id: string;
@@ -83,48 +84,46 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
     window.alert(res);
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <>
       {shouldRedirect && <Redirect to="/members" />}
       <section>
         {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={member.name}
-                />
-                <Input
-                  name="instrument"
-                  type="text"
-                  label="Instrument"
-                  onChange={handleFormChange}
-                  value={member.instrument}
-                />
-                <Input
-                  name="info"
-                  type="text"
-                  label="Info"
-                  onChange={handleFormChange}
-                  value={member.info}
-                />
-                <FileInput onChange={handleImageChange} />
-              </div>
-              <div className="card-action">
-                <Button handleClick={handleSaveClick}>Save</Button>
+        <Loader isLoading={isLoading}>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Name"
+                    onChange={handleFormChange}
+                    value={member.name}
+                  />
+                  <Input
+                    name="instrument"
+                    type="text"
+                    label="Instrument"
+                    onChange={handleFormChange}
+                    value={member.instrument}
+                  />
+                  <Input
+                    name="info"
+                    type="text"
+                    label="Info"
+                    onChange={handleFormChange}
+                    value={member.info}
+                  />
+                  <FileInput onChange={handleImageChange} />
+                </div>
+                <div className="card-action">
+                  <Button handleClick={handleSaveClick}>Save</Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Loader>
       </section>
     </>
   );

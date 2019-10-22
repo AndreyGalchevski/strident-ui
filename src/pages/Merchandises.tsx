@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { PRIMARY_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
+import Loader from '../components/Loader';
 
 const styles = {
   card: {
@@ -54,9 +55,7 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
     <section>
       <Header title="Merch" />
       {authState.isAuthenticated && <Fab url="/admin/merch/new" />}
-      {isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
+      <Loader isLoading={isLoading}>
         <div className="row">
           {merchandises.map(merchandise => (
             <div
@@ -100,7 +99,7 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

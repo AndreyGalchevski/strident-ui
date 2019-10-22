@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { PRIMARY_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
+import Loader from '../components/Loader';
 
 const styles = {
   video: {
@@ -60,9 +61,7 @@ function Videos(props: RouteComponentProps): React.ReactElement {
     <section>
       <Header title="Videos" />
       {authState.isAuthenticated && <Fab url="/admin/videos/new" />}
-      {isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
+      <Loader isLoading={isLoading}>
         <div className="row">
           {videos.map(video => (
             <div key={video.id} className="col s12 m4" style={styles.video}>
@@ -92,7 +91,7 @@ function Videos(props: RouteComponentProps): React.ReactElement {
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

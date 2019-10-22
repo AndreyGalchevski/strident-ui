@@ -7,6 +7,7 @@ import Button from '../../components/Button';
 import { formatDate, formatTime } from '../../utils/general';
 import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
+import Loader from '../../components/Loader';
 
 type MatchParams = {
   id: string;
@@ -98,69 +99,67 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     window.alert(res);
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <>
       {shouldRedirect && <Redirect to="/gigs" />}
       <section>
         {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Input
-                  name="venue"
-                  type="text"
-                  label="Venue"
-                  onChange={handleTextInputChange}
-                  value={gig.venue}
-                />
-                <Input
-                  name="address"
-                  type="text"
-                  label="Address"
-                  onChange={handleTextInputChange}
-                  value={gig.address}
-                />
-                <Input
-                  name="city"
-                  type="text"
-                  label="City"
-                  onChange={handleTextInputChange}
-                  value={gig.city}
-                />
-                <Input
-                  name="date"
-                  type="date"
-                  label="Date"
-                  onChange={handleDateInputChange}
-                  value={formatDate(gig.date)}
-                />
-                <Input
-                  name="date"
-                  type="time"
-                  label="Time"
-                  onChange={handleTimeInputChange}
-                  value={formatTime(gig.date)}
-                />
-                <Input
-                  name="fbEvent"
-                  type="text"
-                  label="Facebook Event"
-                  onChange={handleTextInputChange}
-                  value={gig.fbEvent}
-                />
-                <FileInput onChange={handleImageChange} />
-              </div>
-              <div className="card-action">
-                <Button handleClick={handleSaveClick}>Save</Button>
+        <Loader isLoading={isLoading}>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Input
+                    name="venue"
+                    type="text"
+                    label="Venue"
+                    onChange={handleTextInputChange}
+                    value={gig.venue}
+                  />
+                  <Input
+                    name="address"
+                    type="text"
+                    label="Address"
+                    onChange={handleTextInputChange}
+                    value={gig.address}
+                  />
+                  <Input
+                    name="city"
+                    type="text"
+                    label="City"
+                    onChange={handleTextInputChange}
+                    value={gig.city}
+                  />
+                  <Input
+                    name="date"
+                    type="date"
+                    label="Date"
+                    onChange={handleDateInputChange}
+                    value={formatDate(gig.date)}
+                  />
+                  <Input
+                    name="date"
+                    type="time"
+                    label="Time"
+                    onChange={handleTimeInputChange}
+                    value={formatTime(gig.date)}
+                  />
+                  <Input
+                    name="fbEvent"
+                    type="text"
+                    label="Facebook Event"
+                    onChange={handleTextInputChange}
+                    value={gig.fbEvent}
+                  />
+                  <FileInput onChange={handleImageChange} />
+                </div>
+                <div className="card-action">
+                  <Button handleClick={handleSaveClick}>Save</Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Loader>
       </section>
     </>
   );

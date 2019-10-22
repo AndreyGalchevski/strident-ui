@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
+import Loader from '../components/Loader';
 
 const styles = {
   lyricsContainer: (isWideScreen: boolean): any => ({
@@ -75,9 +76,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
     <section>
       <Header title="Lyrics" />
       {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
-      {isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
+      <Loader isLoading={isLoading}>
         <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
           {lyrics.map(lyric => (
             <div key={lyric.id} style={styles.lyric}>
@@ -100,7 +99,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

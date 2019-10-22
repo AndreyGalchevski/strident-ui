@@ -36,41 +36,39 @@ function Login(): React.ReactElement {
     setLoading(false);
   }
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <>
       {shouldRedirect && <Redirect to="/" />}
-      <section>
-        <h3>Login</h3>
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Input
-                  name="username"
-                  type="text"
-                  label="Username"
-                  onChange={handleUsernameChange}
-                  value={username}
-                />
-                <Input
-                  name="password"
-                  type="password"
-                  label="Password"
-                  onChange={handlePasswordChange}
-                  value={password}
-                />
-              </div>
-              <div className="card-action">
-                <Button handleClick={handleLogin}>Login</Button>
+      <Loader isLoading={isLoading}>
+        <section>
+          <h3>Login</h3>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Input
+                    name="username"
+                    type="text"
+                    label="Username"
+                    onChange={handleUsernameChange}
+                    value={username}
+                  />
+                  <Input
+                    name="password"
+                    type="password"
+                    label="Password"
+                    onChange={handlePasswordChange}
+                    value={password}
+                  />
+                </div>
+                <div className="card-action">
+                  <Button handleClick={handleLogin}>Login</Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Loader>
     </>
   );
 }

@@ -8,6 +8,7 @@ import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
+import Loader from '../components/Loader';
 
 const styles = {
   card: {
@@ -54,9 +55,7 @@ function Members(props: RouteComponentProps): React.ReactElement {
     <section>
       <Header title="Members" />
       {authState.isAuthenticated && <Fab url="/admin/members/new" />}
-      {isLoading ? (
-        <h3>Loading...</h3>
-      ) : (
+      <Loader isLoading={isLoading}>
         <div className="row">
           {members.map(member => (
             <div key={member.id} className="col s12 m3">
@@ -86,7 +85,7 @@ function Members(props: RouteComponentProps): React.ReactElement {
             </div>
           ))}
         </div>
-      )}
+      </Loader>
     </section>
   );
 }

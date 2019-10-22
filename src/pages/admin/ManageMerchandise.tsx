@@ -6,6 +6,7 @@ import { fetchResource, updateResource, createResource, uploadImage } from '../.
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
+import Loader from '../../components/Loader';
 
 type MatchParams = {
   id: string;
@@ -85,55 +86,53 @@ function ManageMerchandise(props: RouteComponentProps<MatchParams>): React.React
     window.alert(res);
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <>
       {shouldRedirect && <Redirect to="/merch" />}
       <section>
         {match.params.id ? <h3>Update Merch</h3> : <h3>Create Merch</h3>}
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={merchandise.name}
-                />
-                <Input
-                  name="type"
-                  type="text"
-                  label="Type"
-                  onChange={handleFormChange}
-                  value={merchandise.type}
-                />
-                <Input
-                  name="price"
-                  type="number"
-                  label="Price"
-                  onChange={handleFormChange}
-                  value={merchandise.price}
-                />
-                <Input
-                  name="url"
-                  type="text"
-                  label="URL"
-                  onChange={handleFormChange}
-                  value={merchandise.url}
-                />
-                <FileInput onChange={handleImageChange} />
-              </div>
-              <div className="card-action">
-                <Button handleClick={handleSaveClick}>Save</Button>
+        <Loader isLoading={isLoading}>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Name"
+                    onChange={handleFormChange}
+                    value={merchandise.name}
+                  />
+                  <Input
+                    name="type"
+                    type="text"
+                    label="Type"
+                    onChange={handleFormChange}
+                    value={merchandise.type}
+                  />
+                  <Input
+                    name="price"
+                    type="number"
+                    label="Price"
+                    onChange={handleFormChange}
+                    value={merchandise.price}
+                  />
+                  <Input
+                    name="url"
+                    type="text"
+                    label="URL"
+                    onChange={handleFormChange}
+                    value={merchandise.url}
+                  />
+                  <FileInput onChange={handleImageChange} />
+                </div>
+                <div className="card-action">
+                  <Button handleClick={handleSaveClick}>Save</Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Loader>
       </section>
     </>
   );

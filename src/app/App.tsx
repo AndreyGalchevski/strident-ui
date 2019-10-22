@@ -41,7 +41,13 @@ function App(): React.ReactElement {
 
   return (
     <main style={styles}>
-      <Suspense fallback={<Loader />}>
+      <Suspense
+        fallback={
+          <Loader isLoading>
+            <></>
+          </Loader>
+        }
+      >
         <Route exact path="/" component={Home} />
         <Route exact path="/members" component={Members} />
         <Route exact path="/songs" component={Songs} />

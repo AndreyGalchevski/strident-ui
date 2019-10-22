@@ -6,6 +6,7 @@ import { fetchResource, updateResource, createResource } from '../../api/utils';
 import { formatDate } from '../../utils/general';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Loader from '../../components/Loader';
 
 type MatchParams = {
   id: string;
@@ -56,47 +57,45 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
     window.alert(res);
   }
 
-  if (isLoading) {
-    return <h3>Loading...</h3>;
-  }
-
   return (
     <>
       {shouldRedirect && <Redirect to="/videos" />}
       <section>
         {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
-        <div className="row">
-          <div className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-content">
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={video.name}
-                />
-                <Input
-                  name="url"
-                  type="text"
-                  label="URL"
-                  onChange={handleFormChange}
-                  value={video.url}
-                />
-                <Input
-                  name="date"
-                  type="date"
-                  label="Date"
-                  onChange={handleDateChange}
-                  value={formatDate(video.date)}
-                />
-              </div>
-              <div className="card-action">
-                <Button handleClick={handleSaveClick}>Save</Button>
+        <Loader isLoading={isLoading}>
+          <div className="row">
+            <div className="col s12 m4 offset-m4">
+              <div className="card">
+                <div className="card-content">
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Name"
+                    onChange={handleFormChange}
+                    value={video.name}
+                  />
+                  <Input
+                    name="url"
+                    type="text"
+                    label="URL"
+                    onChange={handleFormChange}
+                    value={video.url}
+                  />
+                  <Input
+                    name="date"
+                    type="date"
+                    label="Date"
+                    onChange={handleDateChange}
+                    value={formatDate(video.date)}
+                  />
+                </div>
+                <div className="card-action">
+                  <Button handleClick={handleSaveClick}>Save</Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Loader>
       </section>
     </>
   );
