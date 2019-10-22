@@ -4,6 +4,7 @@ import { Route, withRouter } from 'react-router-dom';
 import decodeJWT from '../utils/jwt';
 import PrivateRoute from '../components/PrivateRoute';
 import Loader from '../components/Loader';
+import ManageMerchandise from '../pages/admin/ManageMerchandise';
 
 const Home = withRouter(lazy(() => import('../pages/Home')));
 const Members = withRouter(lazy(() => import('../pages/Members')));
@@ -65,6 +66,13 @@ function App(): React.ReactElement {
           key="edit-video"
           path="/admin/videos/edit/:id"
           component={ManageVideo}
+        />
+        <PrivateRoute exact key="new-merch" path="/admin/merch/new" component={ManageMerchandise} />
+        <PrivateRoute
+          exact
+          key="edit-merch"
+          path="/admin/merch/edit/:id"
+          component={ManageMerchandise}
         />
         <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
         <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />

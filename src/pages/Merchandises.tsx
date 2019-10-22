@@ -43,7 +43,7 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
   function handleDeleteClick(merchandiseId: string): MouseEventHandler {
     return async (): Promise<void> => {
       if (window.confirm('Are you sure you want to delete the merch?')) {
-        const res = await deleteResource('songs', merchandiseId);
+        const res = await deleteResource('merchandises', merchandiseId);
         fetchMerchandises();
         window.alert(res);
       }
@@ -63,16 +63,26 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
               key={merchandise.id}
               className={merchandises.length === 1 ? 'col s12 m4 push-m4' : 'col s12 m4'}
             >
-              <div className="card">
+              <div className="card" style={styles.card}>
                 <div className="card-image">
                   <picture>
                     <source srcSet={merchandise.imageNG} type="image/webp" />
                     <source srcSet={merchandise.image} type="image/jpeg" />
                     <img src={merchandise.image} alt="" />
                   </picture>
-                  <span className="card-title">{merchandise.name}</span>
+                  <a
+                    href={merchandise.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-floating halfway-fab waves-effect waves-light white"
+                  >
+                    <i className="material-icons" style={{ color: 'black' }}>
+                      shopping_cart
+                    </i>
+                  </a>
                 </div>
                 <div className="card-content">
+                  <span className="card-title">{merchandise.name}</span>
                   <p>{merchandise.type}</p>
                   <p>&#8362; {merchandise.price} ILS</p>
                 </div>

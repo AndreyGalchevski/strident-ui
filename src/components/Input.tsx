@@ -5,7 +5,7 @@ export interface TextInputProps {
   type: string;
   label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
+  value: string | number;
 }
 
 function TextInput(props: TextInputProps): React.ReactElement {
