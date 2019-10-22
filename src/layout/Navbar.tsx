@@ -24,7 +24,7 @@ const styles = {
     color: '#fff',
   },
   sideNavImage: {
-    marginTop: '5vh',
+    marginTop: '3vh',
     width: '65vw',
     height: '40vh',
   },
