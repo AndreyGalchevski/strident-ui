@@ -5,7 +5,7 @@ import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
-import { PRIMARY_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
@@ -16,6 +16,8 @@ const styles = {
   },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    backgroundColor: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
   },
   cardContent: {
     padding: 0,

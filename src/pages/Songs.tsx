@@ -5,7 +5,7 @@ import { fetchResources, deleteResource } from '../api/utils';
 import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
-import { PRIMARY_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
@@ -16,6 +16,8 @@ const styles = {
   },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    backgroundColor: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
   },
   cardContent: {
     padding: 0,
@@ -65,7 +67,7 @@ function Songs(props: RouteComponentProps): React.ReactElement {
         <div className="row">
           {songs.map(song => (
             <div key={song.id} className="col s12 m4" style={styles.song}>
-              <div className="card" style={styles.cardContent}>
+              <div className="card" style={styles.card}>
                 <div className="card-content" style={styles.cardContent}>
                   <iframe
                     title={song.name}

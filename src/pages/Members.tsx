@@ -3,7 +3,7 @@ import React, { useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { PRIMARY_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import Header from '../components/Header';
@@ -13,6 +13,8 @@ import Loader from '../components/Loader';
 const styles = {
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    backgroundColor: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
   },
 };
 

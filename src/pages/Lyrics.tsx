@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
-import { PRIMARY_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import Button from '../components/Button';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
@@ -27,6 +27,8 @@ const styles = {
     paddingTop: '2em',
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
     paddingBottom: '1em',
+    backgroundColor: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
   },
   cardContent: {
     padding: '0',

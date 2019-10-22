@@ -1,5 +1,5 @@
 import React, { ReactElement, MouseEventHandler } from 'react';
-import { LIGHT_COLOR, ACCENT_COLOR } from '../utils/constants';
+import { ACCENT_COLOR, NEUTRAL_COLOR } from '../utils/constants';
 
 export interface ButtonProps {
   isPrimary?: boolean;
@@ -20,7 +20,7 @@ function Button(props: ButtonProps): ReactElement {
       type="button"
       className="waves-effect waves-light btn"
       onClick={handleClick}
-      style={{ ...styles, backgroundColor: isPrimary ? ACCENT_COLOR : LIGHT_COLOR }}
+      style={{ ...styles, backgroundColor: isPrimary ? ACCENT_COLOR : NEUTRAL_COLOR }}
     >
       {children}
     </button>
