@@ -12,6 +12,12 @@ type MatchParams = {
   id: string;
 };
 
+const styles = {
+  container: {
+    marginBottom: '4em',
+  },
+};
+
 function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [member, setMember] = useState<Member>({
@@ -87,7 +93,7 @@ function ManageMember(props: RouteComponentProps<MatchParams>): React.ReactEleme
   return (
     <>
       {shouldRedirect && <Redirect to="/members" />}
-      <section>
+      <section style={styles.container}>
         {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">

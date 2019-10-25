@@ -12,6 +12,12 @@ type MatchParams = {
   id: string;
 };
 
+const styles = {
+  container: {
+    marginBottom: '4em',
+  },
+};
+
 function ManageMerchandise(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [merchandise, setMerchandise] = useState<Merchandise>({
@@ -89,7 +95,7 @@ function ManageMerchandise(props: RouteComponentProps<MatchParams>): React.React
   return (
     <>
       {shouldRedirect && <Redirect to="/merch" />}
-      <section>
+      <section style={styles.container}>
         {match.params.id ? <h3>Update Merch</h3> : <h3>Create Merch</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">

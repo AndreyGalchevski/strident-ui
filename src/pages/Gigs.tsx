@@ -12,6 +12,9 @@ import { formatDate, formatTime } from '../utils/general';
 import Loader from '../components/Loader';
 
 const styles = {
+  container: {
+    marginBottom: '4em',
+  },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
     backgroundColor: PRIMARY_COLOR,
@@ -65,7 +68,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
       <Loader isLoading={isLoading}>

@@ -12,6 +12,9 @@ import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
 const styles = {
+  container: {
+    marginBottom: '4em',
+  },
   lyricsContainer: (isWideScreen: boolean): any => ({
     margin: 'auto',
     maxWidth: '1080px',
@@ -75,7 +78,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="Lyrics" />
       {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
       <Loader isLoading={isLoading}>

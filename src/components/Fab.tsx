@@ -15,7 +15,7 @@ function Fab(props: FabProps): React.ReactElement {
   }, []);
 
   return (
-    <div className="fixed-action-btn">
+    <div className="fixed-action-btn" style={{ bottom: '50px' }}>
       <Link to={url} className="btn-floating btn-large red">
         <i className="large material-icons">add</i>
       </Link>

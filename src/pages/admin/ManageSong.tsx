@@ -11,6 +11,12 @@ type MatchParams = {
   id: string;
 };
 
+const styles = {
+  container: {
+    marginBottom: '4em',
+  },
+};
+
 function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [song, setSong] = useState<Song>({} as Song);
@@ -50,7 +56,7 @@ function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement
   return (
     <>
       {shouldRedirect && <Redirect to="/songs" />}
-      <section>
+      <section style={styles.container}>
         {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">

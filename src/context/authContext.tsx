@@ -9,7 +9,7 @@ export function useAuthContext(): any {
 }
 
 export interface AuthProviderProps {
-  children: ReactElement[];
+  children: ReactElement;
 }
 
 export function AuthProvider(props: AuthProviderProps): ReactElement {

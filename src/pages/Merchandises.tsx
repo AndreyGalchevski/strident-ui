@@ -11,6 +11,9 @@ import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
 const styles = {
+  container: {
+    marginBottom: '4em',
+  },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
     backgroundColor: PRIMARY_COLOR,
@@ -54,7 +57,7 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="Merch" />
       {authState.isAuthenticated && <Fab url="/admin/merch/new" />}
       <Loader isLoading={isLoading}>

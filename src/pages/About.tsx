@@ -4,6 +4,9 @@ import Header from '../components/Header';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 
 const styles = {
+  container: {
+    marginBottom: '4em',
+  },
   aboutParagraph: {
     marginTop: 0,
   },
@@ -16,7 +19,7 @@ const styles = {
 
 function About(): React.ReactElement {
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="About" />
       <div className="row">
         <div className="col s12 m8 offset-m2">

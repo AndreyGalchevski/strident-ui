@@ -13,6 +13,12 @@ type MatchParams = {
   id: string;
 };
 
+const styles = {
+  container: {
+    marginBottom: '4em',
+  },
+};
+
 function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
 
@@ -102,7 +108,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
   return (
     <>
       {shouldRedirect && <Redirect to="/gigs" />}
-      <section>
+      <section style={styles.container}>
         {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">

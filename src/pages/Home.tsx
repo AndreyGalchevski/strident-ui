@@ -6,8 +6,8 @@ import Header from '../components/Header';
 import { PRIMARY_COLOR } from '../utils/constants';
 
 const styles = {
-  socialMediaLinksContainer: {
-    marginBottom: '2em',
+  container: {
+    marginBottom: '4em',
   },
   socialMediaLink: {
     paddingLeft: '1em',
@@ -186,12 +186,12 @@ function Home(): ReactElement {
   ];
 
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="Home" />
       <ImageGallery items={images} lazyLoad />
       <div>
         <h3>Follow Us On Social Media</h3>
-        <div style={styles.socialMediaLinksContainer}>
+        <div>
           <a
             href="https://www.facebook.com/stridentthrash"
             target="_blank"

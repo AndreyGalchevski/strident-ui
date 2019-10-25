@@ -19,6 +19,8 @@ import ManageSong from '../pages/admin/ManageSong';
 import ManageMerchandise from '../pages/admin/ManageMerchandise';
 import ManageGig from '../pages/admin/ManageGig';
 import ManageLyric from '../pages/admin/ManageLyric';
+import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
 
 const styles: CSSProperties = {
   overflowY: 'scroll',
@@ -39,39 +41,53 @@ function App(): React.ReactElement {
   }, []);
 
   return (
-    <main style={styles}>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/members" component={Members} />
-      <Route exact path="/songs" component={Songs} />
-      <Route exact path="/videos" component={Videos} />
-      <Route exact path="/merch" component={Merchandises} />
-      <Route exact path="/gigs" component={Gigs} />
-      <Route exact path="/lyrics" component={Lyrics} />
-      <Route exact path="/about" component={About} />
-      <Route exact path="/login" component={Login} />
-      <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
-      <PrivateRoute
-        exact
-        key="edit-member"
-        path="/admin/members/edit/:id"
-        component={ManageMember}
-      />
-      <PrivateRoute exact key="new-song" path="/admin/songs/new" component={ManageSong} />
-      <PrivateRoute exact key="edit-song" path="/admin/songs/edit/:id" component={ManageSong} />
-      <PrivateRoute exact key="new-video" path="/admin/videos/new" component={ManageVideo} />
-      <PrivateRoute exact key="edit-video" path="/admin/videos/edit/:id" component={ManageVideo} />
-      <PrivateRoute exact key="new-merch" path="/admin/merch/new" component={ManageMerchandise} />
-      <PrivateRoute
-        exact
-        key="edit-merch"
-        path="/admin/merch/edit/:id"
-        component={ManageMerchandise}
-      />
-      <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
-      <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />
-      <PrivateRoute exact key="new-lyric" path="/admin/lyrics/new" component={ManageLyric} />
-      <PrivateRoute exact key="edit-lyric" path="/admin/lyrics/edit/:id" component={ManageLyric} />
-    </main>
+    <>
+      <Navbar />
+      <main style={styles}>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/members" component={Members} />
+        <Route exact path="/songs" component={Songs} />
+        <Route exact path="/videos" component={Videos} />
+        <Route exact path="/merch" component={Merchandises} />
+        <Route exact path="/gigs" component={Gigs} />
+        <Route exact path="/lyrics" component={Lyrics} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact key="new-member" path="/admin/members/new" component={ManageMember} />
+        <PrivateRoute
+          exact
+          key="edit-member"
+          path="/admin/members/edit/:id"
+          component={ManageMember}
+        />
+        <PrivateRoute exact key="new-song" path="/admin/songs/new" component={ManageSong} />
+        <PrivateRoute exact key="edit-song" path="/admin/songs/edit/:id" component={ManageSong} />
+        <PrivateRoute exact key="new-video" path="/admin/videos/new" component={ManageVideo} />
+        <PrivateRoute
+          exact
+          key="edit-video"
+          path="/admin/videos/edit/:id"
+          component={ManageVideo}
+        />
+        <PrivateRoute exact key="new-merch" path="/admin/merch/new" component={ManageMerchandise} />
+        <PrivateRoute
+          exact
+          key="edit-merch"
+          path="/admin/merch/edit/:id"
+          component={ManageMerchandise}
+        />
+        <PrivateRoute exact key="new-gig" path="/admin/gigs/new" component={ManageGig} />
+        <PrivateRoute exact key="edit-gig" path="/admin/gigs/edit/:id" component={ManageGig} />
+        <PrivateRoute exact key="new-lyric" path="/admin/lyrics/new" component={ManageLyric} />
+        <PrivateRoute
+          exact
+          key="edit-lyric"
+          path="/admin/lyrics/edit/:id"
+          component={ManageLyric}
+        />
+      </main>
+      <Footer />
+    </>
   );
 }
 

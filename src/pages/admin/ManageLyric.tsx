@@ -12,6 +12,12 @@ type MatchParams = {
   id: string;
 };
 
+const styles = {
+  container: {
+    marginBottom: '4em',
+  },
+};
+
 function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElement {
   const { match } = props;
   const [lyric, setLyric] = useState<Lyric>({} as Lyric);
@@ -55,7 +61,7 @@ function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElemen
   return (
     <>
       {shouldRedirect && <Redirect to="/lyrics" />}
-      <section>
+      <section style={styles.container}>
         {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">
