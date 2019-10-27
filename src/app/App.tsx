@@ -1,7 +1,5 @@
 import React, { useEffect, CSSProperties, useState } from 'react';
 import { Route } from 'react-router-dom';
-// @ts-ignore
-import Fade from 'react-reveal/Fade';
 
 import decodeJWT from '../utils/jwt';
 import PrivateRoute from '../components/PrivateRoute';
@@ -30,9 +28,6 @@ const styles: CSSProperties = {
 };
 
 function App(): React.ReactElement {
-  const [curentScrollPosition, setCurrentScrollPosition] = useState(window.pageYOffset);
-  const [isFooterVisible, setFooterVisible] = useState(true);
-
   useEffect(() => {
     const token = localStorage.getItem('stridentToken');
     if (token) {
@@ -45,26 +40,8 @@ function App(): React.ReactElement {
     }
   }, []);
 
-  function toggleFooter(newScrollPosition: number): void {
-    if (newScrollPosition < curentScrollPosition) {
-      setFooterVisible(true);
-    } else {
-      setFooterVisible(false);
-    }
-  }
-
-  function handleScroll(e: any): void {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    setCurrentScrollPosition(scrollTop);
-    toggleFooter(scrollTop);
-    const isBottomOfPage = Math.floor(scrollHeight - scrollTop) === clientHeight;
-    if (isBottomOfPage) {
-      setFooterVisible(true);
-    }
-  }
-
   return (
-    <div onScroll={window.innerWidth <= 786 ? handleScroll : null}>
+    <>
       <Navbar />
       <main style={styles}>
         <Route exact path="/" component={Home} />
@@ -109,10 +86,8 @@ function App(): React.ReactElement {
           component={ManageLyric}
         />
       </main>
-      <Fade bottom when={isFooterVisible} duration={500}>
-        <Footer />
-      </Fade>
-    </div>
+      <Footer />
+    </>
   );
 }
 

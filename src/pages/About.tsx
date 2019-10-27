@@ -5,7 +5,7 @@ import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 
 const styles = {
   container: {
-    marginBottom: '4em',
+    marginBottom: '17vh',
   },
   aboutParagraph: {
     marginTop: 0,

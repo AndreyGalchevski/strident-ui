@@ -7,7 +7,7 @@ import { PRIMARY_COLOR } from '../utils/constants';
 
 const styles = {
   container: {
-    marginBottom: '4em',
+    marginBottom: '18vh',
   },
   socialMediaLink: {
     paddingLeft: '1em',

@@ -12,7 +12,7 @@ import Loader from '../components/Loader';
 
 const styles = {
   container: {
-    marginBottom: '4em',
+    marginBottom: '17vh',
   },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,

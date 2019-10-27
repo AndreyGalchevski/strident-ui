@@ -13,7 +13,7 @@ import Loader from '../components/Loader';
 
 const styles = {
   container: {
-    // marginBottom: '4em',
+    marginBottom: '17vh',
   },
   lyricsContainer: (isWideScreen: boolean): any => ({
     margin: 'auto',

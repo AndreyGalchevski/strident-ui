@@ -11,6 +11,9 @@ import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
 const styles = {
+  container: {
+    marginBottom: '17vh',
+  },
   video: {
     marginBottom: '2em',
   },
@@ -60,7 +63,7 @@ function Videos(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
+    <section style={styles.container}>
       <Header title="Videos" />
       {authState.isAuthenticated && <Fab url="/admin/videos/new" />}
       <Loader isLoading={isLoading}>

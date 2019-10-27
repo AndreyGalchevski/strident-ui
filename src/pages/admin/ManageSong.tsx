@@ -13,7 +13,7 @@ type MatchParams = {
 
 const styles = {
   container: {
-    marginBottom: '4em',
+    marginBottom: '17vh',
   },
 };
 

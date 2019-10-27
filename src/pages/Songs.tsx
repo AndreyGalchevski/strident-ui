@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEventHandler } from 'react';
+import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -11,6 +11,9 @@ import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
 const styles = {
+  container: {
+    marginBottom: '17vh',
+  },
   song: {
     marginBottom: '2em',
   },
@@ -60,7 +63,7 @@ function Songs(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section>
+    <section style={styles.container as CSSProperties}>
       <Header title="Songs" />
       {authState.isAuthenticated && <Fab url="/admin/songs/new" />}
       <Loader isLoading={isLoading}>
