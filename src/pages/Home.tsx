@@ -207,8 +207,9 @@ function Home(): ReactElement {
 
   async function fetchGigs(): Promise<void> {
     setLoading(true);
-    const resources = await fetchResources<Gig>('gigs');
-    setLatestGigs(resources);
+    const gigs = await fetchResources<Gig>('gigs');
+    const lastThreeGigs = gigs.slice(0, 3);
+    setLatestGigs(lastThreeGigs);
     setLoading(false);
   }
 
