@@ -48,6 +48,7 @@ export interface Merchandise {
 
 export interface Gig {
   id: string;
+  name: string;
   venue: string;
   address: string;
   city: string;

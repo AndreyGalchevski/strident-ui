@@ -19,7 +19,7 @@ const styles = {
     paddingRight: '0.5em',
   },
   socialMediaIcon: {
-    fontSize: '18px',
+    fontSize: '20px',
     color: LIGHT_COLOR,
   },
 };
@@ -54,9 +54,27 @@ function Footer(): ReactElement {
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialMediaLink}
-            aria-label="Foolow Strident on Bandcamp"
+            aria-label="Follow Strident on Bandcamp"
           >
             <i className="fab fa-bandcamp" style={styles.socialMediaIcon} />
+          </a>
+          <a
+            href="https://www.youtube.com/user/MrThrashmaster"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.socialMediaLink}
+            aria-label="Watch Strident on Youtube"
+          >
+            <i className="fab fa-youtube" style={styles.socialMediaIcon} />
+          </a>
+          <a
+            href="https://open.spotify.com/artist/1iLO8tqlkfiQMWf7JqaNE3"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={styles.socialMediaLink}
+            aria-label="Listen to Strident on Spotify"
+          >
+            <i className="fab fa-spotify" style={styles.socialMediaIcon} />
           </a>
         </span>
         {/* <span>&#169; {currentYear} Strident</span> */}

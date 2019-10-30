@@ -7,28 +7,6 @@ import Header from '../components/Header';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { fetchResources } from '../api/utils';
 import { Gig } from '../api/types';
-import { formatDate } from '../utils/general';
-
-const styles = {
-  container: {
-    marginBottom: '18vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-    marginTop: '0',
-    marginBottom: '1em',
-  },
-  socialMediaLink: {
-    paddingLeft: '1em',
-    paddingRight: '1em',
-  },
-  socialMediaIcon: {
-    fontSize: '60px',
-    color: PRIMARY_COLOR,
-  },
-};
 
 const baseURL = 'https://res.cloudinary.com/dqvimfd8b/image/upload';
 
@@ -195,6 +173,34 @@ const images = [
   },
 ];
 
+const styles = {
+  container: {
+    marginBottom: '18vh',
+  },
+  card: {
+    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    backgroundColor: PRIMARY_COLOR,
+    color: LIGHT_COLOR,
+    marginTop: '0',
+    marginBottom: '1em',
+  },
+  cardEmbedContent: {
+    padding: 0,
+  },
+  cardAction: {
+    color: LIGHT_COLOR,
+    margin: 0,
+  },
+  socialMediaLink: {
+    paddingLeft: '1em',
+    paddingRight: '1em',
+  },
+  socialMediaIcon: {
+    fontSize: '60px',
+    color: PRIMARY_COLOR,
+  },
+};
+
 function Home(): ReactElement {
   const [latestGigs, setLatestGigs] = useState<Gig[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -248,57 +254,88 @@ function Home(): ReactElement {
         <div className="col s12 m6">
           <div className="card" style={styles.card}>
             <div className="card-content">
+              <p className="card-title">About</p>
               <p className="flow-text">
                 Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
                 (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
                 AC / DC, etc and having come a long way, they found their style on the Israeli metal
-                scene, despite the fact that in those years the scene was flooded with black metal
-                and many hardcore bands
-                <Link to="about"> ...</Link>
+                scene
               </p>
+            </div>
+            <div className="card-action">
+              <Link to="about" style={styles.cardAction}>
+                Read more
+              </Link>
             </div>
           </div>
         </div>
         <div className="col s12 m6">
-          <iframe
-            title="March Of Plague (Official Release)"
-            width="100%"
-            height="60%"
-            src="https://www.youtube.com/embed/kRaTaPfQi8U"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-          <Link to="/videos">More...</Link>
+          <div className="card" style={styles.card}>
+            <div className="card-content" style={styles.cardEmbedContent}>
+              <iframe
+                title="March Of Plague (Official Release)"
+                width="100%"
+                height="60%"
+                src="https://www.youtube.com/embed/kRaTaPfQi8U"
+                frameBorder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <div className="card-action">
+              <Link to="/videos" style={styles.cardAction}>
+                More videos
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
       <ImageGallery items={images} lazyLoad />
-      <div className="row">
+      <div className="row" style={{ marginTop: '2em' }}>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
           <div className="col s12 m6">
-            <h3>Latest gigs</h3>
-            {latestGigs.map(gig => (
-              <p>
-                <span>{formatDate(new Date(gig.date))} </span>
-                <span>{gig.venue} </span>
-                <span>{gig.city}</span>
-              </p>
-            ))}
-            <Link to="/gigs">More...</Link>
+            <div className="card" style={styles.card}>
+              <div className="card-content">
+                <div className="card-title">Latest Gigs</div>
+                {latestGigs.map(gig => (
+                  <div key={gig.id}>
+                    <p>{new Date(gig.date).toDateString()}</p>
+                    <p>
+                      {gig.name} - {gig.venue}
+                    </p>
+                    <p>{gig.city}</p>
+                    <hr />
+                  </div>
+                ))}
+              </div>
+              <div className="card-action">
+                <Link to="/gigs" style={styles.cardAction}>
+                  More gigs
+                </Link>
+              </div>
+            </div>
           </div>
         )}
         <div className="col s12 m6">
-          <iframe
-            title="Strident Spotify page"
-            src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
-            width="100%"
-            height="60%"
-            frameBorder="0"
-            allow="encrypted-media"
-          />
-          <Link to="/songs">More...</Link>
+          <div className="card" style={styles.card}>
+            <div className="card-content" style={styles.cardEmbedContent}>
+              <iframe
+                title="Strident Spotify page"
+                src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
+                width="100%"
+                height="60%"
+                frameBorder="0"
+                allow="encrypted-media"
+              />
+            </div>
+            <div className="card-action">
+              <Link to="/songs" style={styles.cardAction}>
+                More songs
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
