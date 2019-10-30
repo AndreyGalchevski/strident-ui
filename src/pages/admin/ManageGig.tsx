@@ -24,6 +24,7 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
 
   const [gig, setGig] = useState<Gig>({
     id: '',
+    name: '',
     venue: '',
     address: '',
     city: '',
@@ -115,6 +116,13 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
             <div className="col s12 m4 offset-m4">
               <div className="card">
                 <div className="card-content">
+                  <Input
+                    name="name"
+                    type="text"
+                    label="Name"
+                    onChange={handleTextInputChange}
+                    value={gig.name}
+                  />
                   <Input
                     name="venue"
                     type="text"
