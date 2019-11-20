@@ -299,7 +299,7 @@ function Home(): ReactElement {
           <div className="col s12 m6">
             <div className="card" style={styles.card}>
               <div className="card-content">
-                <div className="card-title">Latest Gigs</div>
+                <div className="card-title">Gigs</div>
                 {latestGigs.map(gig => (
                   <div key={gig.id}>
                     <p>{new Date(gig.date).toDateString()}</p>
