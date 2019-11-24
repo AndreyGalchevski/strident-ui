@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEventHandler } from 'react';
+import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -18,6 +18,15 @@ const styles = {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
     backgroundColor: PRIMARY_COLOR,
     color: LIGHT_COLOR,
+  },
+  price: {
+    display: 'flex',
+    FlexDirectionProperty: 'row',
+    justifyContent: 'center',
+  },
+  euroIcon: {
+    fontSize: '18px',
+    marginRight: '2px',
   },
 };
 
@@ -88,7 +97,12 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
                 <div className="card-content">
                   <span className="card-title">{merchandise.name}</span>
                   <p>{merchandise.type}</p>
-                  <p>&#8362; {merchandise.price} ILS</p>
+                  <p style={styles.price}>
+                    <i className="material-icons" style={styles.euroIcon}>
+                      euro_symbol
+                    </i>
+                    <span> {merchandise.price} EUR</span>
+                  </p>
                 </div>
                 {authState.isAuthenticated && (
                   <div className="card-action">
