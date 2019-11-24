@@ -199,6 +199,10 @@ const styles = {
     fontSize: '60px',
     color: PRIMARY_COLOR,
   },
+  banner: {
+    height: '74vh', 
+    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}` 
+  }
 };
 
 function Home(): ReactElement {
@@ -246,7 +250,7 @@ function Home(): ReactElement {
             <img
               src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
               alt="New Album banner"
-              style={{ width: '100%' }}
+              style={styles.banner}
             />
           </picture>
         </div>
