@@ -278,10 +278,10 @@ function Home(): ReactElement {
           <div className="card" style={styles.card}>
             <div className="card-content" style={styles.cardEmbedContent}>
               <iframe
-                title="March Of Plague (Official Release)"
+                title="STRIDENT - No Faith No War"
                 width="100%"
                 height="60%"
-                src="https://www.youtube.com/embed/kRaTaPfQi8U"
+                src="https://www.youtube.com/embed/UkvlRmq62io"
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
