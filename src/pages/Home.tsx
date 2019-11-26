@@ -1,10 +1,11 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import styled from '@emotion/styled';
 
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
+import { PRIMARY_COLOR, LIGHT_COLOR, COLORS } from '../utils/constants';
 import { fetchResources } from '../api/utils';
 import { Gig } from '../api/types';
 
@@ -173,37 +174,44 @@ const images = [
   },
 ];
 
-const styles = {
-  container: {
-    marginBottom: '18vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-    marginTop: '0',
-    marginBottom: '1em',
-  },
-  cardEmbedContent: {
-    padding: 0,
-  },
-  cardAction: {
-    color: LIGHT_COLOR,
-    margin: 0,
-  },
-  socialMediaLink: {
-    paddingLeft: '1em',
-    paddingRight: '1em',
-  },
-  socialMediaIcon: {
-    fontSize: '60px',
-    color: PRIMARY_COLOR,
-  },
-  banner: {
-    height: '74vh', 
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}` 
-  }
-};
+const Container = styled.section({
+  marginBottom: '18vh',
+});
+
+const Card = styled.div({
+  position: 'relative',
+  margin: '.5rem 0 1rem 0',
+  boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
+  backgroundColor: COLORS.BLACK,
+  color: COLORS.WHITE,
+  borderRadius: '20px',
+});
+
+const CardContent = styled.div({
+  padding: '24px',
+});
+
+const CardTitle = styled.p({
+  fontSize: '20px',
+  lineHeight: '32px',
+  marginBottom: '8px',
+});
+
+const CardAction = styled.div({
+  position: 'relative',
+  backgroundColor: 'inherit',
+  borderTop: `1px solid ${COLORS.DARK_GREY}`,
+  padding: '16px 24px',
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 0,
+  borderBottomLeftRadius: 'inherit',
+  borderBottomRightRadius: 'inherit',
+});
+
+const Banner = styled.img({
+  height: '74vh',
+  boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
+});
 
 function Home(): ReactElement {
   const [latestGigs, setLatestGigs] = useState<Gig[]>([]);
@@ -222,7 +230,7 @@ function Home(): ReactElement {
   }, []);
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Home" />
       <div className="row">
         <div className="col s12">
@@ -247,36 +255,33 @@ function Home(): ReactElement {
               srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274888/strident/app/march-of-plague-banner-wide.jpg"
               type="image/jpeg"
             />
-            <img
+            <Banner
               src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
               alt="New Album banner"
-              style={styles.banner}
             />
           </picture>
         </div>
       </div>
       <div className="row">
         <div className="col s12 m6">
-          <div className="card" style={styles.card}>
-            <div className="card-content">
-              <p className="card-title">About</p>
+          <Card>
+            <CardContent>
+              <CardTitle>About</CardTitle>
               <p className="flow-text">
                 Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
                 (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
                 AC / DC, etc and having come a long way, they found their style on the Israeli metal
                 scene
               </p>
-            </div>
-            <div className="card-action">
-              <Link to="about" style={styles.cardAction}>
-                Read more
-              </Link>
-            </div>
-          </div>
+            </CardContent>
+            <CardAction>
+              <Link to="about">Read more</Link>
+            </CardAction>
+          </Card>
         </div>
         <div className="col s12 m6">
-          <div className="card" style={styles.card}>
-            <div className="card-content" style={styles.cardEmbedContent}>
+          <Card>
+            <CardContent style={{ padding: 0 }}>
               <iframe
                 title="STRIDENT - No Faith No War"
                 width="100%"
@@ -286,13 +291,11 @@ function Home(): ReactElement {
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
-            </div>
-            <div className="card-action">
-              <Link to="/videos" style={styles.cardAction}>
-                More videos
-              </Link>
-            </div>
-          </div>
+            </CardContent>
+            <CardAction>
+              <Link to="/videos">More videos</Link>
+            </CardAction>
+          </Card>
         </div>
       </div>
       <ImageGallery items={images} lazyLoad />
@@ -301,9 +304,9 @@ function Home(): ReactElement {
           <p>Loading...</p>
         ) : (
           <div className="col s12 m6">
-            <div className="card" style={styles.card}>
-              <div className="card-content">
-                <div className="card-title">Gigs</div>
+            <Card>
+              <CardContent>
+                <CardTitle>Gigs</CardTitle>
                 {latestGigs.map(gig => (
                   <div key={gig.id}>
                     <p>{new Date(gig.date).toDateString()}</p>
@@ -314,18 +317,16 @@ function Home(): ReactElement {
                     <hr />
                   </div>
                 ))}
-              </div>
-              <div className="card-action">
-                <Link to="/gigs" style={styles.cardAction}>
-                  More gigs
-                </Link>
-              </div>
-            </div>
+              </CardContent>
+              <CardAction>
+                <Link to="/gigs">More gigs</Link>
+              </CardAction>
+            </Card>
           </div>
         )}
         <div className="col s12 m6">
-          <div className="card" style={styles.card}>
-            <div className="card-content" style={styles.cardEmbedContent}>
+          <Card>
+            <CardContent style={{ padding: 0 }}>
               <iframe
                 title="Strident Spotify page"
                 src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
@@ -334,16 +335,14 @@ function Home(): ReactElement {
                 frameBorder="0"
                 allow="encrypted-media"
               />
-            </div>
-            <div className="card-action">
-              <Link to="/songs" style={styles.cardAction}>
-                More songs
-              </Link>
-            </div>
-          </div>
+            </CardContent>
+            <CardAction>
+              <Link to="/songs">More songs</Link>
+            </CardAction>
+          </Card>
         </div>
       </div>
-    </section>
+    </Container>
   );
 }
 
