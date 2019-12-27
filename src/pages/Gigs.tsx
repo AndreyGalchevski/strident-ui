@@ -1,10 +1,11 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { useState, useEffect, MouseEventHandler, CSSProperties } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
@@ -15,8 +16,20 @@ const styles = {
   container: {
     marginBottom: '17vh',
   },
+  gigsContainer: (isMobile: boolean): CSSProperties => ({
+    margin: 'auto',
+    maxWidth: '1080px',
+    columnCount: isMobile ? 1 : 2,
+  }),
+  gig: {
+    display: 'inline-block',
+    width: '100%',
+    paddingRight: '2vh',
+    paddingLeft: '2vh',
+  },
   card: {
     boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
+    paddingBottom: '1em',
     backgroundColor: PRIMARY_COLOR,
     color: LIGHT_COLOR,
   },
@@ -36,6 +49,7 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
   const { history } = props;
 
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [gigs, setGigs] = useState<Gig[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -72,9 +86,9 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <div style={styles.gigsContainer(isMobile)}>
           {gigs.map(gig => (
-            <div key={gig.id} className="col s12 m4">
+            <div key={gig.id} style={styles.gig}>
               <div className="card" style={styles.card}>
                 <div className="card-image">
                   <picture>
