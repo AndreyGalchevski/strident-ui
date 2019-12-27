@@ -5,8 +5,8 @@ import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
-import Button from '../components/Button';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
+import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
@@ -82,7 +82,7 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
       <Header title="Lyrics" />
       {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
       <Loader isLoading={isLoading}>
-        <div style={styles.lyricsContainer(isWideScreen)} className="lyrics-container">
+        <div style={styles.lyricsContainer(isWideScreen)}>
           {lyrics.map(lyric => (
             <div key={lyric.id} style={styles.lyric}>
               <div className="card" style={styles.card}>
