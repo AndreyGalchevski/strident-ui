@@ -1,13 +1,11 @@
-import React, { ChangeEvent } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
 import { ACCENT_COLOR } from '../utils/constants';
 
-export interface FileInputPros {
+export interface Props {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function FileInput(props: FileInputPros): React.ReactElement {
-  const { onChange } = props;
-
+const FileInput: FunctionComponent<Props> = ({ onChange }) => {
   return (
     <div className="file-field input-field">
       <div className="btn" style={{ backgroundColor: ACCENT_COLOR }}>
@@ -19,6 +17,6 @@ function FileInput(props: FileInputPros): React.ReactElement {
       </div>
     </div>
   );
-}
+};
 
 export default FileInput;

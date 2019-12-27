@@ -1,20 +1,17 @@
-import React, { ReactElement, MouseEventHandler } from 'react';
+import React, { FunctionComponent, MouseEventHandler } from 'react';
 import { ACCENT_COLOR, NEUTRAL_COLOR } from '../utils/constants';
-
-export interface ButtonProps {
-  isPrimary?: boolean;
-  handleClick: MouseEventHandler;
-  children: string | ReactElement;
-}
 
 const styles = {
   marginRight: '1em',
   marginLeft: '1em',
 };
 
-function Button(props: ButtonProps): ReactElement {
-  const { isPrimary, handleClick, children } = props;
+export interface Props {
+  isPrimary?: boolean;
+  handleClick: MouseEventHandler;
+}
 
+const Button: FunctionComponent<Props> = ({ isPrimary, handleClick, children }) => {
   return (
     <button
       type="button"
@@ -25,6 +22,6 @@ function Button(props: ButtonProps): ReactElement {
       {children}
     </button>
   );
-}
+};
 
 export default Button;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { Member } from '../api/types';
@@ -21,9 +21,7 @@ const styles = {
   },
 };
 
-function Members(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
 
   const [members, setMembers] = useState<Member[]>([]);
@@ -93,6 +91,6 @@ function Members(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Members;

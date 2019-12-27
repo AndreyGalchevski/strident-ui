@@ -1,4 +1,4 @@
-import React, { ReactElement, CSSProperties } from 'react';
+import React, { FunctionComponent, CSSProperties } from 'react';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 
 const styles = {
@@ -24,9 +24,7 @@ const styles = {
   },
 };
 
-function Footer(): ReactElement {
-  const currentYear = new Date().getFullYear();
-
+const Footer: FunctionComponent = () => {
   return (
     <footer style={styles.footer as CSSProperties}>
       <p style={styles.footerContent}>
@@ -77,10 +75,9 @@ function Footer(): ReactElement {
             <i className="fab fa-spotify" style={styles.socialMediaIcon} />
           </a>
         </span>
-        {/* <span>&#169; {currentYear} Strident</span> */}
       </p>
     </footer>
   );
-}
+};
 
 export default Footer;

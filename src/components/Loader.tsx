@@ -1,9 +1,4 @@
-import React, { useState, useEffect, ReactElement } from 'react';
-
-export interface LoaderProps {
-  isLoading: boolean;
-  children: ReactElement;
-}
+import React, { FunctionComponent, ReactNode, useState, useEffect } from 'react';
 
 const styles = {
   container: {
@@ -18,8 +13,12 @@ const styles = {
   },
 };
 
-function Loader(props: LoaderProps): ReactElement {
-  const { isLoading, children } = props;
+export interface Props {
+  isLoading: boolean;
+}
+
+// @ts-ignore
+const Loader: FunctionComponent<Props> = ({ isLoading, children }) => {
   const [shouldDisplayLoading, setDisplayLoading] = useState(true);
 
   useEffect(() => {
@@ -49,6 +48,6 @@ function Loader(props: LoaderProps): ReactElement {
   ) : (
     children
   );
-}
+};
 
 export default Loader;

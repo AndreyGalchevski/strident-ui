@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Gig } from '../../api/types';
@@ -9,19 +9,17 @@ import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
 
-type MatchParams = {
-  id: string;
-};
-
 const styles = {
   container: {
     marginBottom: '17vh',
   },
 };
 
-function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+type MatchParams = {
+  id: string;
+};
 
+const ManageGig: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [gig, setGig] = useState<Gig>({
     id: '',
     name: '',
@@ -177,6 +175,6 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
       </section>
     </>
   );
-}
+};
 
 export default ManageGig;

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, MouseEventHandler, CSSProperties } from 'react';
+import React, {
+  FunctionComponent,
+  useState,
+  useEffect,
+  MouseEventHandler,
+  CSSProperties,
+} from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Gig } from '../api/types';
@@ -45,9 +51,7 @@ const styles = {
   },
 };
 
-function Gigs(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -141,6 +145,6 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Gigs;

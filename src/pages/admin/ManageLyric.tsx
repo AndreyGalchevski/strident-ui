@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Lyric } from '../../api/types';
@@ -8,18 +8,17 @@ import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import Loader from '../../components/Loader';
 
-type MatchParams = {
-  id: string;
-};
-
 const styles = {
   container: {
     marginBottom: '17vh',
   },
 };
 
-function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+type MatchParams = {
+  id: string;
+};
+
+const ManageLyric: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [lyric, setLyric] = useState<Lyric>({} as Lyric);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -92,6 +91,6 @@ function ManageLyric(props: RouteComponentProps<MatchParams>): React.ReactElemen
       </section>
     </>
   );
-}
+};
 
 export default ManageLyric;

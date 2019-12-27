@@ -1,4 +1,10 @@
-import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+  MouseEventHandler,
+  CSSProperties,
+} from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -27,9 +33,7 @@ const styles = {
   },
 };
 
-function Songs(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
 
   const [songs, setSongs] = useState<Song[]>([]);
@@ -98,6 +102,6 @@ function Songs(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Songs;

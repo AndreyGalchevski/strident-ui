@@ -6,7 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/react',
-    'prettier/@typescript-eslint'
+    'prettier/@typescript-eslint',
   ],
   rules: {
     'prettier/prettier': ['error'],
@@ -15,22 +15,23 @@ module.exports = {
     'react/jsx-filename-extension': [
       1,
       {
-        'extensions': ['.tsx']
-      }
+        extensions: ['.tsx'],
+      },
     ],
     'no-underscore-dangle': 'off',
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'react/prop-types': 0,
   },
   settings: {
-    'import/extensions': ['.js','.jsx','.ts','.tsx'],
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
-      '@typescript-eslint/parser': ['.ts','.tsx']
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
-      'import/resolver': {
-          node: {
-              extensions: ['.js','.jsx','.ts','.tsx']
-          }
-      }
+    },
   },
   globals: {
     atob: true,
@@ -42,5 +43,5 @@ module.exports = {
     navigator: true,
     fetch: true,
     M: true,
-  }
-}
+  },
+};

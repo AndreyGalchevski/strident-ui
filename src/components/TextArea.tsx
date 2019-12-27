@@ -1,15 +1,13 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { FunctionComponent, ChangeEvent, useEffect } from 'react';
 
-export interface TextAreaProps {
+export interface Props {
   name: string;
   label: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
 }
 
-function TextArea(props: TextAreaProps): React.ReactElement {
-  const { name, label, onChange, value } = props;
-
+const TextArea: FunctionComponent<Props> = ({ name, label, onChange, value }) => {
   useEffect(() => {
     const el = document.querySelector(`#${name}`);
     // @ts-ignore
@@ -22,6 +20,6 @@ function TextArea(props: TextAreaProps): React.ReactElement {
       <label htmlFor={name}>{label}</label>
     </div>
   );
-}
+};
 
 export default TextArea;

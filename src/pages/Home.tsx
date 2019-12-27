@@ -1,11 +1,11 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import styled from '@emotion/styled';
 
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import { PRIMARY_COLOR, LIGHT_COLOR, COLORS } from '../utils/constants';
+import { COLORS } from '../utils/constants';
 import { fetchResources } from '../api/utils';
 import { Gig } from '../api/types';
 
@@ -213,7 +213,7 @@ const Banner = styled.img({
   boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
 });
 
-function Home(): ReactElement {
+const Home: FunctionComponent = () => {
   const [latestGigs, setLatestGigs] = useState<Gig[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -344,6 +344,6 @@ function Home(): ReactElement {
       </div>
     </Container>
   );
-}
+};
 
 export default Home;

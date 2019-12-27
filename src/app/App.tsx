@@ -1,4 +1,4 @@
-import React, { useEffect, CSSProperties, useState } from 'react';
+import React, { FunctionComponent, useEffect, CSSProperties } from 'react';
 import { Route } from 'react-router-dom';
 
 import decodeJWT from '../utils/jwt';
@@ -27,7 +27,7 @@ const styles: CSSProperties = {
   height: '100%',
 };
 
-function App(): React.ReactElement {
+const App: FunctionComponent = () => {
   useEffect(() => {
     const token = localStorage.getItem('stridentToken');
     if (token) {
@@ -89,6 +89,6 @@ function App(): React.ReactElement {
       <Footer />
     </>
   );
-}
+};
 
 export default App;

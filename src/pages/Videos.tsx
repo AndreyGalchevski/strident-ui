@@ -1,4 +1,4 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -27,9 +27,7 @@ const styles = {
   },
 };
 
-function Videos(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
 
   const [videos, setVideos] = useState<Video[]>([]);
@@ -99,6 +97,6 @@ function Videos(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Videos;

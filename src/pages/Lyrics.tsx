@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEventHandler } from 'react';
+import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -42,8 +42,7 @@ const styles = {
   },
 };
 
-function Lyrics(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
+const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
   const isWideScreen = useMediaQuery('(min-width: 1024px)');
 
@@ -107,6 +106,6 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Lyrics;

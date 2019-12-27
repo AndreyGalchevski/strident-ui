@@ -1,8 +1,4 @@
-import React, { ReactElement } from 'react';
-
-export interface HeaderProps {
-  title: string;
-}
+import React, { FunctionComponent } from 'react';
 
 const styles = {
   leftImage: {
@@ -17,9 +13,11 @@ const styles = {
   },
 };
 
-function Header(props: HeaderProps): ReactElement {
-  const { title } = props;
+export interface Props {
+  title: string;
+}
 
+const Header: FunctionComponent<Props> = ({ title }) => {
   return (
     <div>
       <h3 className="hide-on-med-and-up">
@@ -40,6 +38,6 @@ function Header(props: HeaderProps): ReactElement {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

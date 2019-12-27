@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Video } from '../../api/types';
@@ -18,8 +18,7 @@ const styles = {
   },
 };
 
-function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+const ManageVideo: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [video, setVideo] = useState<Video>({
     id: '',
     name: '',
@@ -105,6 +104,6 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
       </section>
     </>
   );
-}
+};
 
 export default ManageVideo;

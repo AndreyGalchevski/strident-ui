@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import Header from '../components/Header';
 import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-function About(): React.ReactElement {
+const About: FunctionComponent = () => {
   return (
     <section style={styles.container}>
       <Header title="About" />
@@ -46,6 +46,6 @@ function About(): React.ReactElement {
       </div>
     </section>
   );
-}
+};
 
 export default About;

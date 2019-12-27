@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Merchandise } from '../../api/types';
@@ -8,18 +8,17 @@ import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
 
-type MatchParams = {
-  id: string;
-};
-
 const styles = {
   container: {
     marginBottom: '17vh',
   },
 };
 
-function ManageMerchandise(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+type MatchParams = {
+  id: string;
+};
+
+const ManageMerchandise: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [merchandise, setMerchandise] = useState<Merchandise>({
     id: '',
     name: '',
@@ -142,6 +141,6 @@ function ManageMerchandise(props: RouteComponentProps<MatchParams>): React.React
       </section>
     </>
   );
-}
+};
 
 export default ManageMerchandise;

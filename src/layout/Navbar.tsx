@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, CSSProperties } from 'react';
+import React, { FunctionComponent, useEffect, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { PRIMARY_COLOR, ACCENT_COLOR } from '../utils/constants';
@@ -30,7 +30,7 @@ const styles = {
   },
 };
 
-function Navbar(): ReactElement {
+const Navbar: FunctionComponent = () => {
   const activeLinkStyle: CSSProperties = {
     fontWeight: 'bold',
     color: ACCENT_COLOR,
@@ -214,6 +214,6 @@ function Navbar(): ReactElement {
       </ul>
     </div>
   );
-}
+};
 
 export default Navbar;

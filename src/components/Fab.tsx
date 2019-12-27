@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export interface FabProps {
+export interface Props {
   url: string;
 }
 
-function Fab(props: FabProps): React.ReactElement {
-  const { url } = props;
-
+const Fab: FunctionComponent<Props> = ({ url }) => {
   useEffect(() => {
     const elems = document.querySelectorAll('.fixed-action-btn');
     // @ts-ignore
@@ -21,6 +19,6 @@ function Fab(props: FabProps): React.ReactElement {
       </Link>
     </div>
   );
-}
+};
 
 export default Fab;

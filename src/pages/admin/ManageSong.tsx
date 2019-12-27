@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Song } from '../../api/types';
@@ -17,8 +17,7 @@ const styles = {
   },
 };
 
-function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
   const [song, setSong] = useState<Song>({} as Song);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -95,6 +94,6 @@ function ManageSong(props: RouteComponentProps<MatchParams>): React.ReactElement
       </section>
     </>
   );
-}
+};
 
 export default ManageSong;

@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { FunctionComponent, ChangeEvent, useEffect } from 'react';
 
-export interface TextInputProps {
+export interface Props {
   name: string;
   type: string;
   label: string;
@@ -8,9 +8,7 @@ export interface TextInputProps {
   value: string | number;
 }
 
-function TextInput(props: TextInputProps): React.ReactElement {
-  const { name, type, label, onChange, value } = props;
-
+const TextInput: FunctionComponent<Props> = ({ name, type, label, onChange, value }) => {
   useEffect(() => {
     // @ts-ignore
     M.updateTextFields();
@@ -22,6 +20,6 @@ function TextInput(props: TextInputProps): React.ReactElement {
       <label htmlFor={name}>{label}</label>
     </div>
   );
-}
+};
 
 export default TextInput;

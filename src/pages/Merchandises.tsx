@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
+import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
@@ -30,9 +30,7 @@ const styles = {
   },
 };
 
-function Merchandises(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
 
   const [merchandises, setMerchandises] = useState<Merchandise[]>([]);
@@ -121,6 +119,6 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
       </Loader>
     </section>
   );
-}
+};
 
 export default Merchandises;

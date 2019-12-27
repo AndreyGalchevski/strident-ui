@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, ChangeEvent } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { useAuthContext } from '../context/authContext';
@@ -8,7 +8,7 @@ import Loader from '../components/Loader';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-function Login(): React.ReactElement {
+const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -71,6 +71,6 @@ function Login(): React.ReactElement {
       </Loader>
     </>
   );
-}
+};
 
 export default Login;
