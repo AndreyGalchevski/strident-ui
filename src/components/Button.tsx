@@ -1,10 +1,22 @@
 import React, { FunctionComponent, MouseEventHandler } from 'react';
-import { ACCENT_COLOR, NEUTRAL_COLOR } from '../utils/constants';
+import styled from '@emotion/styled';
 
-const styles = {
+import { COLORS } from '../utils/constants';
+
+const StyledButton = styled.button<{ isPrimary: boolean }>(({ isPrimary }) => ({
+  border: 'none',
+  borderRadius: 2,
+  display: 'inline-block',
+  height: 36,
+  padding: '0 16px',
+  textTransform: 'uppercase',
+  verticalAlign: 'middle',
+  WebkitTapHighlightColor: 'transparent',
   marginRight: '1em',
   marginLeft: '1em',
-};
+  backgroundColor: isPrimary ? COLORS.RED : COLORS.GREY,
+  color: COLORS.WHITE,
+}));
 
 export interface Props {
   isPrimary?: boolean;
@@ -13,14 +25,9 @@ export interface Props {
 
 const Button: FunctionComponent<Props> = ({ isPrimary, handleClick, children }) => {
   return (
-    <button
-      type="button"
-      className="waves-effect waves-light btn"
-      onClick={handleClick}
-      style={{ ...styles, backgroundColor: isPrimary ? ACCENT_COLOR : NEUTRAL_COLOR }}
-    >
+    <StyledButton isPrimary={isPrimary} type="button" onClick={handleClick}>
       {children}
-    </button>
+    </StyledButton>
   );
 };
 

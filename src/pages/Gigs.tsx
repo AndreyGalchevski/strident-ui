@@ -1,55 +1,44 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  MouseEventHandler,
-  CSSProperties,
-} from 'react';
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
+import { formatDate, formatTime } from '../utils/general';
+import Container from '../styled/Container';
+import { Card, CardContent, CardImage, CardAction } from '../styled/Card';
+import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
-import { formatDate, formatTime } from '../utils/general';
 import Loader from '../components/Loader';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  gigsContainer: (isMobile: boolean): CSSProperties => ({
-    margin: 'auto',
-    maxWidth: '1080px',
-    columnCount: isMobile ? 1 : 2,
-  }),
-  gig: {
-    display: 'inline-block',
-    width: '100%',
-    paddingRight: '2vh',
-    paddingLeft: '2vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    paddingBottom: '1em',
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  facebookIcon: {
-    color: '#3b5998',
-    fontSize: '20px',
-    marginTop: '0.5em',
-  },
-  directionsIcon: {
-    color: '#4A89F3',
-    fontSize: '25px',
-    marginTop: '-0.4em',
-  },
-};
+const GigsContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  margin: 'auto',
+  maxWidth: '1080px',
+  columnCount: isMobile ? 1 : 2,
+}));
+
+const GigItem = styled.div({
+  display: 'inline-block',
+  width: '100%',
+  paddingRight: '2vh',
+  paddingLeft: '2vh',
+});
+
+const FacebookIcon = styled.i({
+  color: '#3b5998',
+  fontSize: '20px',
+  marginTop: 10,
+});
+
+const DirectionsIcon = styled.i({
+  color: '#4A89F3',
+  fontSize: '25px',
+  marginTop: 7,
+});
 
 const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
@@ -86,64 +75,56 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
       <Loader isLoading={isLoading}>
-        <div style={styles.gigsContainer(isMobile)}>
+        <GigsContainer isMobile={isMobile}>
           {gigs.map(gig => (
-            <div key={gig.id} style={styles.gig}>
-              <div className="card" style={styles.card}>
-                <div className="card-image">
+            <GigItem key={gig.id}>
+              <Card>
+                <div>
                   <picture>
                     <source srcSet={gig.imageNG} type="image/webp" />
                     <source srcSet={gig.image} type="image/jpeg" />
-                    <img src={gig.image} alt="" />
+                    <CardImage src={gig.image} alt="" />
                   </picture>
-                  <a
-                    href={gig.fbEvent}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-floating halfway-fab waves-effect waves-light white"
-                  >
-                    <i className="fab fa-facebook-f" style={styles.facebookIcon} />
-                  </a>
-                  <a
+                </div>
+                <CardContent style={{ maxHeight: 202 }}>
+                  <HalfwayTab href={gig.fbEvent} target="_blank" rel="noopener noreferrer">
+                    <FacebookIcon className="fab fa-facebook-f" />
+                  </HalfwayTab>
+                  <HalfwayTab
                     href={`https://www.google.com/maps/search/?api=1&query=${gig.venue} ${gig.city}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ paddingTop: '10px' }}
-                    className="btn-floating halfway-fab waves-effect waves-light white left"
+                    style={{ right: 'auto', left: 24 }}
                   >
-                    <i className="material-icons" style={styles.directionsIcon}>
-                      directions
-                    </i>
-                  </a>
-                </div>
-                <div className="card-content">
+                    <DirectionsIcon className="material-icons">directions</DirectionsIcon>
+                  </HalfwayTab>
                   <p>{gig.venue}</p>
                   <p>
                     {gig.address}, {gig.city}
                   </p>
                   <p>{formatDate(new Date(gig.date))}</p>
                   <p>{formatTime(new Date(gig.date))}</p>
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(gig.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(gig.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </GigItem>
           ))}
-        </div>
+        </GigsContainer>
       </Loader>
-    </section>
+    </Container>
   );
 };
 

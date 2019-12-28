@@ -1,39 +1,56 @@
 import React, { FunctionComponent, useEffect, CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
+import styled from '@emotion/styled';
 
-import { PRIMARY_COLOR, ACCENT_COLOR } from '../utils/constants';
+import { COLORS } from '../utils/constants';
 
-const styles = {
-  nav: {
-    backgroundColor: PRIMARY_COLOR,
-  },
-  brandLogo: {
-    width: '3em',
-    height: '1.9em',
-  },
-  leftLinks: {
-    paddingLeft: '15em',
-  },
-  rightLinks: {
-    paddingRight: '17em',
-  },
-  sideNav: {
-    backgroundColor: PRIMARY_COLOR,
-  },
-  link: {
-    color: '#fff',
-  },
-  sideNavImage: {
-    marginTop: '3vh',
-    width: '65vw',
-    height: '40vh',
-  },
-};
+const Nav = styled.nav({
+  backgroundColor: COLORS.BLACK,
+});
+
+const LogoImage = styled.img({
+  width: '3em',
+  height: '1.9em',
+});
+
+const LeftLinks = styled.ul({
+  paddingLeft: '15em !important',
+});
+
+const RightLinks = styled.ul({
+  paddingRight: '17em',
+});
+
+const SideNav = styled.ul({
+  backgroundColor: COLORS.BLACK,
+});
+
+interface SideNavLinkProps {
+  path: string;
+  text: string;
+}
+const SideNavLink: FunctionComponent<SideNavLinkProps> = ({ path, text }) => (
+  <NavLink
+    exact
+    to={path}
+    className="sidenav-close"
+    style={{ color: COLORS.WHITE }}
+    activeStyle={{ fontWeight: 'bold', color: COLORS.RED }}
+  >
+    {text}
+  </NavLink>
+);
+
+const SideNavImage = styled.img({
+  marginTop: '3vh',
+  width: '65vw',
+  height: '40vh',
+});
 
 const Navbar: FunctionComponent = () => {
   const activeLinkStyle: CSSProperties = {
     fontWeight: 'bold',
-    color: ACCENT_COLOR,
+    color: COLORS.RED,
   };
 
   useEffect(() => {
@@ -45,18 +62,17 @@ const Navbar: FunctionComponent = () => {
   return (
     <div>
       <div className="navbar-fixed">
-        <nav style={styles.nav}>
+        <Nav>
           <div className="nav-wrapper">
-            <img
+            <LogoImage
               className="brand-logo center"
               src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570799435/strident/app/20191011_160907.png"
               alt=""
-              style={styles.brandLogo}
             />
             <a href="#0" data-target="slide-out" className="sidenav-trigger">
               <i className="material-icons">menu</i>
             </a>
-            <ul className="left hide-on-med-and-down" style={styles.leftLinks}>
+            <LeftLinks className="left hide-on-med-and-down">
               <li>
                 <NavLink exact to="/" activeStyle={activeLinkStyle}>
                   Home
@@ -77,8 +93,8 @@ const Navbar: FunctionComponent = () => {
                   Songs
                 </NavLink>
               </li>
-            </ul>
-            <ul className="right hide-on-med-and-down" style={styles.rightLinks}>
+            </LeftLinks>
+            <RightLinks className="right hide-on-med-and-down">
               <li>
                 <NavLink exact to="/merch" activeStyle={activeLinkStyle}>
                   Merch
@@ -99,119 +115,52 @@ const Navbar: FunctionComponent = () => {
                   About
                 </NavLink>
               </li>
-            </ul>
+            </RightLinks>
           </div>
-        </nav>
+        </Nav>
       </div>
-      <ul id="slide-out" className="sidenav" style={styles.sideNav}>
+      <SideNav id="slide-out" className="sidenav">
         <li>
-          <NavLink
-            exact
-            to="/"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Home
-          </NavLink>
+          <SideNavLink path="/" text="Home" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/members"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Members
-          </NavLink>
+          <SideNavLink path="/members" text="Members" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/videos"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Videos
-          </NavLink>
+          <SideNavLink path="/videos" text="Videos" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/songs"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Songs
-          </NavLink>
+          <SideNavLink path="/songs" text="Songs" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/merch"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Merch
-          </NavLink>
+          <SideNavLink path="/gigs" text="Gigs" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/gigs"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Gigs
-          </NavLink>
+          <SideNavLink path="/merch" text="Merch" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/lyrics"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            Lyrics
-          </NavLink>
+          <SideNavLink path="/lyrics" text="Lyrics" />
         </li>
         <li>
-          <NavLink
-            exact
-            to="/about"
-            className="sidenav-close"
-            style={styles.link}
-            activeStyle={activeLinkStyle}
-          >
-            About
-          </NavLink>
+          <SideNavLink path="/about" text="About" />
         </li>
         <li>
           <picture>
             <source
-              style={styles.sideNavImage}
               srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164676/strident/app/sidenav_ng.webp"
               type="image/webp"
             />
             <source
-              style={styles.sideNavImage}
               srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164625/strident/app/sidenav.png"
               type="image/jpeg"
             />
-            <img
-              style={styles.sideNavImage}
+            <SideNavImage
               src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571164625/strident/app/sidenav.png"
               alt=""
             />
           </picture>
         </li>
-      </ul>
+      </SideNav>
     </div>
   );
 };

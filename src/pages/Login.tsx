@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { useAuthContext } from '../context/authContext';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
+import { Card, CardContent, CardTitle, CardImage, CardAction } from '../styled/Card';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -44,8 +45,8 @@ const Login: FunctionComponent = () => {
           <h3>Login</h3>
           <div className="row">
             <div className="col s12 m4 offset-m4">
-              <div className="card">
-                <div className="card-content">
+              <Card>
+                <CardContent>
                   <Input
                     name="username"
                     type="text"
@@ -60,11 +61,11 @@ const Login: FunctionComponent = () => {
                     onChange={handlePasswordChange}
                     value={password}
                   />
-                </div>
-                <div className="card-action">
+                </CardContent>
+                <CardAction>
                   <Button handleClick={handleLogin}>Login</Button>
-                </div>
-              </div>
+                </CardAction>
+              </Card>
             </div>
           </div>
         </section>

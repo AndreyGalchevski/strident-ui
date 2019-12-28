@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import styled from '@emotion/styled';
 
-import { Link } from 'react-router-dom';
+import Container from '../styled/Container';
+import { Card, CardContent, CardTitle, CardAction } from '../styled/Card';
 import Header from '../components/Header';
 import { COLORS } from '../utils/constants';
 import { fetchResources } from '../api/utils';
@@ -174,40 +176,6 @@ const images = [
   },
 ];
 
-const Container = styled.section({
-  marginBottom: '18vh',
-});
-
-const Card = styled.div({
-  position: 'relative',
-  margin: '.5rem 0 1rem 0',
-  boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
-  backgroundColor: COLORS.BLACK,
-  color: COLORS.WHITE,
-  borderRadius: '20px',
-});
-
-const CardContent = styled.div({
-  padding: '24px',
-});
-
-const CardTitle = styled.p({
-  fontSize: '20px',
-  lineHeight: '32px',
-  marginBottom: '8px',
-});
-
-const CardAction = styled.div({
-  position: 'relative',
-  backgroundColor: 'inherit',
-  borderTop: `1px solid ${COLORS.DARK_GREY}`,
-  padding: '16px 24px',
-  borderTopLeftRadius: 0,
-  borderTopRightRadius: 0,
-  borderBottomLeftRadius: 'inherit',
-  borderBottomRightRadius: 'inherit',
-});
-
 const Banner = styled.img({
   height: '74vh',
   boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
@@ -217,7 +185,7 @@ const Home: FunctionComponent = () => {
   const [latestGigs, setLatestGigs] = useState<Gig[]>([]);
   const [isLoading, setLoading] = useState(false);
 
-  async function fetchGigs(): Promise<void> {
+  async function fetchLatestGigs(): Promise<void> {
     setLoading(true);
     const gigs = await fetchResources<Gig>('gigs');
     const lastThreeGigs = gigs.slice(0, 3);
@@ -226,7 +194,7 @@ const Home: FunctionComponent = () => {
   }
 
   useEffect(() => {
-    fetchGigs();
+    fetchLatestGigs();
   }, []);
 
   return (

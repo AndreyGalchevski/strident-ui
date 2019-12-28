@@ -4,28 +4,12 @@ import { RouteComponentProps } from 'react-router-dom';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import Button from '../components/Button';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
+import Container from '../styled/Container';
+import { Card, CardContent, CardAction } from '../styled/Card';
 import Header from '../components/Header';
+import Button from '../components/Button';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
-
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  video: {
-    marginBottom: '2em',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  cardContent: {
-    padding: 0,
-  },
-};
 
 const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
@@ -61,15 +45,15 @@ const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Videos" />
       {authState.isAuthenticated && <Fab url="/admin/videos/new" />}
       <Loader isLoading={isLoading}>
         <div className="row">
           {videos.map(video => (
-            <div key={video.id} className="col s12 m4" style={styles.video}>
-              <div className="card" style={styles.card}>
-                <div className="card-content" style={styles.cardContent}>
+            <div key={video.id} className="col s12 m4" style={{ marginBottom: '2em' }}>
+              <Card>
+                <CardContent style={{ padding: 0 }}>
                   <iframe
                     title={video.name}
                     src={video.url}
@@ -79,23 +63,23 @@ const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     width="100%"
                     height="60%"
                   />
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(video.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(video.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
+              </Card>
             </div>
           ))}
         </div>
       </Loader>
-    </section>
+    </Container>
   );
 };
 

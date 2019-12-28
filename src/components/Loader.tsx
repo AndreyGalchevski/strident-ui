@@ -1,17 +1,17 @@
-import React, { FunctionComponent, ReactNode, useState, useEffect } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    FlexDirectionProperty: 'column',
-    height: '70%',
-  },
-  image: {
-    width: '70%',
-  },
-};
+const Container = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  FlexDirectionProperty: 'column',
+  height: '70%',
+});
+
+const SpinnerImage = styled.img({
+  width: '70%',
+});
 
 export interface Props {
   isLoading: boolean;
@@ -28,7 +28,7 @@ const Loader: FunctionComponent<Props> = ({ isLoading, children }) => {
   }, []);
 
   return isLoading || shouldDisplayLoading ? (
-    <div style={styles.container}>
+    <Container>
       <picture>
         <source
           srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751521/strident/app/strident_rat_ng.webp"
@@ -38,13 +38,12 @@ const Loader: FunctionComponent<Props> = ({ isLoading, children }) => {
           srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751421/strident/app/strident_rat.gif"
           type="image/jpeg"
         />
-        <img
+        <SpinnerImage
           src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751421/strident/app/strident_rat.gif"
           alt=""
-          style={styles.image}
         />
       </picture>
-    </div>
+    </Container>
   ) : (
     children
   );

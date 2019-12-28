@@ -1,82 +1,80 @@
-import React, { FunctionComponent, CSSProperties } from 'react';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
+import React, { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
 
-const styles = {
-  footer: {
-    position: 'fixed',
-    bottom: '0',
-    width: '100%',
-    height: '5vh',
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-    zIndex: '99',
-  },
-  footerContent: {
-    marginTop: '1vh',
-  },
-  socialMediaLink: {
-    paddingLeft: '0.5em',
-    paddingRight: '0.5em',
-  },
-  socialMediaIcon: {
-    fontSize: '20px',
-    color: LIGHT_COLOR,
-  },
-};
+import { COLORS } from '../utils/constants';
+
+const Container = styled.footer({
+  position: 'fixed',
+  bottom: '0',
+  width: '100%',
+  height: '5vh',
+  backgroundColor: COLORS.BLACK,
+  color: COLORS.WHITE,
+  zIndex: 99,
+});
+
+const Content = styled.p({
+  marginTop: '1vh',
+});
+
+const SocialMediaLink = styled.a({
+  paddingLeft: '0.5em',
+  paddingRight: '0.5em',
+});
+
+const SocialMediaIcon = styled.i({
+  fontSize: '20px',
+  color: COLORS.WHITE,
+});
 
 const Footer: FunctionComponent = () => {
   return (
-    <footer style={styles.footer as CSSProperties}>
-      <p style={styles.footerContent}>
+    <Container>
+      <Content>
         <span>
-          <a
+          <SocialMediaLink
             href="https://www.facebook.com/stridentthrash"
             target="_blank"
             rel="noopener noreferrer"
-            style={styles.socialMediaLink}
             aria-label="Follow Strident on Facebook"
           >
-            <i className="fab fa-facebook-square" style={styles.socialMediaIcon} />
-          </a>
-          <a
+            <SocialMediaIcon className="fab fa-facebook-square" />
+          </SocialMediaLink>
+          <SocialMediaLink
             href="https://www.instagram.com/strident.thrash"
             target="_blank"
             rel="noopener noreferrer"
-            style={styles.socialMediaLink}
             aria-label="Follow Strident on Instagram"
           >
-            <i className="fab fa-instagram" style={styles.socialMediaIcon} />
-          </a>
-          <a
+            <SocialMediaIcon className="fab fa-instagram" />
+          </SocialMediaLink>
+          <SocialMediaLink
             href="https://stridentthrash.bandcamp.com"
             target="_blank"
             rel="noopener noreferrer"
-            style={styles.socialMediaLink}
             aria-label="Follow Strident on Bandcamp"
           >
-            <i className="fab fa-bandcamp" style={styles.socialMediaIcon} />
-          </a>
-          <a
+            <SocialMediaIcon className="fab fa-bandcamp" />
+          </SocialMediaLink>
+          <SocialMediaLink
             href="https://www.youtube.com/user/MrThrashmaster"
             target="_blank"
             rel="noopener noreferrer"
-            style={styles.socialMediaLink}
             aria-label="Watch Strident on Youtube"
           >
-            <i className="fab fa-youtube" style={styles.socialMediaIcon} />
-          </a>
-          <a
+            <SocialMediaIcon className="fab fa-youtube" />
+          </SocialMediaLink>
+          <SocialMediaLink
             href="https://open.spotify.com/artist/1iLO8tqlkfiQMWf7JqaNE3"
             target="_blank"
             rel="noopener noreferrer"
-            style={styles.socialMediaLink}
             aria-label="Listen to Strident on Spotify"
           >
-            <i className="fab fa-spotify" style={styles.socialMediaIcon} />
-          </a>
+            <SocialMediaIcon className="fab fa-spotify" />
+          </SocialMediaLink>
         </span>
-      </p>
-    </footer>
+      </Content>
+    </Container>
   );
 };
 

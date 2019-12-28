@@ -1,31 +1,18 @@
 import React, { FunctionComponent } from 'react';
 
 import Header from '../components/Header';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
-
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  aboutParagraph: {
-    marginTop: 0,
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-};
+import Container from '../styled/Container';
+import { Card, CardContent } from '../styled/Card';
 
 const About: FunctionComponent = () => {
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="About" />
       <div className="row">
         <div className="col s12 m8 offset-m2">
-          <div className="card" style={styles.card}>
-            <div className="card-content">
-              <p className="flow-text" style={styles.aboutParagraph}>
+          <Card>
+            <CardContent>
+              <p className="flow-text" style={{ marginTop: 0 }}>
                 Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
                 (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
                 AC / DC, etc and having come a long way, they found their style on the Israeli metal
@@ -37,14 +24,14 @@ const About: FunctionComponent = () => {
                 second album will out worldwide through Punishment 18 Records. The best thrash for
                 lovers and connoisseurs of this style.
               </p>
-              <p className="flow-text" style={styles.aboutParagraph}>
+              <p className="flow-text" style={{ marginTop: 0 }}>
                 Thrash `till Death!
               </p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </section>
+    </Container>
   );
 };
 

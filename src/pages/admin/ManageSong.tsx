@@ -3,18 +3,14 @@ import { RouteComponentProps, Redirect } from 'react-router-dom';
 
 import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
+import Container from '../../styled/Container';
+import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
 
 type MatchParams = {
   id: string;
-};
-
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
 };
 
 const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
@@ -55,13 +51,13 @@ const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match
   return (
     <>
       {shouldRedirect && <Redirect to="/songs" />}
-      <section style={styles.container}>
+      <Container>
         {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
         <Loader isLoading={isLoading}>
           <div className="row">
             <div className="col s12 m4 offset-m4">
-              <div className="card">
-                <div className="card-content">
+              <Card>
+                <CardContent>
                   <Input
                     name="name"
                     type="text"
@@ -83,15 +79,15 @@ const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match
                     onChange={handleFormChange}
                     value={song.album}
                   />
-                </div>
-                <div className="card-action">
+                </CardContent>
+                <CardAction>
                   <Button handleClick={handleSaveClick}>Save</Button>
-                </div>
-              </div>
+                </CardAction>
+              </Card>
             </div>
           </div>
         </Loader>
-      </section>
+      </Container>
     </>
   );
 };

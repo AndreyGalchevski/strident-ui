@@ -1,34 +1,28 @@
 import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Merchandise } from '../api/types';
 import { useAuthContext } from '../context/authContext';
+import Container from '../styled/Container';
+import { Card, CardContent, CardTitle, CardImage, CardAction } from '../styled/Card';
+import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  price: {
-    display: 'flex',
-    FlexDirectionProperty: 'row',
-    justifyContent: 'center',
-  },
-  euroIcon: {
-    fontSize: '18px',
-    marginRight: '2px',
-  },
-};
+const PriceContainer = styled.p({
+  display: 'flex',
+  FlexDirectionProperty: 'row',
+  justifyContent: 'center',
+});
+
+const EuroIcon = styled.i({
+  fontSize: '18px',
+  marginRight: '2px',
+});
 
 const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
@@ -64,7 +58,7 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Merch" />
       {authState.isAuthenticated && <Fab url="/admin/merch/new" />}
       <Loader isLoading={isLoading}>
@@ -74,50 +68,48 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
               key={merchandise.id}
               className={merchandises.length === 1 ? 'col s12 m4 push-m4' : 'col s12 m4'}
             >
-              <div className="card" style={styles.card}>
-                <div className="card-image">
+              <Card>
+                <div>
                   <picture>
                     <source srcSet={merchandise.imageNG} type="image/webp" />
                     <source srcSet={merchandise.image} type="image/jpeg" />
-                    <img src={merchandise.image} alt="" />
+                    <CardImage src={merchandise.image} alt="" />
                   </picture>
-                  <a
+                </div>
+                <CardContent style={{ maxHeight: 184 }}>
+                  <HalfwayTab
                     href={merchandise.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-floating halfway-fab waves-effect waves-light white"
+                    style={{ bottom: 164 }}
                   >
-                    <i className="material-icons" style={{ color: 'black' }}>
+                    <i className="material-icons" style={{ color: 'black', marginTop: 8 }}>
                       shopping_cart
                     </i>
-                  </a>
-                </div>
-                <div className="card-content">
-                  <span className="card-title">{merchandise.name}</span>
+                  </HalfwayTab>
+                  <CardTitle>{merchandise.name}</CardTitle>
                   <p>{merchandise.type}</p>
-                  <p style={styles.price}>
-                    <i className="material-icons" style={styles.euroIcon}>
-                      euro_symbol
-                    </i>
+                  <PriceContainer>
+                    <EuroIcon className="material-icons">euro_symbol</EuroIcon>
                     <span> {merchandise.price} EUR</span>
-                  </p>
-                </div>
+                  </PriceContainer>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(merchandise.id)}>
                       <i className="material-icons">edit</i>
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(merchandise.id)}>
                       <i className="material-icons">delete</i>
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
+              </Card>
             </div>
           ))}
         </div>
       </Loader>
-    </section>
+    </Container>
   );
 };
 

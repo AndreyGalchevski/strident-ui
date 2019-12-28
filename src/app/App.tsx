@@ -1,5 +1,6 @@
-import React, { FunctionComponent, useEffect, CSSProperties } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Route } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import decodeJWT from '../utils/jwt';
 import PrivateRoute from '../components/PrivateRoute';
@@ -22,10 +23,10 @@ import ManageLyric from '../pages/admin/ManageLyric';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
-const styles: CSSProperties = {
+const Main = styled.main({
   overflowY: 'scroll',
   height: '100%',
-};
+});
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -43,7 +44,7 @@ const App: FunctionComponent = () => {
   return (
     <>
       <Navbar />
-      <main style={styles}>
+      <Main>
         <Route exact path="/" component={Home} />
         <Route exact path="/members" component={Members} />
         <Route exact path="/songs" component={Songs} />
@@ -85,7 +86,7 @@ const App: FunctionComponent = () => {
           path="/admin/lyrics/edit/:id"
           component={ManageLyric}
         />
-      </main>
+      </Main>
       <Footer />
     </>
   );
