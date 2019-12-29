@@ -1,19 +1,28 @@
 import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Song } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
+import { useMediaQuery } from '../../hooks/mediaQueryHook';
 import Container from '../../styled/Container';
 import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
 
+export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
+
 type MatchParams = {
   id: string;
 };
 
 const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   const [song, setSong] = useState<Song>({} as Song);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -54,38 +63,36 @@ const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match
       <Container>
         {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
         <Loader isLoading={isLoading}>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <Card>
-                <CardContent>
-                  <Input
-                    name="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleFormChange}
-                    value={song.name}
-                  />
-                  <Input
-                    name="url"
-                    type="text"
-                    label="URL"
-                    onChange={handleFormChange}
-                    value={song.url}
-                  />
-                  <Input
-                    name="album"
-                    type="text"
-                    label="Album"
-                    onChange={handleFormChange}
-                    value={song.album}
-                  />
-                </CardContent>
-                <CardAction>
-                  <Button handleClick={handleSaveClick}>Save</Button>
-                </CardAction>
-              </Card>
-            </div>
-          </div>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleFormChange}
+                  value={song.name}
+                />
+                <Input
+                  name="url"
+                  type="text"
+                  label="URL"
+                  onChange={handleFormChange}
+                  value={song.url}
+                />
+                <Input
+                  name="album"
+                  type="text"
+                  label="Album"
+                  onChange={handleFormChange}
+                  value={song.album}
+                />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </Loader>
       </Container>
     </>

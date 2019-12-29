@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Merchandise } from '../../api/types';
 import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
+import { useMediaQuery } from '../../hooks/mediaQueryHook';
 import Container from '../../styled/Container';
 import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';
@@ -10,11 +12,18 @@ import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
 
+export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
+
 type MatchParams = {
   id: string;
 };
 
 const ManageMerchandise: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   const [merchandise, setMerchandise] = useState<Merchandise>({
     id: '',
     name: '',
@@ -93,46 +102,44 @@ const ManageMerchandise: FunctionComponent<RouteComponentProps<MatchParams>> = (
       <Container>
         {match.params.id ? <h3>Update Merch</h3> : <h3>Create Merch</h3>}
         <Loader isLoading={isLoading}>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <Card>
-                <CardContent>
-                  <Input
-                    name="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleFormChange}
-                    value={merchandise.name}
-                  />
-                  <Input
-                    name="type"
-                    type="text"
-                    label="Type"
-                    onChange={handleFormChange}
-                    value={merchandise.type}
-                  />
-                  <Input
-                    name="price"
-                    type="number"
-                    label="Price"
-                    onChange={handleFormChange}
-                    value={merchandise.price}
-                  />
-                  <Input
-                    name="url"
-                    type="text"
-                    label="URL"
-                    onChange={handleFormChange}
-                    value={merchandise.url}
-                  />
-                  <FileInput onChange={handleImageChange} />
-                </CardContent>
-                <CardAction>
-                  <Button handleClick={handleSaveClick}>Save</Button>
-                </CardAction>
-              </Card>
-            </div>
-          </div>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleFormChange}
+                  value={merchandise.name}
+                />
+                <Input
+                  name="type"
+                  type="text"
+                  label="Type"
+                  onChange={handleFormChange}
+                  value={merchandise.type}
+                />
+                <Input
+                  name="price"
+                  type="number"
+                  label="Price"
+                  onChange={handleFormChange}
+                  value={merchandise.price}
+                />
+                <Input
+                  name="url"
+                  type="text"
+                  label="URL"
+                  onChange={handleFormChange}
+                  value={merchandise.url}
+                />
+                <FileInput onChange={handleImageChange} />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </Loader>
       </Container>
     </>

@@ -7,24 +7,12 @@ import { Lyric } from '../api/types';
 import { useAuthContext } from '../context/authContext';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardTitle, CardContent, CardAction } from '../styled/Card';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
-
-const LyricsContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
-  margin: 'auto',
-  maxWidth: '1080px',
-  columnCount: isMobile ? 1 : 2,
-}));
-
-const LyricItem = styled.div({
-  display: 'inline-block',
-  width: '100%',
-  paddingRight: '2vh',
-  paddingLeft: '2vh',
-});
 
 const Text = styled.pre({
   fontFamily: '"Special Elite", cursive',
@@ -70,9 +58,9 @@ const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Lyrics" />
       {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
       <Loader isLoading={isLoading}>
-        <LyricsContainer isMobile={isMobile}>
+        <Masonry isMobile={isMobile}>
           {lyrics.map(lyric => (
-            <LyricItem key={lyric.id}>
+            <MasonryBrick key={lyric.id}>
               <Card>
                 <CardTitle style={{ paddingTop: 20 }}>{lyric.name}</CardTitle>
                 <CardContent style={{ paddingTop: 0 }}>
@@ -89,9 +77,9 @@ const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </LyricItem>
+            </MasonryBrick>
           ))}
-        </LyricsContainer>
+        </Masonry>
       </Loader>
     </Container>
   );

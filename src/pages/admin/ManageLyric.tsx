@@ -1,8 +1,10 @@
 import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Lyric } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
+import { useMediaQuery } from '../../hooks/mediaQueryHook';
 import Container from '../../styled/Container';
 import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';
@@ -10,11 +12,18 @@ import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import Loader from '../../components/Loader';
 
+export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
+
 type MatchParams = {
   id: string;
 };
 
 const ManageLyric: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   const [lyric, setLyric] = useState<Lyric>({} as Lyric);
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -59,30 +68,23 @@ const ManageLyric: FunctionComponent<RouteComponentProps<MatchParams>> = ({ matc
       <Container>
         {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
         <Loader isLoading={isLoading}>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <Card>
-                <CardContent>
-                  <Input
-                    name="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleNameChange}
-                    value={lyric.name}
-                  />
-                  <TextArea
-                    name="text"
-                    label="Text"
-                    onChange={handleTextChange}
-                    value={lyric.text}
-                  />
-                </CardContent>
-                <CardAction>
-                  <Button handleClick={handleSaveClick}>Save</Button>
-                </CardAction>
-              </Card>
-            </div>
-          </div>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input
+                  name="name"
+                  type="text"
+                  label="Name"
+                  onChange={handleNameChange}
+                  value={lyric.name}
+                />
+                <TextArea name="text" label="Text" onChange={handleTextChange} value={lyric.text} />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </Loader>
       </Container>
     </>

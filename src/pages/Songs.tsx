@@ -4,7 +4,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardContent, CardAction } from '../styled/Card';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -13,6 +15,7 @@ import Loader from '../components/Loader';
 
 const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [songs, setSongs] = useState<Song[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -49,9 +52,9 @@ const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Songs" />
       {authState.isAuthenticated && <Fab url="/admin/songs/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {songs.map(song => (
-            <div key={song.id} className="col s12 m4" style={{ marginBottom: '2em' }}>
+            <MasonryBrick key={song.id}>
               <Card>
                 <CardContent style={{ padding: 0 }}>
                   <iframe
@@ -74,9 +77,9 @@ const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </div>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
     </Container>
   );

@@ -5,7 +5,9 @@ import styled from '@emotion/styled';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Merchandise } from '../api/types';
 import { useAuthContext } from '../context/authContext';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardContent, CardTitle, CardImage, CardAction } from '../styled/Card';
 import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
@@ -26,6 +28,7 @@ const EuroIcon = styled.i({
 
 const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [merchandises, setMerchandises] = useState<Merchandise[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -62,12 +65,9 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Merch" />
       {authState.isAuthenticated && <Fab url="/admin/merch/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {merchandises.map(merchandise => (
-            <div
-              key={merchandise.id}
-              className={merchandises.length === 1 ? 'col s12 m4 push-m4' : 'col s12 m4'}
-            >
+            <MasonryBrick key={merchandise.id}>
               <Card>
                 <div>
                   <picture>
@@ -81,7 +81,7 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     href={merchandise.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ bottom: 164 }}
+                    style={{ bottom: 156 }}
                   >
                     <i className="material-icons" style={{ color: 'black', marginTop: 8 }}>
                       shopping_cart
@@ -105,9 +105,9 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </div>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
     </Container>
   );

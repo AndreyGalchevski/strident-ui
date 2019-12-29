@@ -1,9 +1,11 @@
 import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
 import { useAuthContext } from '../context/authContext';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
 import { Card, CardTitle, CardContent, CardImage, CardAction } from '../styled/Card';
 import Button from '../components/Button';
@@ -11,8 +13,20 @@ import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
 
+const MembersContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  display: 'flex',
+  flexDirection: isMobile ? 'column' : 'row',
+  WebkitFlexDirection: isMobile ? 'column' : 'row',
+}));
+
+const MemberItem = styled.div({
+  paddingRight: '2vh',
+  paddingLeft: '2vh',
+});
+
 const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [members, setMembers] = useState<Member[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -49,9 +63,9 @@ const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Members" />
       {authState.isAuthenticated && <Fab url="/admin/members/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <MembersContainer isMobile={isMobile}>
           {members.map(member => (
-            <div key={member.id} className="col s12 m3">
+            <MemberItem key={member.id}>
               <Card>
                 <div>
                   <picture>
@@ -75,9 +89,9 @@ const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </div>
+            </MemberItem>
           ))}
-        </div>
+        </MembersContainer>
       </Loader>
     </Container>
   );

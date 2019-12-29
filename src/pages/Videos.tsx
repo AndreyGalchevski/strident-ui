@@ -4,7 +4,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardContent, CardAction } from '../styled/Card';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -13,6 +15,7 @@ import Loader from '../components/Loader';
 
 const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -49,9 +52,9 @@ const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Videos" />
       {authState.isAuthenticated && <Fab url="/admin/videos/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {videos.map(video => (
-            <div key={video.id} className="col s12 m4" style={{ marginBottom: '2em' }}>
+            <MasonryBrick key={video.id}>
               <Card>
                 <CardContent style={{ padding: 0 }}>
                   <iframe
@@ -75,9 +78,9 @@ const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </div>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
     </Container>
   );

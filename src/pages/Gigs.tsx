@@ -8,25 +8,13 @@ import { useAuthContext } from '../context/authContext';
 import { useMediaQuery } from '../hooks/mediaQueryHook';
 import { formatDate, formatTime } from '../utils/general';
 import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardContent, CardImage, CardAction } from '../styled/Card';
 import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
-
-const GigsContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
-  margin: 'auto',
-  maxWidth: '1080px',
-  columnCount: isMobile ? 1 : 2,
-}));
-
-const GigItem = styled.div({
-  display: 'inline-block',
-  width: '100%',
-  paddingRight: '2vh',
-  paddingLeft: '2vh',
-});
 
 const FacebookIcon = styled.i({
   color: '#3b5998',
@@ -79,9 +67,9 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
       <Loader isLoading={isLoading}>
-        <GigsContainer isMobile={isMobile}>
+        <Masonry isMobile={isMobile}>
           {gigs.map(gig => (
-            <GigItem key={gig.id}>
+            <MasonryBrick key={gig.id}>
               <Card>
                 <div>
                   <picture>
@@ -120,9 +108,9 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   </CardAction>
                 )}
               </Card>
-            </GigItem>
+            </MasonryBrick>
           ))}
-        </GigsContainer>
+        </Masonry>
       </Loader>
     </Container>
   );
