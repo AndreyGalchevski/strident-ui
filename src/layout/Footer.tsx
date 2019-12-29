@@ -2,6 +2,11 @@ import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 
 import { COLORS } from '../utils/constants';
+import FacebookIcon from '../components/icons/Facebook';
+import InstagramIcon from '../components/icons/Instagram';
+import BandcampIcon from '../components/icons/Bandcamp';
+import YoutubeIcon from '../components/icons/Youtube';
+import SpotifyIcon from '../components/icons/Spotify';
 
 const Container = styled.footer({
   position: 'fixed',
@@ -38,7 +43,7 @@ const Footer: FunctionComponent = () => {
             rel="noopener noreferrer"
             aria-label="Follow Strident on Facebook"
           >
-            <SocialMediaIcon className="fab fa-facebook-square" />
+            <FacebookIcon />
           </SocialMediaLink>
           <SocialMediaLink
             href="https://www.instagram.com/strident.thrash"
@@ -46,7 +51,7 @@ const Footer: FunctionComponent = () => {
             rel="noopener noreferrer"
             aria-label="Follow Strident on Instagram"
           >
-            <SocialMediaIcon className="fab fa-instagram" />
+            <InstagramIcon />
           </SocialMediaLink>
           <SocialMediaLink
             href="https://stridentthrash.bandcamp.com"
@@ -54,7 +59,7 @@ const Footer: FunctionComponent = () => {
             rel="noopener noreferrer"
             aria-label="Follow Strident on Bandcamp"
           >
-            <SocialMediaIcon className="fab fa-bandcamp" />
+            <BandcampIcon />
           </SocialMediaLink>
           <SocialMediaLink
             href="https://www.youtube.com/user/MrThrashmaster"
@@ -62,7 +67,7 @@ const Footer: FunctionComponent = () => {
             rel="noopener noreferrer"
             aria-label="Watch Strident on Youtube"
           >
-            <SocialMediaIcon className="fab fa-youtube" />
+            <YoutubeIcon />
           </SocialMediaLink>
           <SocialMediaLink
             href="https://open.spotify.com/artist/1iLO8tqlkfiQMWf7JqaNE3"
@@ -70,7 +75,7 @@ const Footer: FunctionComponent = () => {
             rel="noopener noreferrer"
             aria-label="Listen to Strident on Spotify"
           >
-            <SocialMediaIcon className="fab fa-spotify" />
+            <SpotifyIcon />
           </SocialMediaLink>
         </span>
       </Content>
