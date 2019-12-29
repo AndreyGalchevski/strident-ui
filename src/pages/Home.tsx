@@ -176,8 +176,13 @@ const images = [
   },
 ];
 
+const BannerContainer = styled.div({
+  marginBottom: 20,
+});
+
 const Banner = styled.img({
   height: '74vh',
+  maxWidth: '90vw',
   boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
 });
 
@@ -200,36 +205,34 @@ const Home: FunctionComponent = () => {
   return (
     <Container>
       <Header title="Home" />
-      <div className="row">
-        <div className="col s12">
-          <picture>
-            <source
-              media="(max-width: 785px)"
-              srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572275145/strident/app/march-of-plague-banner-high-ng.webp"
-              type="image/webp"
-            />
-            <source
-              media="(max-width: 785px)"
-              srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
-              type="image/jpeg"
-            />
-            <source
-              media="(min-width: 786px)"
-              srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572275146/strident/app/march-of-plague-banner-wide-ng.webp"
-              type="image/webp"
-            />
-            <source
-              media="(min-width: 786px)"
-              srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274888/strident/app/march-of-plague-banner-wide.jpg"
-              type="image/jpeg"
-            />
-            <Banner
-              src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
-              alt="New Album banner"
-            />
-          </picture>
-        </div>
-      </div>
+      <BannerContainer>
+        <picture>
+          <source
+            media="(max-width: 785px)"
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572275145/strident/app/march-of-plague-banner-high-ng.webp"
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 785px)"
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
+            type="image/jpeg"
+          />
+          <source
+            media="(min-width: 786px)"
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572275146/strident/app/march-of-plague-banner-wide-ng.webp"
+            type="image/webp"
+          />
+          <source
+            media="(min-width: 786px)"
+            srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274888/strident/app/march-of-plague-banner-wide.jpg"
+            type="image/jpeg"
+          />
+          <Banner
+            src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1572274125/strident/app/march-of-plague-banner-high.jpg"
+            alt="New Album banner"
+          />
+        </picture>
+      </BannerContainer>
       <div className="row">
         <div className="col s12 m6">
           <Card>
