@@ -12,6 +12,8 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
 const MembersContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   display: 'flex',
@@ -81,10 +83,10 @@ const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 {authState.isAuthenticated && (
                   <CardAction>
                     <Button handleClick={handleUpdateClick(member.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(member.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
                   </CardAction>
                 )}

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import { COLORS } from '../utils/constants';
+import MenuIcon from '../components/icons/Menu';
 
 const Nav = styled.nav({
   backgroundColor: COLORS.BLACK,
@@ -70,7 +71,7 @@ const Navbar: FunctionComponent = () => {
               alt=""
             />
             <a href="#0" data-target="slide-out" className="sidenav-trigger">
-              <i className="material-icons">menu</i>
+              <MenuIcon style={{ marginTop: 16 }} />
             </a>
             <LeftLinks className="left hide-on-med-and-down">
               <li>

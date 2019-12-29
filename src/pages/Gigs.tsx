@@ -15,18 +15,10 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
-
-const FacebookIcon = styled.i({
-  color: '#3b5998',
-  fontSize: '20px',
-  marginTop: 10,
-});
-
-const DirectionsIcon = styled.i({
-  color: '#4A89F3',
-  fontSize: '25px',
-  marginTop: 7,
-});
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
+import DirectionsIcon from '../components/icons/Directions';
+import EventIcon from '../components/icons/Event';
 
 const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
@@ -80,7 +72,7 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 </div>
                 <CardContent style={{ maxHeight: 202 }}>
                   <HalfwayTab href={gig.fbEvent} target="_blank" rel="noopener noreferrer">
-                    <FacebookIcon className="fab fa-facebook-f" />
+                    <EventIcon color="#3b5998" style={{ marginTop: 8 }} />
                   </HalfwayTab>
                   <HalfwayTab
                     href={`https://www.google.com/maps/search/?api=1&query=${gig.venue} ${gig.city}`}
@@ -88,7 +80,7 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     rel="noopener noreferrer"
                     style={{ right: 'auto', left: 24 }}
                   >
-                    <DirectionsIcon className="material-icons">directions</DirectionsIcon>
+                    <DirectionsIcon color="#4A89F3" style={{ marginTop: 8 }} />
                   </HalfwayTab>
                   <p>{gig.venue}</p>
                   <p>
@@ -100,10 +92,10 @@ const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 {authState.isAuthenticated && (
                   <CardAction>
                     <Button handleClick={handleUpdateClick(gig.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(gig.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
                   </CardAction>
                 )}

@@ -12,6 +12,8 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
 const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
@@ -69,10 +71,10 @@ const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 {authState.isAuthenticated && (
                   <CardAction>
                     <Button handleClick={handleUpdateClick(song.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(song.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
                   </CardAction>
                 )}

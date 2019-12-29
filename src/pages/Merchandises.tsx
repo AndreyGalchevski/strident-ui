@@ -14,16 +14,15 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
+import ShoppingCartIcon from '../components/icons/ShoppingCart';
+import EuroIcon from '../components/icons/Euro';
 
 const PriceContainer = styled.p({
   display: 'flex',
   FlexDirectionProperty: 'row',
   justifyContent: 'center',
-});
-
-const EuroIcon = styled.i({
-  fontSize: '18px',
-  marginRight: '2px',
 });
 
 const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
@@ -83,24 +82,22 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     rel="noopener noreferrer"
                     style={{ bottom: 156 }}
                   >
-                    <i className="material-icons" style={{ color: 'black', marginTop: 8 }}>
-                      shopping_cart
-                    </i>
+                    <ShoppingCartIcon style={{ marginTop: 8 }} />
                   </HalfwayTab>
                   <CardTitle>{merchandise.name}</CardTitle>
                   <p>{merchandise.type}</p>
                   <PriceContainer>
-                    <EuroIcon className="material-icons">euro_symbol</EuroIcon>
+                    <EuroIcon style={{ marginTop: 2, marginRight: 4 }} />
                     <span> {merchandise.price} EUR</span>
                   </PriceContainer>
                 </CardContent>
                 {authState.isAuthenticated && (
                   <CardAction>
                     <Button handleClick={handleUpdateClick(merchandise.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(merchandise.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
                   </CardAction>
                 )}

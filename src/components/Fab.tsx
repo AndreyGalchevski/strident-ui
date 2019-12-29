@@ -1,6 +1,8 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import AddIcon from '../components/icons/Add';
+
 export interface Props {
   url: string;
 }
@@ -15,7 +17,7 @@ const Fab: FunctionComponent<Props> = ({ url }) => {
   return (
     <div className="fixed-action-btn" style={{ bottom: '50px' }}>
       <Link to={url} className="btn-floating btn-large red">
-        <i className="large material-icons">add</i>
+        <AddIcon style={{ marginTop: 16 }} />
       </Link>
     </div>
   );

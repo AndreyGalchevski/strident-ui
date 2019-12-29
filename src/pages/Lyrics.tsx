@@ -13,6 +13,8 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
 const Text = styled.pre({
   fontFamily: '"Special Elite", cursive',
@@ -69,10 +71,10 @@ const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {
                 {authState.isAuthenticated && (
                   <CardAction>
                     <Button handleClick={handleUpdateClick(lyric.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(lyric.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
                   </CardAction>
                 )}
