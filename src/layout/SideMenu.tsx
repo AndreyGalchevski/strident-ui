@@ -10,7 +10,7 @@ const Wrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: COLORS.BLACK,
-  padding: 20,
+  paddingTop: 20,
 });
 
 const MenuImage = styled.img({

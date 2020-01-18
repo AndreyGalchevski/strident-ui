@@ -8,7 +8,5 @@ export const Masonry = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
 
 export const MasonryBrick = styled.div({
   display: 'inline-block',
-  width: '100%',
-  paddingRight: '2vh',
-  paddingLeft: '2vh',
+  width: '95%',
 });

@@ -6,6 +6,7 @@ import Logo from './Logo';
 
 const Wrapper = styled.div({
   display: 'flex',
+  height: '100%',
 });
 
 const LogoWrapper = styled.div({

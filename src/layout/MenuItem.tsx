@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 import { COLORS } from '../utils/constants';
 
+const baseLinkStyle = {
+  color: COLORS.WHITE,
+  margin: 'auto',
+};
+
 interface MenuItemProps {
   path: string;
   text: string;
@@ -14,7 +19,7 @@ const MenuItem: FunctionComponent<MenuItemProps> = ({ path, text, onClick, style
   <NavLink
     exact
     to={path}
-    style={style}
+    style={{ ...baseLinkStyle, ...style }}
     activeStyle={{ fontSize: 16, color: COLORS.RED }}
     onClick={onClick}
   >
