@@ -1,21 +1,44 @@
-import React, { FunctionComponent, ChangeEvent } from 'react';
-import { ACCENT_COLOR } from '../utils/constants';
+import React, { FunctionComponent, ChangeEvent, useState } from 'react';
+import styled from '@emotion/styled';
+
+import { COLORS } from '../utils/constants';
+
+const Wrapper = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  paddingTop: 8,
+});
+
+const InputContainer = styled.label({});
+
+const InputButton = styled.p({
+  padding: 8,
+  backgroundColor: COLORS.RED,
+  color: COLORS.WHITE,
+});
 
 export interface Props {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FileInput: FunctionComponent<Props> = ({ onChange }) => {
+  const [fileName, setFileName] = useState('');
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+    if (event.target.files && event.target.files.length > 0) {
+      setFileName(event.target.files[0].name);
+    }
+    onChange(event);
+  }
+
   return (
-    <div className="file-field input-field">
-      <div className="btn" style={{ backgroundColor: ACCENT_COLOR }}>
-        <span>File</span>
-        <input type="file" onChange={onChange} />
-      </div>
-      <div className="file-path-wrapper">
-        <input className="file-path validate" type="text" />
-      </div>
-    </div>
+    <Wrapper>
+      <InputContainer>
+        <InputButton>File</InputButton>
+        <input type="file" onChange={handleChange} style={{ display: 'none' }} />
+      </InputContainer>
+      <p style={{ margin: 0 }}>{fileName}</p>
+    </Wrapper>
   );
 };
 

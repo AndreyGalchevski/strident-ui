@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -76,24 +76,11 @@ const ManageVideo: FunctionComponent<RouteComponentProps<MatchParams>> = ({ matc
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={video.name}
-                />
-                <Input
-                  name="url"
-                  type="text"
-                  label="URL"
-                  onChange={handleFormChange}
-                  value={video.url}
-                />
+                <Input name="name" type="text" onChange={handleFormChange} value={video.name} />
+                <Input name="url" type="text" onChange={handleFormChange} value={video.url} />
                 <Input
                   name="date"
                   type="date"
-                  label="Date"
                   onChange={handleDateChange}
                   value={formatDate(video.date)}
                 />

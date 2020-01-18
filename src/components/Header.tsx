@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
-
 import styled from '@emotion/styled';
+
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 
 const LeftIcon = styled.img({
   marginRight: 10,
@@ -20,20 +21,25 @@ export interface Props {
 }
 
 const Header: FunctionComponent<Props> = ({ title }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   return (
     <div>
-      <h3 className="hide-on-med-and-up">
-        <LeftIcon
-          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570908405/strident/icons/20191012_210223__01.png"
-          alt=""
-        />
-        {title}
-        <RightIcon
-          src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570903384/strident/icons/20191012_210223.png"
-          alt=""
-        />
-      </h3>
-      <Divider className="hide-on-med-and-down"> </Divider>
+      {isMobile ? (
+        <h3>
+          <LeftIcon
+            src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570908405/strident/icons/20191012_210223__01.png"
+            alt=""
+          />
+          {title}
+          <RightIcon
+            src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570903384/strident/icons/20191012_210223.png"
+            alt=""
+          />
+        </h3>
+      ) : (
+        <Divider> </Divider>
+      )}
     </div>
   );
 };

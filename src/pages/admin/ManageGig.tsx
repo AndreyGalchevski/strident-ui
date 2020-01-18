@@ -13,7 +13,7 @@ import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -118,52 +118,35 @@ const ManageGig: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match 
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleTextInputChange}
-                  value={gig.name}
-                />
+                <Input name="name" type="text" onChange={handleTextInputChange} value={gig.name} />
                 <Input
                   name="venue"
                   type="text"
-                  label="Venue"
                   onChange={handleTextInputChange}
                   value={gig.venue}
                 />
                 <Input
                   name="address"
                   type="text"
-                  label="Address"
                   onChange={handleTextInputChange}
                   value={gig.address}
                 />
-                <Input
-                  name="city"
-                  type="text"
-                  label="City"
-                  onChange={handleTextInputChange}
-                  value={gig.city}
-                />
+                <Input name="city" type="text" onChange={handleTextInputChange} value={gig.city} />
                 <Input
                   name="date"
                   type="date"
-                  label="Date"
                   onChange={handleDateInputChange}
                   value={formatDate(gig.date)}
                 />
                 <Input
                   name="date"
                   type="time"
-                  label="Time"
                   onChange={handleTimeInputChange}
                   value={formatTime(gig.date)}
                 />
                 <Input
                   name="fbEvent"
                   type="text"
-                  label="Facebook Event"
                   onChange={handleTextInputChange}
                   value={gig.fbEvent}
                 />

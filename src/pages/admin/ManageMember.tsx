@@ -12,7 +12,7 @@ import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -103,27 +103,14 @@ const ManageMember: FunctionComponent<RouteComponentProps<MatchParams>> = ({ mat
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={member.name}
-                />
+                <Input name="name" type="text" onChange={handleFormChange} value={member.name} />
                 <Input
                   name="instrument"
                   type="text"
-                  label="Instrument"
                   onChange={handleFormChange}
                   value={member.instrument}
                 />
-                <Input
-                  name="info"
-                  type="text"
-                  label="Info"
-                  onChange={handleFormChange}
-                  value={member.info}
-                />
+                <Input name="info" type="text" onChange={handleFormChange} value={member.info} />
                 <FileInput onChange={handleImageChange} />
               </CardContent>
               <CardAction>

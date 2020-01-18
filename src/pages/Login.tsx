@@ -11,7 +11,7 @@ import Loader from '../components/Loader';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -57,14 +57,12 @@ const Login: FunctionComponent = () => {
                 <Input
                   name="username"
                   type="text"
-                  label="Username"
                   onChange={handleUsernameChange}
                   value={username}
                 />
                 <Input
                   name="password"
                   type="password"
-                  label="Password"
                   onChange={handlePasswordChange}
                   value={password}
                 />

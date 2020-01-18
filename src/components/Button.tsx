@@ -20,7 +20,7 @@ const StyledButton = styled.button<{ isPrimary: boolean }>(({ isPrimary }) => ({
 
 export interface Props {
   isPrimary?: boolean;
-  handleClick: MouseEventHandler;
+  handleClick?: MouseEventHandler;
 }
 
 const Button: FunctionComponent<Props> = ({ isPrimary, handleClick, children }) => {

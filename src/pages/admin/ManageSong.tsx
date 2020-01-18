@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -66,27 +66,9 @@ const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleFormChange}
-                  value={song.name}
-                />
-                <Input
-                  name="url"
-                  type="text"
-                  label="URL"
-                  onChange={handleFormChange}
-                  value={song.url}
-                />
-                <Input
-                  name="album"
-                  type="text"
-                  label="Album"
-                  onChange={handleFormChange}
-                  value={song.album}
-                />
+                <Input name="name" type="text" onChange={handleFormChange} value={song.name} />
+                <Input name="url" type="text" onChange={handleFormChange} value={song.url} />
+                <Input name="album" type="text" onChange={handleFormChange} value={song.album} />
               </CardContent>
               <CardAction>
                 <Button handleClick={handleSaveClick}>Save</Button>

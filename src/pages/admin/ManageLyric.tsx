@@ -12,7 +12,7 @@ import Input from '../../components/Input';
 import TextArea from '../../components/TextArea';
 import Loader from '../../components/Loader';
 
-export const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
   width: isMobile ? '90vw' : '35vw',
   margin: 'auto',
 }));
@@ -71,14 +71,8 @@ const ManageLyric: FunctionComponent<RouteComponentProps<MatchParams>> = ({ matc
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
-                <Input
-                  name="name"
-                  type="text"
-                  label="Name"
-                  onChange={handleNameChange}
-                  value={lyric.name}
-                />
-                <TextArea name="text" label="Text" onChange={handleTextChange} value={lyric.text} />
+                <Input name="name" type="text" onChange={handleNameChange} value={lyric.name} />
+                <TextArea name="text" onChange={handleTextChange} value={lyric.text} />
               </CardContent>
               <CardAction>
                 <Button handleClick={handleSaveClick}>Save</Button>

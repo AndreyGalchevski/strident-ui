@@ -1,24 +1,24 @@
-import React, { FunctionComponent, ChangeEvent, useEffect } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
+
+import { capitalize } from '../utils/general';
 
 export interface Props {
   name: string;
   type: string;
-  label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
 }
 
-const TextInput: FunctionComponent<Props> = ({ name, type, label, onChange, value }) => {
-  useEffect(() => {
-    // @ts-ignore
-    M.updateTextFields();
-  });
-
+const TextInput: FunctionComponent<Props> = ({ name, type, onChange, value }) => {
   return (
-    <div className="input-field">
-      <input id={name} name={name} type={type} onChange={onChange} value={value} />
-      <label htmlFor={name}>{label}</label>
-    </div>
+    <input
+      id={name}
+      name={name}
+      type={type}
+      onChange={onChange}
+      value={value}
+      placeholder={capitalize(name)}
+    />
   );
 };
 

@@ -4,8 +4,10 @@ import styled from '@emotion/styled';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
+import { useMediaQuery } from '../hooks/mediaQueryHook';
 import Container from '../styled/Container';
 import { Card, CardContent, CardTitle, CardAction } from '../styled/Card';
+import ResponsiveText from '../styled/ResponsiveText';
 import Header from '../components/Header';
 import { COLORS } from '../utils/constants';
 import { fetchResources } from '../api/utils';
@@ -187,6 +189,8 @@ const Banner = styled.img({
 });
 
 const Home: FunctionComponent = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   const [latestGigs, setLatestGigs] = useState<Gig[]>([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -238,12 +242,12 @@ const Home: FunctionComponent = () => {
           <Card>
             <CardContent>
               <CardTitle>About</CardTitle>
-              <p className="flow-text">
+              <ResponsiveText isMobile={isMobile}>
                 Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
                 (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
                 AC / DC, etc and having come a long way, they found their style on the Israeli metal
                 scene
-              </p>
+              </ResponsiveText>
             </CardContent>
             <CardAction>
               <Link to="about" style={{ color: COLORS.WHITE }}>
