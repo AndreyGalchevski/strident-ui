@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import styled from '@emotion/styled';
 
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';

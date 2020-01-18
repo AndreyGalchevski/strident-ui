@@ -246,7 +246,9 @@ const Home: FunctionComponent = () => {
               </p>
             </CardContent>
             <CardAction>
-              <Link to="about">Read more</Link>
+              <Link to="about" style={{ color: COLORS.WHITE }}>
+                Read more
+              </Link>
             </CardAction>
           </Card>
         </div>
@@ -264,7 +266,9 @@ const Home: FunctionComponent = () => {
               />
             </CardContent>
             <CardAction>
-              <Link to="/videos">More videos</Link>
+              <Link to="/videos" style={{ color: COLORS.WHITE }}>
+                More videos
+              </Link>
             </CardAction>
           </Card>
         </div>
@@ -290,7 +294,9 @@ const Home: FunctionComponent = () => {
                 ))}
               </CardContent>
               <CardAction>
-                <Link to="/gigs">More gigs</Link>
+                <Link to="/gigs" style={{ color: COLORS.WHITE }}>
+                  More gigs
+                </Link>
               </CardAction>
             </Card>
           </div>
@@ -308,7 +314,9 @@ const Home: FunctionComponent = () => {
               />
             </CardContent>
             <CardAction>
-              <Link to="/songs">More songs</Link>
+              <Link to="/songs" style={{ color: COLORS.WHITE }}>
+                More songs
+              </Link>
             </CardAction>
           </Card>
         </div>

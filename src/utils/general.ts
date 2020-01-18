@@ -28,3 +28,11 @@ export function formatTime(date: Date): string {
   const formattedDate = `${hh}:${mm}`;
   return formattedDate;
 }
+
+export function generateRandomString(length: number): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  return Array.from({ length }, (_, i) => i).reduce(
+    prev => prev + characters.charAt(Math.floor(Math.random() * characters.length)),
+    '',
+  );
+}

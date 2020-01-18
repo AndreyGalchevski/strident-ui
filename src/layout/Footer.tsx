@@ -27,11 +27,6 @@ const SocialMediaLink = styled.a({
   paddingRight: '0.5em',
 });
 
-const SocialMediaIcon = styled.i({
-  fontSize: '20px',
-  color: COLORS.WHITE,
-});
-
 const Footer: FunctionComponent = () => {
   return (
     <Container>
