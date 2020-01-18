@@ -23,6 +23,12 @@ const Banner = styled.img({
   boxShadow: `0 4px 8px 0 ${COLORS.BLACK}, 0 6px 20px 0 ${COLORS.BLACK}`,
 });
 
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  display: 'flex',
+  flexDirection: isMobile ? 'column' : 'row',
+  marginBottom: 20,
+}));
+
 const Home: FunctionComponent = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -72,94 +78,86 @@ const Home: FunctionComponent = () => {
           />
         </picture>
       </BannerContainer>
-      <div className="row">
-        <div className="col s12 m6">
-          <Card>
-            <CardContent>
-              <CardTitle>About</CardTitle>
-              <ResponsiveText isMobile={isMobile}>
-                Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
-                (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
-                AC / DC, etc and having come a long way, they found their style on the Israeli metal
-                scene
-              </ResponsiveText>
-            </CardContent>
-            <CardAction>
-              <Link to="about" style={{ color: COLORS.WHITE }}>
-                Read more
-              </Link>
-            </CardAction>
-          </Card>
-        </div>
-        <div className="col s12 m6">
-          <Card>
-            <CardContent style={{ padding: 0 }}>
-              <iframe
-                title="STRIDENT - No Faith No War"
-                width="100%"
-                height="60%"
-                src="https://www.youtube.com/embed/UkvlRmq62io"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </CardContent>
-            <CardAction>
-              <Link to="/videos" style={{ color: COLORS.WHITE }}>
-                More videos
-              </Link>
-            </CardAction>
-          </Card>
-        </div>
-      </div>
+      <Wrapper isMobile={isMobile}>
+        <Card style={{ margin: 8, flex: 1 }}>
+          <CardContent>
+            <CardTitle>About</CardTitle>
+            <ResponsiveText isMobile={isMobile}>
+              Strident is a thrash metal band formed in 2004 in the ancient city of Be`er Sheva
+              (Israel). Starting from playing cover versions of such famous groups as Iron Maiden,
+              AC / DC, etc and having come a long way, they found their style on the Israeli metal
+              scene
+            </ResponsiveText>
+          </CardContent>
+          <CardAction>
+            <Link to="about" style={{ color: COLORS.WHITE }}>
+              Read more
+            </Link>
+          </CardAction>
+        </Card>
+        <Card style={{ margin: 8, flex: 1 }}>
+          <CardContent style={{ padding: 0 }}>
+            <iframe
+              title="STRIDENT - No Faith No War"
+              width="100%"
+              height="80%"
+              src="https://www.youtube.com/embed/UkvlRmq62io"
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </CardContent>
+          <CardAction>
+            <Link to="/videos" style={{ color: COLORS.WHITE }}>
+              More videos
+            </Link>
+          </CardAction>
+        </Card>
+      </Wrapper>
       <ImageGallery items={homeImages} />
-      <div className="row" style={{ marginTop: '2em' }}>
+      <Wrapper isMobile={isMobile} style={{ marginTop: 20 }}>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <div className="col s12 m6">
-            <Card>
-              <CardContent>
-                <CardTitle>Gigs</CardTitle>
-                {latestGigs.map(gig => (
-                  <div key={gig.id}>
-                    <p>{new Date(gig.date).toDateString()}</p>
-                    <p>
-                      {gig.name} - {gig.venue}
-                    </p>
-                    <p>{gig.city}</p>
-                    <hr />
-                  </div>
-                ))}
-              </CardContent>
-              <CardAction>
-                <Link to="/gigs" style={{ color: COLORS.WHITE }}>
-                  More gigs
-                </Link>
-              </CardAction>
-            </Card>
-          </div>
-        )}
-        <div className="col s12 m6">
-          <Card>
-            <CardContent style={{ padding: 0 }}>
-              <iframe
-                title="Strident Spotify page"
-                src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
-                width="100%"
-                height="60%"
-                frameBorder="0"
-                allow="encrypted-media"
-              />
+          <Card style={{ margin: 8, flex: 1 }}>
+            <CardContent>
+              <CardTitle>Gigs</CardTitle>
+              {latestGigs.map(gig => (
+                <div key={gig.id}>
+                  <p>{new Date(gig.date).toDateString()}</p>
+                  <p>
+                    {gig.name} - {gig.venue}
+                  </p>
+                  <p>{gig.city}</p>
+                  <hr />
+                </div>
+              ))}
             </CardContent>
             <CardAction>
-              <Link to="/songs" style={{ color: COLORS.WHITE }}>
-                More songs
+              <Link to="/gigs" style={{ color: COLORS.WHITE }}>
+                More gigs
               </Link>
             </CardAction>
           </Card>
-        </div>
-      </div>
+        )}
+        <Card style={{ margin: 8, flex: 1 }}>
+          <CardContent style={{ padding: 0 }}>
+            <iframe
+              title="Strident Spotify page"
+              src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
+              width="100%"
+              height="80%"
+              frameBorder="0"
+              allow="encrypted-media"
+            />
+          </CardContent>
+          <CardAction>
+            <Link to="/songs" style={{ color: COLORS.WHITE }}>
+              More songs
+            </Link>
+          </CardAction>
+        </Card>
+      </Wrapper>
     </Container>
   );
 };
