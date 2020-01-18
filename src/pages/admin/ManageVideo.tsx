@@ -67,11 +67,13 @@ const ManageVideo: FunctionComponent<RouteComponentProps<MatchParams>> = ({ matc
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/videos" />}
       <Container>
-        {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
+        <h2>{action} Video</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

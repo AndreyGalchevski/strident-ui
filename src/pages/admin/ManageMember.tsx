@@ -94,11 +94,13 @@ const ManageMember: FunctionComponent<RouteComponentProps<MatchParams>> = ({ mat
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/members" />}
       <Container>
-        {match.params.id ? <h3>Update Member</h3> : <h3>Create Member</h3>}
+        <h2>{action} Member</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

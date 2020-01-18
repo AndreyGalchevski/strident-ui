@@ -1,6 +1,25 @@
 import React, { FunctionComponent, ChangeEvent } from 'react';
+import styled from '@emotion/styled';
 
 import { capitalize } from '../utils/general';
+import { COLORS } from '../utils/constants';
+
+const StyledInput = styled.input({
+  width: '100%',
+  fontSize: 16,
+  padding: 10,
+  paddingLeft: 0,
+  backgroundColor: 'initial',
+  color: COLORS.WHITE,
+  border: 'none',
+  borderBottomWidth: 2,
+  borderBottomStyle: 'solid',
+  borderBottomColor: COLORS.WHITE,
+  ':focus': {
+    outline: 'none',
+    borderBottomColor: COLORS.RED,
+  },
+});
 
 export interface Props {
   name: string;
@@ -9,17 +28,19 @@ export interface Props {
   value: string | number;
 }
 
-const TextInput: FunctionComponent<Props> = ({ name, type, onChange, value }) => {
+const Input: FunctionComponent<Props> = ({ name, type, onChange, value }) => {
   return (
-    <input
-      id={name}
-      name={name}
-      type={type}
-      onChange={onChange}
-      value={value}
-      placeholder={capitalize(name)}
-    />
+    <div style={{ margin: 16 }}>
+      <StyledInput
+        id={name}
+        name={name}
+        type={type}
+        onChange={onChange}
+        value={value}
+        placeholder={capitalize(name)}
+      />
+    </div>
   );
 };
 
-export default TextInput;
+export default Input;

@@ -57,11 +57,13 @@ const ManageSong: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/songs" />}
       <Container>
-        {match.params.id ? <h3>Update Song</h3> : <h3>Create Song</h3>}
+        <h2>{action} Song</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

@@ -96,11 +96,13 @@ const ManageMerchandise: FunctionComponent<RouteComponentProps<MatchParams>> = (
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/merch" />}
       <Container>
-        {match.params.id ? <h3>Update Merch</h3> : <h3>Create Merch</h3>}
+        <h2>{action} Merch</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

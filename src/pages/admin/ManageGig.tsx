@@ -109,11 +109,13 @@ const ManageGig: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match 
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/gigs" />}
       <Container>
-        {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
+        <h2>{action} Gig</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

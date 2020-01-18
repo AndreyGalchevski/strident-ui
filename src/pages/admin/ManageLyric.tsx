@@ -62,11 +62,13 @@ const ManageLyric: FunctionComponent<RouteComponentProps<MatchParams>> = ({ matc
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/lyrics" />}
       <Container>
-        {match.params.id ? <h3>Update Lyric</h3> : <h3>Create Lyric</h3>}
+        <h2>{action} Lyric</h2>
         <Loader isLoading={isLoading}>
           <Wrapper isMobile={isMobile}>
             <Card>

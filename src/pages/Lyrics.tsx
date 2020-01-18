@@ -19,6 +19,7 @@ import DeleteIcon from '../components/icons/Delete';
 const Text = styled.pre({
   fontFamily: '"Special Elite", cursive',
   fontSize: '13px',
+  lineHeight: 1.5,
 });
 
 const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {

@@ -50,7 +50,7 @@ const Login: FunctionComponent = () => {
       {shouldRedirect && <Redirect to="/" />}
       <Loader isLoading={isLoading}>
         <section>
-          <h3>Login</h3>
+          <h2>Login</h2>
           <Wrapper isMobile={isMobile}>
             <Card>
               <CardContent>
