@@ -8,7 +8,7 @@ const HalfwayTab = styled.a({
   borderRadius: 20,
   backgroundColor: COLORS.WHITE,
   right: 24,
-  bottom: 183,
+  bottom: 174,
 });
 
 export default HalfwayTab;

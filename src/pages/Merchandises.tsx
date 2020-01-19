@@ -80,14 +80,14 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     href={merchandise.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ bottom: 156 }}
+                    style={{ bottom: 150 }}
                   >
                     <ShoppingCartIcon style={{ marginTop: 8 }} />
                   </HalfwayTab>
                   <CardTitle>{merchandise.name}</CardTitle>
                   <p>{merchandise.type}</p>
                   <PriceContainer>
-                    <EuroIcon style={{ marginTop: 2, marginRight: 4 }} />
+                    <EuroIcon style={{ marginRight: 4 }} />
                     <span> {merchandise.price} EUR</span>
                   </PriceContainer>
                 </CardContent>
