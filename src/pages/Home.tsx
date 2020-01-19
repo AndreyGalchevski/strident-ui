@@ -96,7 +96,7 @@ const Home: FunctionComponent = () => {
           </CardAction>
         </Card>
         <Card style={{ margin: 8, flex: 1 }}>
-          <CardContent style={{ padding: 0, height: 335 }}>
+          <CardContent style={{ padding: 0, height: 343 }}>
             <iframe
               title="STRIDENT - No Faith No War"
               width="100%"
@@ -141,7 +141,7 @@ const Home: FunctionComponent = () => {
           </Card>
         )}
         <Card style={{ margin: 8, flex: 1 }}>
-          <CardContent style={{ padding: 0, height: 444 }}>
+          <CardContent style={{ padding: 0, height: 451 }}>
             <iframe
               title="Strident Spotify page"
               src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"

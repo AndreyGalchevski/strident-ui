@@ -79,7 +79,7 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                   href={merchandise.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ bottom: 150 }}
+                  style={{ bottom: 156 }}
                 >
                   <ShoppingCartIcon style={{ marginTop: 8 }} />
                 </HalfwayTab>

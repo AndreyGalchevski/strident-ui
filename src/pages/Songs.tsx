@@ -66,6 +66,7 @@ const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     allow="encrypted-media"
                     width="100%"
                     height="60%"
+                    style={{ borderRadius: 30 }}
                   />
                 </CardContent>
                 {authState.isAuthenticated && (

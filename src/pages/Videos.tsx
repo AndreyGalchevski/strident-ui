@@ -67,6 +67,7 @@ const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     frameBorder="0"
                     width="100%"
                     height="60%"
+                    style={{ borderRadius: 30 }}
                   />
                 </CardContent>
                 {authState.isAuthenticated && (
