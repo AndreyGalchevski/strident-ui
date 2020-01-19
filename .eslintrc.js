@@ -21,6 +21,16 @@ module.exports = {
     'no-underscore-dangle': 'off',
     'import/prefer-default-export': 'off',
     'react/prop-types': 0,
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
