@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import AddIcon from '../components/icons/Add';
+import AddIcon from './icons/Add';
 import { COLORS } from '../utils/constants';
 
 const FixedActionButton = styled.div({
