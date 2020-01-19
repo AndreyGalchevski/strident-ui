@@ -96,11 +96,11 @@ const Home: FunctionComponent = () => {
           </CardAction>
         </Card>
         <Card style={{ margin: 8, flex: 1 }}>
-          <CardContent style={{ padding: 0 }}>
+          <CardContent style={{ padding: 0, height: 335 }}>
             <iframe
               title="STRIDENT - No Faith No War"
               width="100%"
-              height="80%"
+              height="100%"
               src="https://www.youtube.com/embed/UkvlRmq62io"
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -141,12 +141,12 @@ const Home: FunctionComponent = () => {
           </Card>
         )}
         <Card style={{ margin: 8, flex: 1 }}>
-          <CardContent style={{ padding: 0 }}>
+          <CardContent style={{ padding: 0, height: 444 }}>
             <iframe
               title="Strident Spotify page"
               src="https://open.spotify.com/embed/artist/1iLO8tqlkfiQMWf7JqaNE3"
               width="100%"
-              height="80%"
+              height="100%"
               frameBorder="0"
               allow="encrypted-media"
             />

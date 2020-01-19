@@ -5,10 +5,12 @@ import { useMediaQuery } from '../hooks/mediaQueryHook';
 
 const LeftIcon = styled.img({
   marginRight: 10,
+  marginBottom: -4,
 });
 
 const RightIcon = styled.img({
   marginLeft: 10,
+  marginBottom: -4,
 });
 
 const Divider = styled.div({
@@ -26,7 +28,7 @@ const Header: FunctionComponent<Props> = ({ title }) => {
   return (
     <div>
       {isMobile ? (
-        <h3>
+        <h1>
           <LeftIcon
             src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570908405/strident/icons/20191012_210223__01.png"
             alt=""
@@ -36,7 +38,7 @@ const Header: FunctionComponent<Props> = ({ title }) => {
             src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1570903384/strident/icons/20191012_210223.png"
             alt=""
           />
-        </h3>
+        </h1>
       ) : (
         <Divider> </Divider>
       )}

@@ -75,15 +75,15 @@ const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
                     <CardImage src={merchandise.image} alt="" />
                   </picture>
                 </div>
+                <HalfwayTab
+                  href={merchandise.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ bottom: 150 }}
+                >
+                  <ShoppingCartIcon style={{ marginTop: 8 }} />
+                </HalfwayTab>
                 <CardContent style={{ maxHeight: 184 }}>
-                  <HalfwayTab
-                    href={merchandise.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ bottom: 150 }}
-                  >
-                    <ShoppingCartIcon style={{ marginTop: 8 }} />
-                  </HalfwayTab>
                   <CardTitle>{merchandise.name}</CardTitle>
                   <p>{merchandise.type}</p>
                   <PriceContainer>
