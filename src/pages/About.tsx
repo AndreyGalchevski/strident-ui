@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from '@emotion/styled';
 
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import Header from '../components/Header';
 import Container from '../styled/Container';
 import ResponsiveText from '../styled/ResponsiveText';

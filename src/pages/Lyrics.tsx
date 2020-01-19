@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import Container from '../styled/Container';
 import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardTitle, CardContent, CardAction } from '../styled/Card';

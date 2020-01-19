@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import Container from '../styled/Container';
 import { Card, CardContent, CardTitle, CardAction } from '../styled/Card';
 import ResponsiveText from '../styled/ResponsiveText';

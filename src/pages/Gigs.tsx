@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { formatDate, formatTime } from '../utils/general';
 import Container from '../styled/Container';
 import { Masonry, MasonryBrick } from '../styled/Masonry';

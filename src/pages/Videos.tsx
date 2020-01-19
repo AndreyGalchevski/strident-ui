@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import Container from '../styled/Container';
 import { Masonry, MasonryBrick } from '../styled/Masonry';
 import { Card, CardContent, CardAction } from '../styled/Card';

@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { COLORS } from '../utils/constants';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import MobileMenu from './MobileMenu';
 import DesktopMenu from './DesktopMenu';
 import SideMenu from './SideMenu';

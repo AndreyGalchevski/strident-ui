@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
 import { formatDate, formatTime } from '../../utils/general';
-import { useMediaQuery } from '../../hooks/mediaQueryHook';
+import useMediaQuery from '../../hooks/useMediaQuery';
 import Container from '../../styled/Container';
 import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';

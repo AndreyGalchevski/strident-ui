@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
 import { Card, CardContent, CardAction } from '../styled/Card';
