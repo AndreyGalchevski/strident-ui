@@ -1,36 +1,23 @@
-import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
+import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Song } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import Button from '../components/Button';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
+import useMediaQuery from '../hooks/useMediaQuery';
+import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
+import { Card, CardContent, CardAction } from '../styled/Card';
 import Header from '../components/Header';
+import Button from '../components/Button';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  song: {
-    marginBottom: '2em',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  cardContent: {
-    padding: 0,
-  },
-};
-
-function Songs(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Songs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [songs, setSongs] = useState<Song[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -63,15 +50,15 @@ function Songs(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container as CSSProperties}>
+    <Container>
       <Header title="Songs" />
       {authState.isAuthenticated && <Fab url="/admin/songs/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {songs.map(song => (
-            <div key={song.id} className="col s12 m4" style={styles.song}>
-              <div className="card" style={styles.card}>
-                <div className="card-content" style={styles.cardContent}>
+            <MasonryBrick key={song.id}>
+              <Card>
+                <CardContent style={{ padding: 0 }}>
                   <iframe
                     title={song.name}
                     src={song.url}
@@ -80,24 +67,24 @@ function Songs(props: RouteComponentProps): React.ReactElement {
                     width="100%"
                     height="60%"
                   />
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(song.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(song.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Songs;

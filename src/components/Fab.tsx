@@ -1,26 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 
-export interface FabProps {
+import AddIcon from './icons/Add';
+import { COLORS } from '../utils/constants';
+
+const FixedActionButton = styled.div({
+  position: 'fixed',
+  right: 23,
+  bottom: 50,
+  paddingTop: 15,
+  marginBottom: 0,
+  zIndex: 997,
+});
+
+const RoundButton = styled.div({
+  width: 56,
+  height: 56,
+  fontSize: 16,
+  borderRadius: 50,
+  backgroundColor: COLORS.RED,
+});
+
+export interface Props {
   url: string;
 }
 
-function Fab(props: FabProps): React.ReactElement {
-  const { url } = props;
-
-  useEffect(() => {
-    const elems = document.querySelectorAll('.fixed-action-btn');
-    // @ts-ignore
-    M.FloatingActionButton.init(elems, {});
-  }, []);
-
-  return (
-    <div className="fixed-action-btn" style={{ bottom: '50px' }}>
-      <Link to={url} className="btn-floating btn-large red">
-        <i className="large material-icons">add</i>
+const Fab: FunctionComponent<Props> = ({ url }) => (
+  <FixedActionButton>
+    <RoundButton>
+      <Link to={url}>
+        <AddIcon style={{ marginTop: 16 }} />
       </Link>
-    </div>
-  );
-}
+    </RoundButton>
+  </FixedActionButton>
+);
 
 export default Fab;

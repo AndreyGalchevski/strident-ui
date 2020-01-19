@@ -1,30 +1,34 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
-
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
+
 import { Member } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
+import useMediaQuery from '../hooks/useMediaQuery';
+import Container from '../styled/Container';
+import { Card, CardTitle, CardContent, CardImage, CardAction } from '../styled/Card';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-};
+const MembersContainer = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  display: 'flex',
+  flexDirection: isMobile ? 'column' : 'row',
+  WebkitFlexDirection: isMobile ? 'column' : 'row',
+}));
 
-function Members(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
+const MemberItem = styled.div({
+  paddingRight: '2vh',
+  paddingLeft: '2vh',
+});
 
+const Members: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [members, setMembers] = useState<Member[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -57,42 +61,42 @@ function Members(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Members" />
       {authState.isAuthenticated && <Fab url="/admin/members/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <MembersContainer isMobile={isMobile}>
           {members.map(member => (
-            <div key={member.id} className="col s12 m3">
-              <div className="card" style={styles.card}>
-                <div className="card-image">
+            <MemberItem key={member.id}>
+              <Card>
+                <div>
                   <picture>
                     <source srcSet={member.imageNG} type="image/webp" />
                     <source srcSet={member.image} type="image/jpeg" />
-                    <img src={member.image} alt="" />
+                    <CardImage src={member.image} alt="" />
                   </picture>
-                  <span className="card-title">{member.name}</span>
                 </div>
-                <div className="card-content">
+                <CardContent>
+                  <CardTitle>{member.name}</CardTitle>
                   <p>{member.instrument}</p>
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(member.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(member.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MemberItem>
           ))}
-        </div>
+        </MembersContainer>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Members;

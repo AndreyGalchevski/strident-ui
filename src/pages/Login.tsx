@@ -1,20 +1,29 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, ChangeEvent } from 'react';
 import { Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { useAuthContext } from '../context/authContext';
+import useMediaQuery from '../hooks/useMediaQuery';
 import { LOGIN_SUCCESS } from '../context/authActionTypes';
 import { login } from '../api/utils';
+import { Card, CardContent, CardAction } from '../styled/Card';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-function Login(): React.ReactElement {
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
+
+const Login: FunctionComponent = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const [, dispatch] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   function handleUsernameChange(e: ChangeEvent<HTMLInputElement>): void {
     setUsername(e.target.value);
@@ -41,36 +50,32 @@ function Login(): React.ReactElement {
       {shouldRedirect && <Redirect to="/" />}
       <Loader isLoading={isLoading}>
         <section>
-          <h3>Login</h3>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <div className="card">
-                <div className="card-content">
-                  <Input
-                    name="username"
-                    type="text"
-                    label="Username"
-                    onChange={handleUsernameChange}
-                    value={username}
-                  />
-                  <Input
-                    name="password"
-                    type="password"
-                    label="Password"
-                    onChange={handlePasswordChange}
-                    value={password}
-                  />
-                </div>
-                <div className="card-action">
-                  <Button handleClick={handleLogin}>Login</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h2>Login</h2>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input
+                  name="username"
+                  type="text"
+                  onChange={handleUsernameChange}
+                  value={username}
+                />
+                <Input
+                  name="password"
+                  type="password"
+                  onChange={handlePasswordChange}
+                  value={password}
+                />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleLogin}>Login</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </section>
       </Loader>
     </>
   );
-}
+};
 
 export default Login;

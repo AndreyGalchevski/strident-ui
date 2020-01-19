@@ -1,30 +1,34 @@
-import React, { ReactElement, MouseEventHandler } from 'react';
-import { ACCENT_COLOR, NEUTRAL_COLOR } from '../utils/constants';
+import React, { FunctionComponent, MouseEventHandler } from 'react';
+import styled from '@emotion/styled';
 
-export interface ButtonProps {
-  isPrimary?: boolean;
-  handleClick: MouseEventHandler;
-  children: string | ReactElement;
-}
+import { COLORS } from '../utils/constants';
 
-const styles = {
+const StyledButton = styled.button<{ isPrimary: boolean }>(({ isPrimary }) => ({
+  border: 'none',
+  borderRadius: 2,
+  display: 'inline-block',
+  height: 36,
+  padding: '0 16px',
+  textTransform: 'uppercase',
+  verticalAlign: 'middle',
+  WebkitTapHighlightColor: 'transparent',
   marginRight: '1em',
   marginLeft: '1em',
-};
+  backgroundColor: isPrimary ? COLORS.RED : COLORS.GREY,
+  color: COLORS.WHITE,
+}));
 
-function Button(props: ButtonProps): ReactElement {
-  const { isPrimary, handleClick, children } = props;
-
-  return (
-    <button
-      type="button"
-      className="waves-effect waves-light btn"
-      onClick={handleClick}
-      style={{ ...styles, backgroundColor: isPrimary ? ACCENT_COLOR : NEUTRAL_COLOR }}
-    >
-      {children}
-    </button>
-  );
+export interface Props {
+  isPrimary?: boolean;
+  handleClick?: MouseEventHandler;
 }
+
+const Button: FunctionComponent<Props> = ({ isPrimary, handleClick, children }) => {
+  return (
+    <StyledButton isPrimary={isPrimary} type="button" onClick={handleClick}>
+      {children}
+    </StyledButton>
+  );
+};
 
 export default Button;

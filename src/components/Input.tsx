@@ -1,27 +1,46 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
+import styled from '@emotion/styled';
 
-export interface TextInputProps {
+import { capitalize } from '../utils/general';
+import { COLORS } from '../utils/constants';
+
+const StyledInput = styled.input({
+  width: '100%',
+  fontSize: 16,
+  padding: 10,
+  paddingLeft: 0,
+  backgroundColor: 'initial',
+  color: COLORS.WHITE,
+  border: 'none',
+  borderBottomWidth: 2,
+  borderBottomStyle: 'solid',
+  borderBottomColor: COLORS.WHITE,
+  ':focus': {
+    outline: 'none',
+    borderBottomColor: COLORS.RED,
+  },
+});
+
+export interface Props {
   name: string;
   type: string;
-  label: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string | number;
 }
 
-function TextInput(props: TextInputProps): React.ReactElement {
-  const { name, type, label, onChange, value } = props;
-
-  useEffect(() => {
-    // @ts-ignore
-    M.updateTextFields();
-  });
-
+const Input: FunctionComponent<Props> = ({ name, type, onChange, value }) => {
   return (
-    <div className="input-field">
-      <input id={name} name={name} type={type} onChange={onChange} value={value} />
-      <label htmlFor={name}>{label}</label>
+    <div style={{ margin: 16 }}>
+      <StyledInput
+        id={name}
+        name={name}
+        type={type}
+        onChange={onChange}
+        value={value}
+        placeholder={capitalize(name)}
+      />
     </div>
   );
-}
+};
 
-export default TextInput;
+export default Input;

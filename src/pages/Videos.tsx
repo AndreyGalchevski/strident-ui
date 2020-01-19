@@ -1,36 +1,23 @@
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Video } from '../api/types';
 import { useAuthContext } from '../context/authContext';
-import Button from '../components/Button';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
+import useMediaQuery from '../hooks/useMediaQuery';
+import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
+import { Card, CardContent, CardAction } from '../styled/Card';
 import Header from '../components/Header';
+import Button from '../components/Button';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  video: {
-    marginBottom: '2em',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  cardContent: {
-    padding: 0,
-  },
-};
-
-function Videos(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Videos: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [videos, setVideos] = useState<Video[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -63,15 +50,15 @@ function Videos(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Videos" />
       {authState.isAuthenticated && <Fab url="/admin/videos/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {videos.map(video => (
-            <div key={video.id} className="col s12 m4" style={styles.video}>
-              <div className="card" style={styles.card}>
-                <div className="card-content" style={styles.cardContent}>
+            <MasonryBrick key={video.id}>
+              <Card>
+                <CardContent style={{ padding: 0 }}>
                   <iframe
                     title={video.name}
                     src={video.url}
@@ -81,24 +68,24 @@ function Videos(props: RouteComponentProps): React.ReactElement {
                     width="100%"
                     height="60%"
                   />
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(video.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(video.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Videos;

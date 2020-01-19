@@ -1,51 +1,30 @@
-import React, { useEffect, useState, MouseEventHandler } from 'react';
+import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Lyric } from '../api/types';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
+import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
+import { Card, CardTitle, CardContent, CardAction } from '../styled/Card';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  lyricsContainer: (isWideScreen: boolean): any => ({
-    margin: 'auto',
-    maxWidth: '1080px',
-    columnCount: isWideScreen ? '2' : '1',
-  }),
-  lyric: {
-    display: 'inline-block',
-    width: '100%',
-    paddingRight: '2vh',
-    paddingLeft: '2vh',
-  },
-  card: {
-    paddingTop: '2em',
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    paddingBottom: '1em',
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  cardContent: {
-    padding: '0',
-  },
-  text: {
-    fontFamily: '"Special Elite", cursive',
-    fontSize: '13px',
-  },
-};
+const Text = styled.pre({
+  fontFamily: '"Special Elite", cursive',
+  fontSize: '13px',
+  lineHeight: 1.5,
+});
 
-function Lyrics(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
+const Lyrics: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
-  const isWideScreen = useMediaQuery('(min-width: 1024px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [lyrics, setLyrics] = useState<Lyric[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -78,35 +57,35 @@ function Lyrics(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Lyrics" />
       {authState.isAuthenticated && <Fab url="/admin/lyrics/new" />}
       <Loader isLoading={isLoading}>
-        <div style={styles.lyricsContainer(isWideScreen)}>
+        <Masonry isMobile={isMobile}>
           {lyrics.map(lyric => (
-            <div key={lyric.id} style={styles.lyric}>
-              <div className="card" style={styles.card}>
-                <span className="card-title">{lyric.name}</span>
-                <div className="card-content" style={styles.cardContent}>
-                  <pre style={styles.text}>{lyric.text}</pre>
-                </div>
+            <MasonryBrick key={lyric.id}>
+              <Card>
+                <CardTitle style={{ paddingTop: 20 }}>{lyric.name}</CardTitle>
+                <CardContent style={{ paddingTop: 0 }}>
+                  <Text>{lyric.text}</Text>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(lyric.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(lyric.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Lyrics;

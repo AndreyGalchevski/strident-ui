@@ -1,53 +1,25 @@
-import React, { useState, useEffect, MouseEventHandler, CSSProperties } from 'react';
+import React, { FunctionComponent, useState, useEffect, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { Gig } from '../api/types';
 import { fetchResources, deleteResource } from '../api/utils';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import { useAuthContext } from '../context/authContext';
-import { useMediaQuery } from '../hooks/mediaQueryHook';
+import useMediaQuery from '../hooks/useMediaQuery';
+import { formatDate, formatTime } from '../utils/general';
+import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
+import { Card, CardContent, CardImage, CardAction } from '../styled/Card';
+import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
-import { formatDate, formatTime } from '../utils/general';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
+import DirectionsIcon from '../components/icons/Directions';
+import EventIcon from '../components/icons/Event';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  gigsContainer: (isMobile: boolean): CSSProperties => ({
-    margin: 'auto',
-    maxWidth: '1080px',
-    columnCount: isMobile ? 1 : 2,
-  }),
-  gig: {
-    display: 'inline-block',
-    width: '100%',
-    paddingRight: '2vh',
-    paddingLeft: '2vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    paddingBottom: '1em',
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  facebookIcon: {
-    color: '#3b5998',
-    fontSize: '20px',
-    marginTop: '0.5em',
-  },
-  directionsIcon: {
-    color: '#4A89F3',
-    fontSize: '25px',
-    marginTop: '-0.4em',
-  },
-};
-
-function Gigs(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Gigs: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -82,65 +54,57 @@ function Gigs(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Gigs" />
       {authState.isAuthenticated && <Fab url="/admin/gigs/new" />}
       <Loader isLoading={isLoading}>
-        <div style={styles.gigsContainer(isMobile)}>
+        <Masonry isMobile={isMobile}>
           {gigs.map(gig => (
-            <div key={gig.id} style={styles.gig}>
-              <div className="card" style={styles.card}>
-                <div className="card-image">
+            <MasonryBrick key={gig.id}>
+              <Card>
+                <div>
                   <picture>
                     <source srcSet={gig.imageNG} type="image/webp" />
                     <source srcSet={gig.image} type="image/jpeg" />
-                    <img src={gig.image} alt="" />
+                    <CardImage src={gig.image} alt="" />
                   </picture>
-                  <a
-                    href={gig.fbEvent}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-floating halfway-fab waves-effect waves-light white"
-                  >
-                    <i className="fab fa-facebook-f" style={styles.facebookIcon} />
-                  </a>
-                  <a
+                </div>
+                <CardContent style={{ maxHeight: 202 }}>
+                  <HalfwayTab href={gig.fbEvent} target="_blank" rel="noopener noreferrer">
+                    <EventIcon color="#3b5998" style={{ marginTop: 8 }} />
+                  </HalfwayTab>
+                  <HalfwayTab
                     href={`https://www.google.com/maps/search/?api=1&query=${gig.venue} ${gig.city}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ paddingTop: '10px' }}
-                    className="btn-floating halfway-fab waves-effect waves-light white left"
+                    style={{ right: 'auto', left: 24 }}
                   >
-                    <i className="material-icons" style={styles.directionsIcon}>
-                      directions
-                    </i>
-                  </a>
-                </div>
-                <div className="card-content">
+                    <DirectionsIcon color="#4A89F3" style={{ marginTop: 8 }} />
+                  </HalfwayTab>
                   <p>{gig.venue}</p>
                   <p>
                     {gig.address}, {gig.city}
                   </p>
                   <p>{formatDate(new Date(gig.date))}</p>
                   <p>{formatTime(new Date(gig.date))}</p>
-                </div>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(gig.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(gig.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Gigs;

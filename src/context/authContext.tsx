@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactElement } from 'react';
+import React, { createContext, useContext, FunctionComponent, useReducer } from 'react';
 
 import { initialState, reducer } from './authReducer';
 
@@ -8,16 +8,10 @@ export function useAuthContext(): any {
   return useContext(AuthContext);
 }
 
-export interface AuthProviderProps {
-  children: ReactElement;
-}
-
-export function AuthProvider(props: AuthProviderProps): ReactElement {
-  const { children } = props;
-
+export const AuthProvider: FunctionComponent = ({ children }) => {
   return (
     <AuthContext.Provider value={useReducer(reducer, initialState)}>
       {children}
     </AuthContext.Provider>
   );
-}
+};

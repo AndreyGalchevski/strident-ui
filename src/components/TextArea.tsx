@@ -1,27 +1,40 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { FunctionComponent, ChangeEvent } from 'react';
+import styled from '@emotion/styled';
 
-export interface TextAreaProps {
+import { capitalize } from '../utils/general';
+import { COLORS } from '../utils/constants';
+
+const StyledTextArea = styled.textarea({
+  width: '100%',
+  height: 350,
+  fontSize: 16,
+  padding: 10,
+  paddingLeft: 0,
+  backgroundColor: 'initial',
+  color: COLORS.WHITE,
+  border: 'none',
+  borderBottomWidth: 2,
+  borderBottomStyle: 'solid',
+  borderBottomColor: COLORS.WHITE,
+  ':focus': {
+    outline: 'none',
+    borderBottomColor: COLORS.RED,
+  },
+  resize: 'none',
+});
+
+export interface Props {
   name: string;
-  label: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   value: string;
 }
 
-function TextArea(props: TextAreaProps): React.ReactElement {
-  const { name, label, onChange, value } = props;
-
-  useEffect(() => {
-    const el = document.querySelector(`#${name}`);
-    // @ts-ignore
-    M.textareaAutoResize(el);
-  });
-
+const TextArea: FunctionComponent<Props> = ({ name, onChange, value }) => {
   return (
-    <div className="input-field">
-      <textarea id={name} className="materialize-textarea" onChange={onChange} value={value} />
-      <label htmlFor={name}>{label}</label>
+    <div style={{ margin: 16 }}>
+      <StyledTextArea id={name} onChange={onChange} value={value} placeholder={capitalize(name)} />
     </div>
   );
-}
+};
 
 export default TextArea;

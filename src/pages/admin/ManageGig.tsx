@@ -1,26 +1,29 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Gig } from '../../api/types';
 import { fetchResource, updateResource, createResource, uploadImage } from '../../api/utils';
-import Button from '../../components/Button';
 import { formatDate, formatTime } from '../../utils/general';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import Container from '../../styled/Container';
+import { Card, CardContent, CardAction } from '../../styled/Card';
+import Button from '../../components/Button';
 import Input from '../../components/Input';
 import FileInput from '../../components/FileInput';
 import Loader from '../../components/Loader';
+
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
 
 type MatchParams = {
   id: string;
 };
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-};
-
-function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
+const ManageGig: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [gig, setGig] = useState<Gig>({
     id: '',
@@ -106,77 +109,60 @@ function ManageGig(props: RouteComponentProps<MatchParams>): React.ReactElement 
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/gigs" />}
-      <section style={styles.container}>
-        {match.params.id ? <h3>Update Gig</h3> : <h3>Create Gig</h3>}
+      <Container>
+        <h2>{action} Gig</h2>
         <Loader isLoading={isLoading}>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <div className="card">
-                <div className="card-content">
-                  <Input
-                    name="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleTextInputChange}
-                    value={gig.name}
-                  />
-                  <Input
-                    name="venue"
-                    type="text"
-                    label="Venue"
-                    onChange={handleTextInputChange}
-                    value={gig.venue}
-                  />
-                  <Input
-                    name="address"
-                    type="text"
-                    label="Address"
-                    onChange={handleTextInputChange}
-                    value={gig.address}
-                  />
-                  <Input
-                    name="city"
-                    type="text"
-                    label="City"
-                    onChange={handleTextInputChange}
-                    value={gig.city}
-                  />
-                  <Input
-                    name="date"
-                    type="date"
-                    label="Date"
-                    onChange={handleDateInputChange}
-                    value={formatDate(gig.date)}
-                  />
-                  <Input
-                    name="date"
-                    type="time"
-                    label="Time"
-                    onChange={handleTimeInputChange}
-                    value={formatTime(gig.date)}
-                  />
-                  <Input
-                    name="fbEvent"
-                    type="text"
-                    label="Facebook Event"
-                    onChange={handleTextInputChange}
-                    value={gig.fbEvent}
-                  />
-                  <FileInput onChange={handleImageChange} />
-                </div>
-                <div className="card-action">
-                  <Button handleClick={handleSaveClick}>Save</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input name="name" type="text" onChange={handleTextInputChange} value={gig.name} />
+                <Input
+                  name="venue"
+                  type="text"
+                  onChange={handleTextInputChange}
+                  value={gig.venue}
+                />
+                <Input
+                  name="address"
+                  type="text"
+                  onChange={handleTextInputChange}
+                  value={gig.address}
+                />
+                <Input name="city" type="text" onChange={handleTextInputChange} value={gig.city} />
+                <Input
+                  name="date"
+                  type="date"
+                  onChange={handleDateInputChange}
+                  value={formatDate(gig.date)}
+                />
+                <Input
+                  name="date"
+                  type="time"
+                  onChange={handleTimeInputChange}
+                  value={formatTime(gig.date)}
+                />
+                <Input
+                  name="fbEvent"
+                  type="text"
+                  onChange={handleTextInputChange}
+                  value={gig.fbEvent}
+                />
+                <FileInput onChange={handleImageChange} />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </Loader>
-      </section>
+      </Container>
     </>
   );
-}
+};
 
 export default ManageGig;

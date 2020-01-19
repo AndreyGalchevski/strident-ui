@@ -1,39 +1,33 @@
-import React, { useEffect, useState, MouseEventHandler, CSSProperties } from 'react';
+import React, { FunctionComponent, useEffect, useState, MouseEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { fetchResources, deleteResource } from '../api/utils';
 import { Merchandise } from '../api/types';
 import { useAuthContext } from '../context/authContext';
+import useMediaQuery from '../hooks/useMediaQuery';
+import Container from '../styled/Container';
+import { Masonry, MasonryBrick } from '../styled/Masonry';
+import { Card, CardContent, CardTitle, CardImage, CardAction } from '../styled/Card';
+import HalfwayTab from '../styled/HalfwayTab';
 import Button from '../components/Button';
-import { PRIMARY_COLOR, LIGHT_COLOR } from '../utils/constants';
 import Header from '../components/Header';
 import Fab from '../components/Fab';
 import Loader from '../components/Loader';
+import EditIcon from '../components/icons/Edit';
+import DeleteIcon from '../components/icons/Delete';
+import ShoppingCartIcon from '../components/icons/ShoppingCart';
+import EuroIcon from '../components/icons/Euro';
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-  card: {
-    boxShadow: `0 4px 8px 0 ${PRIMARY_COLOR}, 0 6px 20px 0 ${PRIMARY_COLOR}`,
-    backgroundColor: PRIMARY_COLOR,
-    color: LIGHT_COLOR,
-  },
-  price: {
-    display: 'flex',
-    FlexDirectionProperty: 'row',
-    justifyContent: 'center',
-  },
-  euroIcon: {
-    fontSize: '18px',
-    marginRight: '2px',
-  },
-};
+const PriceContainer = styled.p({
+  display: 'flex',
+  FlexDirectionProperty: 'row',
+  justifyContent: 'center',
+});
 
-function Merchandises(props: RouteComponentProps): React.ReactElement {
-  const { history } = props;
-
+const Merchandises: FunctionComponent<RouteComponentProps> = ({ history }) => {
   const [authState] = useAuthContext();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const [merchandises, setMerchandises] = useState<Merchandise[]>([]);
   const [isLoading, setLoading] = useState(false);
@@ -66,61 +60,54 @@ function Merchandises(props: RouteComponentProps): React.ReactElement {
   }
 
   return (
-    <section style={styles.container}>
+    <Container>
       <Header title="Merch" />
       {authState.isAuthenticated && <Fab url="/admin/merch/new" />}
       <Loader isLoading={isLoading}>
-        <div className="row">
+        <Masonry isMobile={isMobile}>
           {merchandises.map(merchandise => (
-            <div
-              key={merchandise.id}
-              className={merchandises.length === 1 ? 'col s12 m4 push-m4' : 'col s12 m4'}
-            >
-              <div className="card" style={styles.card}>
-                <div className="card-image">
+            <MasonryBrick key={merchandise.id}>
+              <Card>
+                <div>
                   <picture>
                     <source srcSet={merchandise.imageNG} type="image/webp" />
                     <source srcSet={merchandise.image} type="image/jpeg" />
-                    <img src={merchandise.image} alt="" />
+                    <CardImage src={merchandise.image} alt="" />
                   </picture>
-                  <a
-                    href={merchandise.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-floating halfway-fab waves-effect waves-light white"
-                  >
-                    <i className="material-icons" style={{ color: 'black' }}>
-                      shopping_cart
-                    </i>
-                  </a>
                 </div>
-                <div className="card-content">
-                  <span className="card-title">{merchandise.name}</span>
+                <HalfwayTab
+                  href={merchandise.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ bottom: 150 }}
+                >
+                  <ShoppingCartIcon style={{ marginTop: 8 }} />
+                </HalfwayTab>
+                <CardContent style={{ maxHeight: 184 }}>
+                  <CardTitle>{merchandise.name}</CardTitle>
                   <p>{merchandise.type}</p>
-                  <p style={styles.price}>
-                    <i className="material-icons" style={styles.euroIcon}>
-                      euro_symbol
-                    </i>
+                  <PriceContainer>
+                    <EuroIcon style={{ marginRight: 4 }} />
                     <span> {merchandise.price} EUR</span>
-                  </p>
-                </div>
+                  </PriceContainer>
+                </CardContent>
                 {authState.isAuthenticated && (
-                  <div className="card-action">
+                  <CardAction>
                     <Button handleClick={handleUpdateClick(merchandise.id)}>
-                      <i className="material-icons">edit</i>
+                      <EditIcon />
                     </Button>
                     <Button isPrimary handleClick={handleDeleteClick(merchandise.id)}>
-                      <i className="material-icons">delete</i>
+                      <DeleteIcon />
                     </Button>
-                  </div>
+                  </CardAction>
                 )}
-              </div>
-            </div>
+              </Card>
+            </MasonryBrick>
           ))}
-        </div>
+        </Masonry>
       </Loader>
-    </section>
+    </Container>
   );
-}
+};
 
 export default Merchandises;

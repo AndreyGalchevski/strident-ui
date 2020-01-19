@@ -1,25 +1,29 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, useEffect, ChangeEvent } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 import { Video } from '../../api/types';
 import { fetchResource, updateResource, createResource } from '../../api/utils';
 import { formatDate } from '../../utils/general';
+import useMediaQuery from '../../hooks/useMediaQuery';
+import Container from '../../styled/Container';
+import { Card, CardContent, CardAction } from '../../styled/Card';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loader from '../../components/Loader';
+
+const Wrapper = styled.div<{ isMobile: boolean }>(({ isMobile }) => ({
+  width: isMobile ? '90vw' : '35vw',
+  margin: 'auto',
+}));
 
 type MatchParams = {
   id: string;
 };
 
-const styles = {
-  container: {
-    marginBottom: '17vh',
-  },
-};
+const ManageVideo: FunctionComponent<RouteComponentProps<MatchParams>> = ({ match }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElement {
-  const { match } = props;
   const [video, setVideo] = useState<Video>({
     id: '',
     name: '',
@@ -63,48 +67,35 @@ function ManageVideo(props: RouteComponentProps<MatchParams>): React.ReactElemen
     window.alert(res);
   }
 
+  const action = match.params.id ? 'Update' : 'Create';
+
   return (
     <>
       {shouldRedirect && <Redirect to="/videos" />}
-      <section style={styles.container}>
-        {match.params.id ? <h3>Update Video</h3> : <h3>Create Video</h3>}
+      <Container>
+        <h2>{action} Video</h2>
         <Loader isLoading={isLoading}>
-          <div className="row">
-            <div className="col s12 m4 offset-m4">
-              <div className="card">
-                <div className="card-content">
-                  <Input
-                    name="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleFormChange}
-                    value={video.name}
-                  />
-                  <Input
-                    name="url"
-                    type="text"
-                    label="URL"
-                    onChange={handleFormChange}
-                    value={video.url}
-                  />
-                  <Input
-                    name="date"
-                    type="date"
-                    label="Date"
-                    onChange={handleDateChange}
-                    value={formatDate(video.date)}
-                  />
-                </div>
-                <div className="card-action">
-                  <Button handleClick={handleSaveClick}>Save</Button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Wrapper isMobile={isMobile}>
+            <Card>
+              <CardContent>
+                <Input name="name" type="text" onChange={handleFormChange} value={video.name} />
+                <Input name="url" type="text" onChange={handleFormChange} value={video.url} />
+                <Input
+                  name="date"
+                  type="date"
+                  onChange={handleDateChange}
+                  value={formatDate(video.date)}
+                />
+              </CardContent>
+              <CardAction>
+                <Button handleClick={handleSaveClick}>Save</Button>
+              </CardAction>
+            </Card>
+          </Wrapper>
         </Loader>
-      </section>
+      </Container>
     </>
   );
-}
+};
 
 export default ManageVideo;

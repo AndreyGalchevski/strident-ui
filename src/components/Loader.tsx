@@ -1,25 +1,24 @@
-import React, { useState, useEffect, ReactElement } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 
-export interface LoaderProps {
+const Container = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  FlexDirectionProperty: 'column',
+  height: '70%',
+});
+
+const SpinnerImage = styled.img({
+  width: '70%',
+});
+
+export interface Props {
   isLoading: boolean;
-  children: ReactElement;
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    FlexDirectionProperty: 'column',
-    height: '70%',
-  },
-  image: {
-    width: '70%',
-  },
-};
-
-function Loader(props: LoaderProps): ReactElement {
-  const { isLoading, children } = props;
+// @ts-ignore
+const Loader: FunctionComponent<Props> = ({ isLoading, children }) => {
   const [shouldDisplayLoading, setDisplayLoading] = useState(true);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ function Loader(props: LoaderProps): ReactElement {
   }, []);
 
   return isLoading || shouldDisplayLoading ? (
-    <div style={styles.container}>
+    <Container>
       <picture>
         <source
           srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751521/strident/app/strident_rat_ng.webp"
@@ -39,16 +38,15 @@ function Loader(props: LoaderProps): ReactElement {
           srcSet="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751421/strident/app/strident_rat.gif"
           type="image/jpeg"
         />
-        <img
+        <SpinnerImage
           src="https://res.cloudinary.com/dqvimfd8b/image/upload/v1571751421/strident/app/strident_rat.gif"
           alt=""
-          style={styles.image}
         />
       </picture>
-    </div>
+    </Container>
   ) : (
     children
   );
-}
+};
 
 export default Loader;
