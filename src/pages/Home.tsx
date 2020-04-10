@@ -101,10 +101,11 @@ const Home: FunctionComponent = () => {
               title="STRIDENT - No Faith No War"
               width="100%"
               height="100%"
-              src="https://www.youtube.com/embed/UkvlRmq62io"
+              src="https://www.youtube.com/embed/3MpjGJpmG-Y"
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              style={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
             />
           </CardContent>
           <CardAction>
@@ -149,6 +150,7 @@ const Home: FunctionComponent = () => {
               height="100%"
               frameBorder="0"
               allow="encrypted-media"
+              style={{ borderTopLeftRadius: 30, borderTopRightRadius: 30 }}
             />
           </CardContent>
           <CardAction>
